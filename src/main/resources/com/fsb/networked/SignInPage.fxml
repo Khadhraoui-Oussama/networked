@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1242.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171">
+  <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+  </columnConstraints>
+  <rowConstraints>
+    <RowConstraints maxHeight="249.99997558593748" minHeight="10.0" prefHeight="159.266650390625" vgrow="SOMETIMES" />
+    <RowConstraints maxHeight="573.333319091797" minHeight="10.0" prefHeight="570.733349609375" vgrow="SOMETIMES" />
+    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+  </rowConstraints>
+   <children>
+      <ImageView fitHeight="137.0" fitWidth="518.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+         <image>
+            <Image url="@../../../../../../../../Desktop/New%20folder%20(2)/top/networked-high-resolution-logo-transparent.png" />
+         </image>
+      </ImageView>
+      <GridPane maxWidth="600.0" style="-fx-border-color: #9fafca; -fx-border-radius: 10; -fx-border-width: 4;" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints maxHeight="183.9999755859375" minHeight="10.0" prefHeight="70.66667175292969" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="183.9999755859375" minHeight="3.4666748046875" prefHeight="20.5333251953125" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="455.73332519531255" minHeight="10.0" prefHeight="445.86667480468753" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text fill="#0e387a" strokeType="OUTSIDE" strokeWidth="0.0" text="SIGN IN" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Calibri" size="40.0" />
+               </font>
+            </Text>
+            <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="Acess your network " GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+               <font>
+                  <Font name="Calibri Light" size="20.0" />
+               </font>
+            </Text>
+            <VBox prefHeight="439.0" prefWidth="714.0" GridPane.rowIndex="2">
+               <children>
+                  <TextField alignment="TOP_LEFT" minHeight="50.0" minWidth="-Infinity" prefHeight="44.0" promptText="Email address :">
+                     <font>
+                        <Font name="Consolas" size="28.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField prefWidth="595.0" promptText="Password">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </PasswordField>
+                  <Button alignment="CENTER" mnemonicParsing="false" prefHeight="51.0" prefWidth="663.0" text="Show Password">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="111.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="663.0" text="Forgot Password">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="162.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="663.0" text="Sign in">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+                  <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="New to Networked ? " wrappingWidth="594.9877624511719">
+                     <font>
+                        <Font name="Calibri Light" size="43.0" />
+                     </font>
+                  </Text>
+                  <Button alignment="CENTER" layoutX="10.0" layoutY="213.0" mnemonicParsing="false" prefHeight="51.0" prefWidth="663.0" text="Sign up">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Button>
+               </children>
+            </VBox>
+         </children>
+      </GridPane>
+   </children>
+</GridPane>

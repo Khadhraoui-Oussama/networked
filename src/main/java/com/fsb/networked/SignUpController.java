@@ -28,20 +28,20 @@ public class SignUpController {
 	@FXML
     private void gotoSignUpIndivdual() throws IOException
 	{
-        App.setRoot("SignUnPageIndividual");
+        App.setRoot("SignUpPageIndividualBasic");
     }
 	
 	@FXML
     private void gotoSignUpEntreprise() throws IOException
 	{
-        App.setRoot("SignUnPageEntreprise");
+        App.setRoot("SignUnPageEntrepriseBasic");
     }
 	
 
 	@FXML
     private void cancelSignUp() throws IOException
 	{
-        App.setRoot("SiginInPage");
+        App.setRoot("LogInPage");
     }
 	
 }

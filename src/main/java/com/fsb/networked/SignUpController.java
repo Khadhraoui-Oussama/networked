@@ -28,13 +28,13 @@ public class SignUpController {
 	@FXML
     private void gotoSignUpIndivdual() throws IOException
 	{
-        App.setRoot("SignUpPageIndividualBasic");
+        App.setRoot("SignUpControllers/SignUpPageIndividualBasic");
     }
 	
 	@FXML
     private void gotoSignUpEntreprise() throws IOException
 	{
-        App.setRoot("SignUpPageEntrepriseBasic");
+        App.setRoot("SignUpControllers/SignUpPageEntrepriseBasic");
     }
 	
 

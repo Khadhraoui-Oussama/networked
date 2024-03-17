@@ -18,7 +18,7 @@ public class LoginController {
     }
 	@FXML
     private void gotoSignUp() throws IOException {
-        App.setRoot("SignUpPage");
+        App.setRoot("SignUpControllers/SignUpPage");
     }
 	
 }

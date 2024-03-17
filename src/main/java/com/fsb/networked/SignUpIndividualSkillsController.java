@@ -55,13 +55,13 @@ public class SignUpIndividualSkillsController implements Initializable {
 	@FXML
     private void goBack() throws IOException
 	{
-        App.setRoot("SignInIndividualController");
+        App.setRoot("SignUpControllers/SignUpPageIndividualBasic");
     }
 	
 	@FXML
     private void goNext() throws IOException
 	{
-		App.setRoot("SignUpPageIndividualWork");
+		App.setRoot("SignUpControllers/SignUpPageIndividualWork");
 		System.out.println("Individual Skills Information gathered");
     }
 

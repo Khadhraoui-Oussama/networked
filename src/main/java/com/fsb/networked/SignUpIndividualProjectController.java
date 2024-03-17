@@ -24,7 +24,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
 
-public class SignUpIndividualWorkController implements Initializable {
+public class SignUpIndividualProjectController implements Initializable {
 
 	@FXML
 	private TextField jobPositionField;
@@ -69,7 +69,7 @@ public class SignUpIndividualWorkController implements Initializable {
 	@FXML
     private void goNext() throws IOException
 	{
-		App.setRoot("SignUpControllers/SignUpPageIndividualProject");
+		App.setRoot("SignUpControllers/SignUpPageIndividualWork");
 		System.out.println("Work INFO gathered");
     }
 

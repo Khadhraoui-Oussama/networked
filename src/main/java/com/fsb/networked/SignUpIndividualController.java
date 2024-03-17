@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.Year;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
@@ -15,7 +16,6 @@ import com.fsb.networked.utils.ComboBoxes;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -129,7 +129,9 @@ public class SignUpIndividualController implements Initializable {
 		//DONE TODO : do the same for the email and password fields in the SignUpPage scene
 		
 		validateBasicInfo();
+		App.setRoot("SignUpPageIndividualSkills");
 		System.out.println("Basic Individual Information gathered");
+		
     }
 	
 	private <T> void flashRedBorder(T field)
@@ -254,6 +256,13 @@ public class SignUpIndividualController implements Initializable {
 		//we do the same for the Gender ComboBox
 		genderComboBox.getItems().addAll(ComboBoxes.GENDERS);
 		genderComboBox.getSelectionModel().select(0);
+		
+		//THIS IS ONLY TO SPEED UP THE DEVELEOPMENT REMOVE WHEN READY TO PUSH TO PROD
+		dateOfBirthPicker.setValue(LocalDate.of(2003, 10, 4));
+		firstNameField.setText("John");
+		lastNameField.setText("Doe");
+		physicalAdressField.setText("10 Jarzouna");
+		//REMOVE ALL THE ABOVE WHEN READY TO PUSH TO PROD
 	}
 
 

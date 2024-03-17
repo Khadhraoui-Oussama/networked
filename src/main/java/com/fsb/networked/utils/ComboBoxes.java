@@ -205,4 +205,11 @@ public class ComboBoxes
 			"Male",
 			"Female"
 			};
+
+	public static String[] SKILLLEVELS= { //TIP : don't underscore '_' in the name , 
+										  //it causes a NULLPOINTEREXCEPTION 
+			"Beginner",
+			"Intermediate",
+			"Advanced"
+	};
 }

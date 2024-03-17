@@ -33,5 +33,4 @@ public class Alerts
 	        alert.setContentText("Please provide a complete physical address, \n including street name, city, state/province,\n postal code, and country.\n Also no special characters except - , ' .");
 	        alert.showAndWait();
 	 }
-	 
 }

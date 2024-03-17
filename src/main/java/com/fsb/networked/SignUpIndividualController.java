@@ -151,8 +151,8 @@ public class SignUpIndividualController implements Initializable {
 		}
 		
 		Pattern namePattern = Pattern.compile("^[A-Z][a-z]{1,39}$");
-		Matcher fnameMatcher = namePattern.matcher(firstNameField.getCharacters());
-		Matcher lnameMatcher = namePattern.matcher(lastNameField.getCharacters());
+		Matcher fnameMatcher = namePattern.matcher(firstNameField.getText());
+		Matcher lnameMatcher = namePattern.matcher(lastNameField.getText());
 		
 		Pattern addressPattern  = Pattern.compile("^[\\w\\s.,'-]+(?:\\s[\\w\\s.,'-]+)*$");
 		Matcher addressMatcher = addressPattern.matcher(physicalAdressField.getCharacters());

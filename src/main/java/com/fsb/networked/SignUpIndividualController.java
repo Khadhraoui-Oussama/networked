@@ -4,13 +4,18 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.time.Year;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.fsb.networked.utils.Alerts;
 import com.fsb.networked.utils.ComboBoxes;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
@@ -20,15 +25,15 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
 
-public class SignUpIndividualController implements Initializable{
+public class SignUpIndividualController implements Initializable {
 
 	
 	//TODO : research how to fill out the DTO with the info given from the form
-	//TODO : implement constraints in the basic info fields : 
-	//like a minimum length for the names , or an age minnimum of 16 years
-	//( do we add an "Im a student in the work tab ??")
 	
 	
+	//DONE TODO : implement constraints in the basic info fields : 
+	//like a minimum length for the names , or an age minimum of 16 years
+	//( do we add an "Im a student in the work tab ??")	
 	//DONE TODO : add a use default profile picture that changes whether the user is male or female
 	//DONE TODO : implement a method to validate that the inputs are filled in,
 	//if one of the fields is left out flash it with a bright red color 
@@ -121,57 +126,94 @@ public class SignUpIndividualController implements Initializable{
 		//TODO: implement a way to save the basic data so it be ready and waiting for the work data
         //one idea : push the basic data we have to the database 
 		//and then push the work data with WHERE clause instead of waiting
-		//TODO : do the same for the email and password fields in the SignUpPage scene
+		//DONE TODO : do the same for the email and password fields in the SignUpPage scene
+		
 		validateBasicInfo();
 		System.out.println("Basic Individual Information gathered");
     }
 	
+	private <T> void flashRedBorder(T field)
+	{
+		((Node) field).setStyle("-fx-border-color:red;");
+	}
+	
 	private void validateBasicInfo()
 	{
 		
-		//border flashes if no value is entered
+		//border flashes if no value is entered & a popup to alert the user
+		//hacky solution BUT if the alert is called for each field ,
+		//it will get instanciated times the number of incomplete fields
+		if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || dateOfBirthPicker.getValue() == null || physicalAdressField.getText().isEmpty())
+		{
+			Alerts.AlertEmptyField();
+		}
+		
+		Pattern namePattern = Pattern.compile("^[A-Z][a-z]{1,39}$");
+		Matcher fnameMatcher = namePattern.matcher(firstNameField.getCharacters());
+		Matcher lnameMatcher = namePattern.matcher(lastNameField.getCharacters());
+		
+		Pattern addressPattern  = Pattern.compile("^[\\w\\s.,'-]+(?:\\s[\\w\\s.,'-]+)*$");
+		Matcher addressMatcher = addressPattern.matcher(physicalAdressField.getCharacters());
+		
 		if (firstNameField.getText().isEmpty())
 		{
-			firstNameField.setStyle("-fx-border-color : red;");;
-			Alerts.AlertEmptyField();
+			flashRedBorder(firstNameField);
 		}
 		else
 		{
-			firstNameField.setStyle("");			
+			firstNameField.setStyle("");
+			if(!fnameMatcher.matches())
+			{
+				flashRedBorder(firstNameField);
+				Alerts.AlertNameField();
+			}
+			
 		}
 		if (lastNameField.getText().isEmpty())
 		{
-			lastNameField.setStyle("-fx-border-color : red;");
-			Alerts.AlertEmptyField();
+			
+			flashRedBorder(lastNameField);
 		}
 		else
 		{
-			lastNameField.setStyle("");			
+			lastNameField.setStyle("");	
+			if(!lnameMatcher.matches() ) 
+			{
+				flashRedBorder(lastNameField);
+				if(fnameMatcher.matches()) // this is to only alert once if both first and last names dont match regex
+				{
+					Alerts.AlertNameField();
+		
+				}
+			}
 		}
 		
 		if (dateOfBirthPicker.getValue() == null)
 		{
-			dateOfBirthPicker.setStyle("-fx-border-color : red;");
-			Alerts.AlertEmptyField();
+			flashRedBorder(dateOfBirthPicker);
 		}
 		else
 		{
-			dateOfBirthPicker.setStyle("");			
+			dateOfBirthPicker.setStyle("");
+			if((Year.now().getValue() - dateOfBirthPicker.getValue().getYear()) < 16)
+			{
+				flashRedBorder(dateOfBirthPicker);
+				Alerts.AlertDOBField();
+			}
 		}
 		if (physicalAdressField.getText().isEmpty())
 		{
-			physicalAdressField.setStyle("-fx-border-color : red;");
-			Alerts.AlertEmptyField();
+			flashRedBorder(physicalAdressField);
 		}
 		else
 		{
-			physicalAdressField.setStyle("");			
+			physicalAdressField.setStyle("");
+			if(!addressMatcher.matches())
+			{
+				flashRedBorder(physicalAdressField);
+				Alerts.AlertAddressField();
+			}
 		}
-		
-		//TODO : implement constraints in the basic info fields : 
-		//like a minimum length for the names , or an age minnimum of 16 years
-		//( do we add an "Im a student in the work tab ??")
-		
 	}
 
 

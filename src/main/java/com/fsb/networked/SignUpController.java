@@ -34,7 +34,7 @@ public class SignUpController {
 	@FXML
     private void gotoSignUpEntreprise() throws IOException
 	{
-        App.setRoot("SignUnPageEntrepriseBasic");
+        App.setRoot("SignUpPageEntrepriseBasic");
     }
 	
 

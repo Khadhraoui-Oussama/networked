@@ -33,4 +33,19 @@ public class Alerts
 	        alert.setContentText("Please provide a complete physical address, \n including street name, city, state/province,\n postal code, and country.\n Also no special characters except - , ' .");
 	        alert.showAndWait();
 	 }
+	 public static void AlertEmailField()
+	 {
+		 	Alert alert = new Alert(AlertType.WARNING);
+	        alert.setTitle("Invalid Email Address");
+	        alert.setContentText("Please enter a valid email address.\nAn email address should be:\n in the format:\n example@example.com");
+	        alert.showAndWait();
+	 }
+	 public static void AlertPasswordField()
+	 {
+		 	Alert alert = new Alert(AlertType.WARNING);
+	        alert.setTitle("Invalid Password");
+	        alert.setContentText("Please enter a valid password.\nA valid password must contain:\nat least 8 characters,\nincluding at least one uppercase letter,\none lowercase letter,\none special character,\nand should not exceed 30 characters.");
+	        alert.showAndWait();
+	 }
+	 
 }

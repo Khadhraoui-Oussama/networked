@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -41,6 +42,9 @@ public class SignUpIndividualVideoController implements Initializable {
     private Button backBtn;
 
     @FXML
+    private Button btnCancel;
+
+    @FXML
     private Media media;
 
     @FXML
@@ -67,7 +71,7 @@ public class SignUpIndividualVideoController implements Initializable {
         fc.getExtensionFilters().clear();
         fc.getExtensionFilters().addAll(
                 new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mov", "*.avi", "*.webm"));
-
+                //.mkv format causes issues ( maybe not supported)
         // Set the selected file or use null if no file has been selected
         videoFile = fc.showOpenDialog(null);
         if (videoFile != null) {
@@ -115,6 +119,16 @@ public class SignUpIndividualVideoController implements Initializable {
         mediaPlayer.seek(Duration.ZERO);
 
         mediaPlayer.play();
+    }
+
+    @FXML
+    private void cancelSignUp() throws IOException
+    {
+        //if the user decides he no longer want to sign up the json files must be cleared of all inputs
+        // and returned to the original state
+        JSONParser.resetIndividualJSONFile();
+        JSONParser.resetEntrepriseJSONFile();
+        App.setRoot("LogInPage");
     }
 
     @Override

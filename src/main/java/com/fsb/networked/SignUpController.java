@@ -1,21 +1,20 @@
 package com.fsb.networked;
 
-import java.io.IOException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.Year;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.fsb.networked.utils.Alerts;
-
+import com.fsb.networked.utils.ImportantFileReferences;
+import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SignUpController implements Initializable{
 
@@ -36,19 +35,22 @@ public class SignUpController implements Initializable{
 	
 	
 	@FXML
-    private void gotoSignUpIndivdual() throws IOException
-	{
-		if(validateBasicInfo())
-		{
-        App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
+    private void gotoSignUpIndivdual() throws IOException {
+		if (validateBasicInfo()) {
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUp", "emailAddress", emailAddressField.getText());
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUp", "password", passwordField.getText());
+			//go to next scene
+			App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
 		}
 	}
-	
+
 	@FXML
     private void gotoSignUpEntreprise() throws IOException
 	{
 		if(validateBasicInfo())
 		{
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Entreprise.JSON", "signUp", "emailAddress", emailAddressField.getText());
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Entreprise.JSON", "signUp", "password", passwordField.getText());
 			App.setRoot("SignUpScenes/SignUpPageEntrepriseBasic");
 		}
     }
@@ -56,7 +58,11 @@ public class SignUpController implements Initializable{
 	@FXML
     private void cancelSignUp() throws IOException
 	{
-        App.setRoot("LogInPage");
+		//if the user decides he no longer want to sign up the json files must be cleared of all inputs
+		// and returned to the original state
+		JSONParser.resetIndividualJSONFile();
+		JSONParser.resetEntrepriseJSONFile();
+		App.setRoot("LogInPage");
     }
 	
 	private <T> void flashRedBorder(T field)
@@ -96,6 +102,7 @@ public class SignUpController implements Initializable{
 	    return isValid;
 	}
 
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -103,8 +110,7 @@ public class SignUpController implements Initializable{
 		passwordField.setText("Azerty123!");
 		emailAddressField.setText("example@xyz.com");
 		//REMOVE ALL THE ABOVE WHEN READY TO PUSH TO PROD
+		passwordField.setText(JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUp","password"));
+		passwordField.setText(JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUp","password"));
 	}
-
-	
-	
 }

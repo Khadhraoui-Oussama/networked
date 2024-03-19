@@ -2,15 +2,15 @@ package com.fsb.networked;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Year;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fsb.networked.dao.Skill;
+import com.fsb.networked.dto.Skill;
 import com.fsb.networked.utils.Alerts;
 import com.fsb.networked.utils.ComboBoxes;
 
+import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -38,7 +38,10 @@ public class SignUpIndividualSkillsController implements Initializable {
 		
 	@FXML
 	private Button btnAddSkill;
-	
+
+	@FXML
+	private Button btnCancel;
+
 	@FXML
 	private Button btnDeleteSkill;
 	
@@ -139,8 +142,16 @@ public class SignUpIndividualSkillsController implements Initializable {
 			}
 		}
 	}
-	
 
+	@FXML
+	private void cancelSignUp() throws IOException
+	{
+		//if the user decides he no longer want to sign up the json files must be cleared of all inputs
+		// and returned to the original state
+		JSONParser.resetIndividualJSONFile();
+		JSONParser.resetEntrepriseJSONFile();
+		App.setRoot("LogInPage");
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources)

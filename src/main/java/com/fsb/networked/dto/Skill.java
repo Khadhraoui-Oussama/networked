@@ -1,4 +1,4 @@
-package com.fsb.networked.dao;
+package com.fsb.networked.dto;
 
 public class Skill
 {

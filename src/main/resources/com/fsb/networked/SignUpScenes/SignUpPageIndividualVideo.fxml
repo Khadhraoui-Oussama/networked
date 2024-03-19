@@ -55,6 +55,11 @@
                         <Font size="19.0" />
                      </font>
                   </Button>
+                  <Button fx:id="btnCancel" layoutX="31.0" layoutY="44.0" mnemonicParsing="false" onAction="#cancelSignUp" prefHeight="37.0" prefWidth="572.0" text="Cancel">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="chooseVideoBtn" mnemonicParsing="false" onAction="#uploadVideoResume" prefHeight="37.0" prefWidth="572.0" text="Choose video">
                      <font>
                         <Font size="19.0" />
@@ -66,7 +71,7 @@
                      </font></Button>
                   <Button fx:id="finishBtn" mnemonicParsing="false" onAction="#goNext" prefHeight="38.0" prefWidth="249.0" text="Finish">
                      <font>
-                        <Font size="17.0" />
+                        <Font size="19.0" />
                      </font></Button>
               </buttons>
             </ButtonBar>

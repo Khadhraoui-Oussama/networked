@@ -127,6 +127,11 @@
                      <font>
                         <Font size="17.0" />
                      </font></Button>
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSignUp" text="Cancel">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
               </buttons>
             </ButtonBar>
             <VBox prefHeight="454.0" prefWidth="530.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">

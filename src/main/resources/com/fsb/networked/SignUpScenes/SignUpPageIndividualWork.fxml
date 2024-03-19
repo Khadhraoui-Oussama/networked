@@ -73,12 +73,12 @@
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="810.0">
                            <children>
-                              <Label prefHeight="38.0" prefWidth="201.0" text="Technology">
+                              <Label prefHeight="38.0" prefWidth="201.0" text="Company">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="technologyField" prefHeight="26.0" prefWidth="267.0" />
+                              <TextField fx:id="companyField" prefHeight="26.0" prefWidth="267.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="65.0" prefHeight="64.0" prefWidth="810.0">
@@ -160,6 +160,11 @@
                      <font>
                         <Font size="17.0" />
                      </font></Button>
+                  <Button fx:id="btnCancel" layoutX="264.0" layoutY="20.0" mnemonicParsing="false" onAction="#cancelSignUp" prefHeight="38.0" prefWidth="249.0" text="Cancel">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
               </buttons>
             </ButtonBar>
             <VBox prefHeight="454.0" prefWidth="530.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">

@@ -135,6 +135,7 @@
               <buttons>
                 <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" text="BACK" />
                   <Button fx:id="btnNext" mnemonicParsing="false" onAction="#goNext" text="NEXT" />
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSignUp" text="Cancel" />
               </buttons>
             </ButtonBar>
             <ImageView fx:id="profilePictureImg" fitHeight="285.0" fitWidth="365.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />

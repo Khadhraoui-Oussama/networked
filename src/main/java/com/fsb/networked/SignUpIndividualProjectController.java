@@ -6,9 +6,10 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fsb.networked.dao.Job;
+import com.fsb.networked.dto.Job;
 import com.fsb.networked.utils.Alerts;
 
+import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -39,7 +40,10 @@ public class SignUpIndividualProjectController implements Initializable {
 	
 	@FXML
 	private DatePicker endDate;
-	
+
+	@FXML
+	private Button btnCancel;
+
 	@FXML
 	private Button btnAddJob;
 	
@@ -163,7 +167,16 @@ public class SignUpIndividualProjectController implements Initializable {
 			}
 		}
 	}
-	
+
+	@FXML
+	private void cancelSignUp() throws IOException
+	{
+		//if the user decides he no longer want to sign up the json files must be cleared of all inputs
+		// and returned to the original state
+		JSONParser.resetIndividualJSONFile();
+		JSONParser.resetEntrepriseJSONFile();
+		App.setRoot("LogInPage");
+	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources)

@@ -5,6 +5,7 @@ module com.fsb.networked {
 	requires javafx.base;
 	requires javafx.graphics;
     requires javafx.media;
+    requires org.json;
 
     opens com.fsb.networked to javafx.fxml;
     exports com.fsb.networked;

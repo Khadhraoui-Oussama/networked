@@ -2,21 +2,18 @@ package com.fsb.networked;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Year;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.fsb.networked.dao.Job;
-import com.fsb.networked.dao.Skill;
+import com.fsb.networked.dto.Job;
 import com.fsb.networked.utils.Alerts;
-import com.fsb.networked.utils.ComboBoxes;
 
+import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -30,7 +27,7 @@ public class SignUpIndividualWorkController implements Initializable {
 	private TextField jobPositionField;
 	
 	@FXML
-	private TextField technologyField;
+	private TextField companyField;
 	
 	@FXML
 	private TextField jobTypeField;
@@ -55,7 +52,10 @@ public class SignUpIndividualWorkController implements Initializable {
 	
 	@FXML
 	private Button btnBack;
-	
+
+	@FXML
+	private Button btnCancel;
+
 	@FXML
 	private ListView<Job> jobListView;
 	
@@ -81,10 +81,10 @@ public class SignUpIndividualWorkController implements Initializable {
 		
 		if(validateJob()) 
 		{
-			jobListView.getItems().add(new Job(jobPositionField.getText(),technologyField.getText(),jobTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue()));
+			jobListView.getItems().add(new Job(jobPositionField.getText(), companyField.getText(),jobTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue()));
 			//now clear all the fields
 			jobPositionField.clear();
-			technologyField.clear();
+			companyField.clear();
 			jobTypeField.clear();
 			startDate.setValue(null);
 			endDate.setValue(null);
@@ -107,7 +107,7 @@ public class SignUpIndividualWorkController implements Initializable {
 	
 	private boolean validateJob()
 	{
-		if(jobPositionField.getText().isEmpty() || technologyField.getText().isEmpty() || jobTypeField.getText().isEmpty() || descriptionTextArea.getText().isEmpty() || startDate.getValue() == null || endDate.getValue() == null)
+		if(jobPositionField.getText().isEmpty() || companyField.getText().isEmpty() || jobTypeField.getText().isEmpty() || descriptionTextArea.getText().isEmpty() || startDate.getValue() == null || endDate.getValue() == null)
 		{
 			Alerts.AlertEmptyField();
 			return false;
@@ -118,19 +118,19 @@ public class SignUpIndividualWorkController implements Initializable {
 		Matcher positionMatcher = positionPattern.matcher(jobPositionField.getText());
 		Matcher jobTypeMatcher = positionPattern.matcher(jobTypeField.getText());
 		
-		Matcher technologyMatcher = technologyPattern.matcher(technologyField.getText());
+		Matcher technologyMatcher = technologyPattern.matcher(companyField.getText());
 		
 		Pattern descriptionPattern  = Pattern.compile("^(?=.{1,150}$)[a-zA-Z0-9]+(?:[ _-][a-zA-Z0-9]+)*$");
 		Matcher descriptionMatcher = descriptionPattern.matcher(descriptionTextArea.getText());
 				
-		if (technologyField.getText().isEmpty() || !technologyMatcher.matches())
+		if (companyField.getText().isEmpty() || !technologyMatcher.matches())
 		{
-			flashRedBorder(technologyField);
+			flashRedBorder(companyField);
 			return false;
 		}
 		else
 		{
-			technologyField.setStyle("");
+			companyField.setStyle("");
 			if (jobPositionField.getText().isEmpty() || !positionMatcher.matches())
 			{
 				flashRedBorder(jobPositionField);
@@ -167,8 +167,17 @@ public class SignUpIndividualWorkController implements Initializable {
 			}
 		}
 	}
-	
-	
+
+	@FXML
+	private void cancelSignUp() throws IOException
+	{
+		//if the user decides he no longer want to sign up the json files must be cleared of all inputs
+		// and returned to the original state
+		JSONParser.resetIndividualJSONFile();
+		JSONParser.resetEntrepriseJSONFile();
+		App.setRoot("LogInPage");
+	}
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{

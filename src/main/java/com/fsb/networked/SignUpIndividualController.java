@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 import com.fsb.networked.utils.Alerts;
 import com.fsb.networked.utils.ComboBoxes;
 
+import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -70,20 +71,17 @@ public class SignUpIndividualController implements Initializable {
 	
 	@FXML
 	private Button btnBack;
-	
+
+	@FXML
+	private Button btnCancel;
+
+
 	@FXML
 	private ImageView profilePictureImg;
 	
 	@FXML
 	private Label statusLabel;
-	
-	@FXML
-    private void goBack() throws IOException
-	{
-        App.setRoot("SignUpScenes/SignUpPage");
-    }
-	
-	
+
 	@FXML 
 	private void selectDefaultProfilePicture() 
 	{
@@ -133,6 +131,10 @@ public class SignUpIndividualController implements Initializable {
 		System.out.println("Basic Individual Information gathered");
 		
     }
+	@FXML
+	private void goBack() throws IOException {
+		App.setRoot("SignUpScenes/SignUpPage");
+	}
 	
 	private <T> void flashRedBorder(T field)
 	{
@@ -141,7 +143,6 @@ public class SignUpIndividualController implements Initializable {
 	
 	private void validateBasicInfo()
 	{
-		
 		//border flashes if no value is entered & a popup to alert the user
 		//hacky solution BUT if the alert is called for each field ,
 		//it will get instanciated times the number of incomplete fields
@@ -218,6 +219,15 @@ public class SignUpIndividualController implements Initializable {
 		}
 	}
 
+	@FXML
+	private void cancelSignUp() throws IOException
+	{
+		//if the user decides he no longer want to sign up the json files must be cleared of all inputs
+		// and returned to the original state
+		JSONParser.resetIndividualJSONFile();
+		JSONParser.resetEntrepriseJSONFile();
+		App.setRoot("LogInPage");
+	}
 
 	@FXML
 	private void uploadProfilePicture()

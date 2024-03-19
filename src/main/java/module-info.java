@@ -4,7 +4,8 @@ module com.fsb.networked {
 	requires java.sql;
 	requires javafx.base;
 	requires javafx.graphics;
-	
-	opens com.fsb.networked to javafx.fxml;
+    requires javafx.media;
+
+    opens com.fsb.networked to javafx.fxml;
     exports com.fsb.networked;
 }

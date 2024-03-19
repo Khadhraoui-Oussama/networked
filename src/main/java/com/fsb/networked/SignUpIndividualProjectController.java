@@ -65,7 +65,7 @@ public class SignUpIndividualProjectController implements Initializable {
 	@FXML
     private void goNext() throws IOException
 	{
-		App.setRoot("SignUpScenes/SignUpPageIndividualWork");
+		App.setRoot("SignUpScenes/SignUpPageIndividualVideo");
 		System.out.println("Work INFO gathered");
     }
 

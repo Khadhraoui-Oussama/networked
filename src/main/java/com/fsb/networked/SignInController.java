@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 
 public class SignInController {
 
@@ -30,7 +31,7 @@ public class SignInController {
 	@FXML
     private void gotoSignUp() throws IOException
 	{
-        App.setRoot("SignUpControllers/SignUpPage");
+        App.setRoot("SignUpScenes/SignUpPage");
     }
 	
 	@FXML
@@ -44,10 +45,11 @@ public class SignInController {
 	{
 		System.out.println("Signed in");
 	}
+
 	@FXML
 	private void togglePasswordVisible()
 	{
-		System.out.println("password visible");
+		
 	}
 	
 	

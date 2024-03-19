@@ -2,21 +2,17 @@ package com.fsb.networked;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.Year;
 import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fsb.networked.dao.Job;
-import com.fsb.networked.dao.Skill;
 import com.fsb.networked.utils.Alerts;
-import com.fsb.networked.utils.ComboBoxes;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -63,13 +59,13 @@ public class SignUpIndividualProjectController implements Initializable {
 	@FXML
     private void goBack() throws IOException
 	{
-        App.setRoot("SignUpControllers/SignUpPageIndividualSkills");
+        App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
     }
 	
 	@FXML
     private void goNext() throws IOException
 	{
-		App.setRoot("SignUpControllers/SignUpPageIndividualWork");
+		App.setRoot("SignUpScenes/SignUpPageIndividualWork");
 		System.out.println("Work INFO gathered");
     }
 

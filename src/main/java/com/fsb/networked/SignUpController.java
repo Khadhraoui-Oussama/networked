@@ -40,7 +40,7 @@ public class SignUpController implements Initializable{
 	{
 		if(validateBasicInfo())
 		{
-        App.setRoot("SignUpControllers/SignUpPageIndividualBasic");
+        App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
 		}
 	}
 	
@@ -49,7 +49,7 @@ public class SignUpController implements Initializable{
 	{
 		if(validateBasicInfo())
 		{
-			App.setRoot("SignUpControllers/SignUpPageEntrepriseBasic");
+			App.setRoot("SignUpScenes/SignUpPageEntrepriseBasic");
 		}
     }
 	

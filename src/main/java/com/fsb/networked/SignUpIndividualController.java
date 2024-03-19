@@ -80,7 +80,7 @@ public class SignUpIndividualController implements Initializable {
 	@FXML
     private void goBack() throws IOException
 	{
-        App.setRoot("SignUpControllers/SignUpPage");
+        App.setRoot("SignUpScenes/SignUpPage");
     }
 	
 	
@@ -129,7 +129,7 @@ public class SignUpIndividualController implements Initializable {
 		//DONE TODO : do the same for the email and password fields in the SignUpPage scene
 		
 		validateBasicInfo();
-		App.setRoot("SignUpControllers/SignUpPageIndividualSkills");
+		App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
 		System.out.println("Basic Individual Information gathered");
 		
     }

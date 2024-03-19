@@ -1,7 +1,8 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
 import java.io.IOException;
 
+import com.fsb.networked.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 public class LoginController {

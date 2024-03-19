@@ -111,7 +111,9 @@ public class SignUpIndividualVideoController implements Initializable {
     @FXML
     private void resetVideo()
     {
-        mediaPlayer.setStartTime(Duration.ZERO);
+        mediaPlayer.pause();
+        mediaPlayer.seek(Duration.ZERO);
+
         mediaPlayer.play();
     }
 

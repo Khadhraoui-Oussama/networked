@@ -93,7 +93,7 @@
             </Button>
             <ImageView fitHeight="655.0" fitWidth="605.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.rowSpan="5" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
                <image>
-                  <Image url="@../../../images/Shared%20workspace-rafiki.png" />
+                  <Image url="@../../../images/shared-workspace-rafiki.png" />
                </image>
             </ImageView>
          </children>

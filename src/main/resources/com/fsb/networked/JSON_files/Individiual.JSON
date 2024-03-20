@@ -1,15 +1,15 @@
 {
   "signUpVideo": {
-    "videoPath": "/C:/Users/khadh/Videos/Microworks/MicroWorks 2024.01.13 - 15.18.12.60.DVR.mp4"
+    "videoPath": ""
   },
   "signUpBasic": {
     "firstName": "John",
     "lastName": "Doe",
     "country": "Tunisia",
     "address": "10 Jarzouna",
-    "gender": "Male",
+    "gender": "Female",
     "dob": "2003-10-04",
-    "picture": "file:/C:/Users/khadh/IdeaProjects/networked/target/classes/images/male_avatar.png"
+    "picture": "file:/C:/Users/khadh/Pictures/JPEG_20240115_223214_5564432815671038367.jpg"
   },
   "signUpProjects": [],
   "signUpWork": [],

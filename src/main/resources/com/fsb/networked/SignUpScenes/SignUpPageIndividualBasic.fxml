@@ -139,11 +139,11 @@
               </buttons>
             </ButtonBar>
             <ImageView fx:id="profilePictureImg" fitHeight="285.0" fitWidth="365.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <VBox prefHeight="190.0" prefWidth="387.0" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <VBox prefHeight="46.0" prefWidth="392.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BASELINE">
                <children>
-                  <HBox>
-                     <children>
-                        <Button fx:id="btnUploadProfilePicture" mnemonicParsing="false" onAction="#uploadProfilePicture" prefHeight="52.0" prefWidth="206.0" text="Upload  your picture">
+                  <ButtonBar prefHeight="246.0" prefWidth="392.0">
+                     <buttons>
+                        <Button fx:id="btnUploadProfilePicture" mnemonicParsing="false" onAction="#uploadProfilePicture" prefHeight="52.0" prefWidth="186.0" text="Upload  your picture">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -151,16 +151,11 @@
                               <Insets />
                            </opaqueInsets>
                         </Button>
-                        <Button fx:id="btnUseDefaultProfilePicture" mnemonicParsing="false" onAction="#selectDefaultProfilePicture" prefHeight="52.0" prefWidth="220.0" text="Use default picture">
-                           <font>
-                              <Font size="15.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets left="15.0" />
-                           </opaqueInsets>
-                        </Button>
-                     </children>
-                  </HBox>
+                     </buttons>
+                     <VBox.margin>
+                        <Insets right="100.0" />
+                     </VBox.margin>
+                  </ButtonBar>
                </children>
             </VBox>
          </children>

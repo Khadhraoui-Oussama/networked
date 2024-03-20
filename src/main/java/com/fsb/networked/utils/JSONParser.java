@@ -102,14 +102,8 @@ public class JSONParser {
         signUpBasicObject.put("gender", "");
 
         String imagePath = "/images/male_avatar.png";
-        URL imageUrl = JSONParser.class.getResource(imagePath);
-        if (imageUrl != null) {
-            // Create an Image object using the URL
-            Image image = new Image(imageUrl.toExternalForm());
-            signUpBasicObject.put("picture", image.getUrl());
-        } else {
-            System.err.println("Image resource not found: " + imagePath);
-        }
+        signUpBasicObject.put("picture", FilePaths.getImagePath(imagePath));
+
         jsonObject.put("signUpBasic", signUpBasicObject);
 
         JSONArray signUpSkillsArray = new JSONArray();

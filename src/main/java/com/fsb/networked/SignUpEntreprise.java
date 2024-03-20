@@ -81,7 +81,6 @@ public class SignUpEntreprise {
             System.err.println("Error: rootPane is null");
             return;
         }
-
         // Create a file chooser dialog
         FileChooser fileChooser = new FileChooser();
 

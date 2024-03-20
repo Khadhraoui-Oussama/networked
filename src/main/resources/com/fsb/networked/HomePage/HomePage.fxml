@@ -10,14 +10,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <BorderPane prefHeight="770.0" prefWidth="1242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <top>
             <HBox alignment="CENTER" prefHeight="85.0" prefWidth="1242.0" BorderPane.alignment="CENTER">
                <children>
-                  <ImageView fitHeight="130.0" fitWidth="309.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="48.0" fitWidth="311.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@../../../../images/networked-high-resolution-logo-transparent.png" />
                      </image>
@@ -26,27 +25,32 @@
                     <buttons>
                       <Button mnemonicParsing="false" text="Home">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Button>
                         <Button layoutX="832.0" layoutY="27.0" mnemonicParsing="false" text="Network">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Button>
                         <Button layoutX="832.0" layoutY="27.0" mnemonicParsing="false" text="Jobs">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Button>
-                        <Button layoutX="832.0" layoutY="27.0" mnemonicParsing="false" text="Messages">
+                        <Button layoutX="832.0" layoutY="27.0" mnemonicParsing="false" text="Notifications">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Button>
                         <Button layoutX="832.0" layoutY="27.0" mnemonicParsing="false" text="Profile">
                            <font>
-                              <Font name="System Bold" size="25.0" />
+                              <Font name="System Bold" size="20.0" />
+                           </font>
+                        </Button>
+                        <Button layoutX="639.0" layoutY="27.0" mnemonicParsing="false" text="Messages">
+                           <font>
+                              <Font name="System Bold" size="20.0" />
                            </font>
                         </Button>
                     </buttons>

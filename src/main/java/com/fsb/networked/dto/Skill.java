@@ -1,5 +1,7 @@
 package com.fsb.networked.dto;
 
+import org.json.JSONObject;
+
 public class Skill
 {
 	private String title;
@@ -55,5 +57,13 @@ public class Skill
 	{
 		this.level = level;
 	}
-	
+
+	public JSONObject toJSON() {
+		JSONObject skillJSON = new JSONObject();
+		skillJSON.put("title", title);
+		skillJSON.put("technology", technology);
+		skillJSON.put("description", description);
+		skillJSON.put("level", level);
+		return skillJSON;
+	}
 }

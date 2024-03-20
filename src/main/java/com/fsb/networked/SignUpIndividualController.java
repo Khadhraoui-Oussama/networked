@@ -10,6 +10,9 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import com.fsb.networked.utils.Alerts;
 import com.fsb.networked.utils.ComboBoxes;
 
@@ -121,14 +124,25 @@ public class SignUpIndividualController implements Initializable {
 	@FXML
     private void goNext() throws IOException
 	{
-		//TODO: implement a way to save the basic data so it be ready and waiting for the work data
+		//DONE JSON TODO: implement a way to save the basic data so it be ready and waiting for the work data
         //one idea : push the basic data we have to the database 
 		//and then push the work data with WHERE clause instead of waiting
 		//DONE TODO : do the same for the email and password fields in the SignUpPage scene
 		
-		validateBasicInfo();
-		App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
-		System.out.println("Basic Individual Information gathered");
+		if(validateBasicInfo())
+		{
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "firstName", firstNameField.getText());
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "lastName", lastNameField.getText());
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "country", countryComboBox.getValue());
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "address", physicalAdressField.getText());
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "gender", genderComboBox.getValue());
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "dob", dateOfBirthPicker.getValue());
+			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", profilePictureImg.getImage().getUrl());
+
+			App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
+			System.out.println("Basic Individual Information gathered");
+		}
+
 		
     }
 	@FXML
@@ -140,83 +154,55 @@ public class SignUpIndividualController implements Initializable {
 	{
 		((Node) field).setStyle("-fx-border-color:red;");
 	}
-	
-	private void validateBasicInfo()
-	{
+
+	private boolean validateBasicInfo() {
+
 		//border flashes if no value is entered & a popup to alert the user
 		//hacky solution BUT if the alert is called for each field ,
 		//it will get instanciated times the number of incomplete fields
-		if(firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || dateOfBirthPicker.getValue() == null || physicalAdressField.getText().isEmpty())
-		{
+		boolean isValid = true;
+
+		if (firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || dateOfBirthPicker.getValue() == null || physicalAdressField.getText().isEmpty()) {
 			Alerts.AlertEmptyField();
+			isValid = false;
 		}
-		
+
 		Pattern namePattern = Pattern.compile("^[A-Z][a-z]{1,39}$");
 		Matcher fnameMatcher = namePattern.matcher(firstNameField.getText());
 		Matcher lnameMatcher = namePattern.matcher(lastNameField.getText());
-		
-		Pattern addressPattern  = Pattern.compile("^[\\w\\s.,'-]+(?:\\s[\\w\\s.,'-]+)*$");
-		Matcher addressMatcher = addressPattern.matcher(physicalAdressField.getCharacters());
-		
-		if (firstNameField.getText().isEmpty())
-		{
+
+		Pattern addressPattern = Pattern.compile("^[\\w\\s.,'-]+(?:\\s[\\w\\s.,'-]+)*$");
+		Matcher addressMatcher = addressPattern.matcher(physicalAdressField.getText());
+
+		if (firstNameField.getText().isEmpty() || !fnameMatcher.matches()) {
 			flashRedBorder(firstNameField);
-		}
-		else
-		{
+			isValid = false;
+		} else {
 			firstNameField.setStyle("");
-			if(!fnameMatcher.matches())
-			{
-				flashRedBorder(firstNameField);
+		}
+
+		if (lastNameField.getText().isEmpty() || !lnameMatcher.matches()) {
+			flashRedBorder(lastNameField);
+			if (fnameMatcher.matches()) { // this is to only alert once if both first and last names don't match regex
 				Alerts.AlertNameField();
 			}
-			
+			isValid = false;
+		} else {
+			lastNameField.setStyle("");
 		}
-		if (lastNameField.getText().isEmpty())
-		{
-			
-			flashRedBorder(lastNameField);
-		}
-		else
-		{
-			lastNameField.setStyle("");	
-			if(!lnameMatcher.matches() ) 
-			{
-				flashRedBorder(lastNameField);
-				if(fnameMatcher.matches()) // this is to only alert once if both first and last names dont match regex
-				{
-					Alerts.AlertNameField();
-		
-				}
-			}
-		}
-		
-		if (dateOfBirthPicker.getValue() == null)
-		{
+		if (dateOfBirthPicker.getValue() == null || (Year.now().getValue() - dateOfBirthPicker.getValue().getYear()) < 16) {
 			flashRedBorder(dateOfBirthPicker);
-		}
-		else
-		{
+			isValid = false;
+		} else {
 			dateOfBirthPicker.setStyle("");
-			if((Year.now().getValue() - dateOfBirthPicker.getValue().getYear()) < 16)
-			{
-				flashRedBorder(dateOfBirthPicker);
-				Alerts.AlertDOBField();
-			}
 		}
-		if (physicalAdressField.getText().isEmpty())
-		{
+		if (physicalAdressField.getText().isEmpty() || !addressMatcher.matches()) {
 			flashRedBorder(physicalAdressField);
-		}
-		else
-		{
+			isValid = false;
+		} else {
 			physicalAdressField.setStyle("");
-			if(!addressMatcher.matches())
-			{
-				flashRedBorder(physicalAdressField);
-				Alerts.AlertAddressField();
-			}
 		}
+		return isValid;
 	}
 
 	@FXML
@@ -262,19 +248,45 @@ public class SignUpIndividualController implements Initializable {
 		//fill in the ComboBox with the country list from the ComboBoxes util class
 		countryComboBox.getItems().addAll(ComboBoxes.COUNTRIES);
 		//little easter egg: set the default selected country to Tunisia which is at index 177
-		countryComboBox.getSelectionModel().select(177);
+
 		//we do the same for the Gender ComboBox
 		genderComboBox.getItems().addAll(ComboBoxes.GENDERS);
-		genderComboBox.getSelectionModel().select(0);
-		
+
+		//load the previously entered data ,so we don't lose it if we decide to go back to check for error in input
+		firstNameField.setText(JSONParser.getValueFromJSONFile(
+				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				"signUpBasic",
+				"firstName"));
+		lastNameField.setText(JSONParser.getValueFromJSONFile(
+				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				"signUpBasic",
+				"lastName"));
+		countryComboBox.getSelectionModel().select(JSONParser.getValueFromJSONFile(
+				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				"signUpBasic",
+				"country"));
+		physicalAdressField.setText(JSONParser.getValueFromJSONFile(
+				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				"signUpBasic",
+				"address"));
+		genderComboBox.getSelectionModel().select(JSONParser.getValueFromJSONFile(
+				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				"signUpBasic",
+				"gender"));
+		//image and DOB
+		String imageURL = JSONParser.getValueFromJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture");
+		profilePictureImg.setImage(new Image(imageURL));
+
+		//format the string dob so that it becomes a LocalDate object
+
 		//THIS IS ONLY TO SPEED UP THE DEVELEOPMENT REMOVE WHEN READY TO PUSH TO PROD
 		dateOfBirthPicker.setValue(LocalDate.of(2003, 10, 4));
 		firstNameField.setText("John");
 		lastNameField.setText("Doe");
 		physicalAdressField.setText("10 Jarzouna");
+		countryComboBox.getSelectionModel().select(177);
+		genderComboBox.getSelectionModel().select(0);
 		//REMOVE ALL THE ABOVE WHEN READY TO PUSH TO PROD
+
 	}
-
-
-
 }

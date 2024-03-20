@@ -1,8 +1,16 @@
 package com.fsb.networked.utils;
 
+import javafx.scene.image.Image;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONPointer;
 
 import java.io.*;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class JSONParser {
     public static String getJSONFromFile(String filename) {
@@ -92,11 +100,23 @@ public class JSONParser {
         signUpBasicObject.put("country", "");
         signUpBasicObject.put("address", "");
         signUpBasicObject.put("gender", "");
-        signUpBasicObject.put("picture", "");
+
+        String imagePath = "/images/male_avatar.png";
+        URL imageUrl = JSONParser.class.getResource(imagePath);
+        if (imageUrl != null) {
+            // Create an Image object using the URL
+            Image image = new Image(imageUrl.toExternalForm());
+            signUpBasicObject.put("picture", image.getUrl());
+        } else {
+            System.err.println("Image resource not found: " + imagePath);
+        }
         jsonObject.put("signUpBasic", signUpBasicObject);
 
+        JSONArray signUpSkillsArray = new JSONArray();
+
         JSONObject signUpSkillsObject = new JSONObject();
-        jsonObject.put("signUpSkills", signUpSkillsObject);
+
+        jsonObject.put("signUpSkills", signUpSkillsArray);
 
         JSONObject signUpWorkObject = new JSONObject();
         jsonObject.put("signUpWork", signUpWorkObject);
@@ -134,6 +154,39 @@ public class JSONParser {
             writer.write(jsonObject.toString());
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+    public static void updateSkillsJSONArray(JSONArray skillsArray) {
+        try {
+            // Read the existing JSON content
+            String content = new String(Files.readAllBytes(Paths.get("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")));
+            JSONObject jsonObject = new JSONObject(content);
+
+            // Update the skills array in the JSON object
+            jsonObject.put("signUpSkills", skillsArray);
+
+            // Write the modified JSON back to the file
+            try (FileWriter file = new FileWriter("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")) {
+                file.write(jsonObject.toString());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static JSONArray getSkillsJSONArray(String filePath) {
+        try {
+            // Read the JSON content from the file
+            String content = Files.readString(Paths.get(filePath));
+
+            // Parse the JSON string
+            JSONObject jsonObject = new JSONObject(content);
+
+            // Get the skills JSON array
+            return jsonObject.getJSONArray("signUpSkills");
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            return new JSONArray(); // Return an empty array if an error occurs
         }
     }
 }

@@ -1,1 +1,1 @@
-{"signUpVideo":{"videoPath":""},"signUpBasic":{"firstName":"","lastName":"","country":"","address":"","gender":"","dob":"","picture":""},"signUpProjects":{},"signUpWork":{},"signUp":{"emailAddress":"example@xyz.com","password":"123456789Aa@"},"signUpSkills":{}}
+{"signUpVideo":{"videoPath":""},"signUpBasic":{"firstName":"","lastName":"","country":"","address":"","gender":"","dob":"","picture":"file:/C:/Users/khadh/IdeaProjects/networked/target/classes/images/male_avatar.png"},"signUpProjects":{},"signUpWork":{},"signUp":{"emailAddress":"","password":""},"signUpSkills":[]}

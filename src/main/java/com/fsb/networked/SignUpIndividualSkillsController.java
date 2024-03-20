@@ -21,6 +21,8 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class SignUpIndividualSkillsController implements Initializable {
 
@@ -53,17 +55,18 @@ public class SignUpIndividualSkillsController implements Initializable {
 	
 	@FXML
 	private ListView<Skill> skillsListView;
-	
-	
+
+	private JSONArray skillsArrays = new JSONArray();
 	@FXML
     private void goBack() throws IOException
 	{
-        App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
+		App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
     }
 	
 	@FXML
     private void goNext() throws IOException
 	{
+		JSONParser.updateSkillsJSONArray(skillsArrays);
 		App.setRoot("SignUpScenes/SignUpPageIndividualWork");
 		System.out.println("Individual Skills Information gathered");
     }
@@ -73,11 +76,15 @@ public class SignUpIndividualSkillsController implements Initializable {
 	private void addSkill()
 	{
 		//DONE TODO : when add skill btn is pressed the skill must be added to the listview of skill
-		//also figure out how it should be added to Skills class or person DAO iDK yet		
-		
+		//also figure out how it should be added to Skills class or person DAO iDK yet
 		if(validateSkill()) 
 		{
-			skillsListView.getItems().add(new Skill(skillTitleField.getText(),technologyField.getText(),descriptionTextArea.getText(),levelComboBox.getValue()));
+			//make a new skill object
+			Skill skill = new Skill(skillTitleField.getText(),technologyField.getText(),descriptionTextArea.getText(),levelComboBox.getValue());
+			//add to the skillListView
+			skillsListView.getItems().add(skill);
+			//add to the skillsArray (JSON)
+			skillsArrays.put(skill.toJSON());
 			//now clear all the fields
 			skillTitleField.clear();
 			technologyField.clear();
@@ -177,8 +184,28 @@ public class SignUpIndividualSkillsController implements Initializable {
                 };
             }
         });
-	
+
+		//this bit of code makes sure the skillsListView gets populated with whatever skills the user has added
+		// so that in case of going to next scene and going back, the inputed data doesn't get lost
+		JSONArray skillsArray = JSONParser.getSkillsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+		// Iterate over each skill object in the JSON array and extract each field
+		for (int i = 0; i < skillsArray.length(); i++) {
+			JSONObject skillObject = skillsArray.getJSONObject(i);
+			String titleValue = skillObject.getString("title");
+			String technologyValue = skillObject.getString("technology");
+			String descriptionValue = skillObject.getString("description");
+			String levelValue = skillObject.getString("level");
+			//create a skill object with those extracted values
+			Skill skill = new Skill(titleValue,technologyValue,descriptionValue,levelValue);
+			//add that skill object to the skillsListView list of items(skills)
+			//check if all fields are empty then don't add it
+			//without this check at the first signUp the user will find an empty ghost task
+			if(!(skill.getTitle().isBlank() && skill.getDescription().isBlank() && skill.getDescription().isBlank()))
+			{
+				skillsListView.getItems().add(skill);
+				//put the skillObject in the skillsArrays so that already filled in skills won't get lost after a scene go and back idk how to explain just trust
+				skillsArrays.put(skillObject);
+			}
+		}
 	}
-	
-	
 }

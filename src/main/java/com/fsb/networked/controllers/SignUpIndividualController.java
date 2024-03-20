@@ -1,4 +1,4 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
 import java.io.File;
 import java.io.IOException;
@@ -14,6 +14,7 @@ import java.util.regex.Pattern;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+import com.fsb.networked.App;
 import com.fsb.networked.utils.*;
 
 import javafx.fxml.FXML;
@@ -126,59 +127,15 @@ public class SignUpIndividualController implements Initializable {
 
 	@FXML
 	private void goBack() throws IOException {
-		App.setRoot("SignUpScenes/SignUpPage");
-	}
-
-	private <T> void flashRedBorder(T field) {
-		((Node) field).setStyle("-fx-border-color:red;");
+		App.setRoot("SignUpScenes/SignUpPageCommon");
 	}
 
 	private boolean validateBasicInfo() {
-
-		//border flashes if no value is entered & a popup to alert the user
-		//hacky solution BUT if the alert is called for each field ,
-		//it will get instanciated times the number of incomplete fields
 		boolean isValid = true;
-
-		if (firstNameField.getText().isEmpty() || lastNameField.getText().isEmpty() || dateOfBirthPicker.getValue() == null || physicalAdressField.getText().isEmpty() || genderComboBox.getValue().isEmpty()) {
-			Alerts.AlertEmptyField();
-			isValid = false;
-		}
-
-		Pattern namePattern = Pattern.compile("^[A-Z][a-z]{1,39}$");
-		Matcher fnameMatcher = namePattern.matcher(firstNameField.getText());
-		Matcher lnameMatcher = namePattern.matcher(lastNameField.getText());
-
-		Pattern addressPattern = Pattern.compile("^[\\w\\s.,'-]+(?:\\s[\\w\\s.,'-]+)*$");
-		Matcher addressMatcher = addressPattern.matcher(physicalAdressField.getText());
-
-		if (firstNameField.getText().isEmpty() || !fnameMatcher.matches()) {
-			flashRedBorder(firstNameField);
-			isValid = false;
-		} else {
-			firstNameField.setStyle("");
-		}
-		if (lastNameField.getText().isEmpty() || !lnameMatcher.matches()) {
-			flashRedBorder(lastNameField);
-			if (fnameMatcher.matches()) { // this is to only alert once if both first and last names don't match regex
-				Alerts.AlertNameField();
-			}
-			isValid = false;
-		} else {
-			lastNameField.setStyle("");
-		}
-		if (dateOfBirthPicker.getValue() == null || (Year.now().getValue() - dateOfBirthPicker.getValue().getYear()) < 16) {
-			flashRedBorder(dateOfBirthPicker);
-			isValid = false;
-		} else {
-			dateOfBirthPicker.setStyle("");
-		}
-		if (physicalAdressField.getText().isEmpty() || !addressMatcher.matches()) {
-			flashRedBorder(physicalAdressField);
-			isValid = false;
-		} else {
-			physicalAdressField.setStyle("");
-		}
+		isValid &= Validator.validateField(firstNameField, Regexes.NAME_REGEX);
+		isValid &= Validator.validateField(lastNameField, Regexes.NAME_REGEX);
+		isValid &= Validator.validateField(dateOfBirthPicker,"");
+		isValid &= Validator.validateField(physicalAdressField, Regexes.ADDRESS_REGEX);
 		return isValid;
 	}
 

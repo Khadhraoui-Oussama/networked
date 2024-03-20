@@ -1,0 +1,16 @@
+package com.fsb.networked.utils;
+
+public class Regexes {
+    public static String LINK_REGEX = "^(http|https)://.*$";
+    public static String DESCRIPTION_REGEX = "^(?=.{1,150}$)[a-zA-Z0-9]+(?:[ _-][a-zA-Z0-9]+)*$";
+    public static String FOUNDERS_REGEX = "^([-A-Za-z]+(?:\\s[-A-Za-z]+)*(?:\\s*,\\s*[-A-Za-z]+(?:\\s[-A-Za-z]+)*)*$|^[A-Za-z-]+(?:\\s[-A-Za-z]+)*(?:\\s*-\\s*[A-Za-z-]+(?:\\s[-A-Za-z]+)*)*$)";
+    public static String TITLE_REGEX = "^[a-zA-Z0-9][a-zA-Z0-9 _-]{1,38}[a-zA-Z0-9]$";
+    public static String POSITION_REGEX = "[a-zA-Z][a-zA-Z_-]{1,38}[a-zA-Z]$";
+    public static String TECHNOLOGY_REGEX = "[a-zA-Z0-9][a-zA-Z0-9 _-]{1,38}[a-zA-Z0-9]$";
+    public static String NAME_REGEX = "^[A-Z][a-z]{1,39}$";
+    public static String COMPANY_NAME_REGEX = "^[A-Z0-9][a-z0-9-_]{1,39}$";
+    public static String ADDRESS_REGEX = "^[\\w\\s.,'-]+(?:\\s[\\w\\s.,'-]+)*$";
+
+
+
+}

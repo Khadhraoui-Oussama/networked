@@ -1,7 +1,8 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
 import java.io.IOException;
 
+import com.fsb.networked.App;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
@@ -31,7 +32,7 @@ public class SignInController {
 	@FXML
     private void gotoSignUp() throws IOException
 	{
-        App.setRoot("SignUpScenes/SignUpPage");
+        App.setRoot("SignUpScenes/SignUpPageCommon");
     }
 	
 	@FXML

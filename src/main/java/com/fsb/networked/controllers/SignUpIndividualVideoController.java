@@ -1,10 +1,11 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import com.fsb.networked.App;
 import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -88,6 +89,12 @@ public class SignUpIndividualVideoController implements Initializable {
         }
     }
 
+    public static boolean isValidVideo(File file) {
+        if (file == null) {
+            return false;
+        }
+        return true;
+    }
     @FXML
     private void goBack() throws IOException
     {
@@ -97,8 +104,11 @@ public class SignUpIndividualVideoController implements Initializable {
     @FXML
     private void finishSignUpIndividual() throws IOException
     {
-        JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpVideo", "videoPath", videoFile.toURI().getPath());
-        System.out.println("All Info Gathered");
+        if(isValidVideo(videoFile))
+        {
+            JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpVideo", "videoPath", videoFile.toURI().getPath());
+            System.out.println("All Info Gathered");
+        }
     }
 
     @FXML
@@ -141,6 +151,4 @@ public class SignUpIndividualVideoController implements Initializable {
             mediaView.setMediaPlayer(mediaPlayer);
         }
     }
-
-
 }

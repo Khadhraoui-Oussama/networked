@@ -1,5 +1,6 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
+import com.fsb.networked.App;
 import com.fsb.networked.utils.Alerts;
 import com.fsb.networked.utils.ImportantFileReferences;
 import com.fsb.networked.utils.JSONParser;
@@ -61,9 +62,7 @@ public class SignUpController implements Initializable{
 	{
 		if(validateBasicInfo())
 		{
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Entreprise.JSON", "signUp", "emailAddress", emailAddressField.getText());
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Entreprise.JSON", "signUp", "password", passwordField.getText());
-			App.setRoot("SignUpScenes/SignUpPageEntrepriseBasic");
+			App.setRoot("SignUpPageEntreprise");
 		}
     }
 	

@@ -18,18 +18,18 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.SignUpIndividualController">
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.SignUpEntrepriseController">
    <children>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="389.2666137695312" />
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="479.3999267578125" />
-            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="400.2000732421875" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="269.7999755859375" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="617.199951171875" />
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="355.60004882812507" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="154.2" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="57.93334350585937" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="285.59995117187503" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="121.4" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="43.20002441406248" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="332.7999755859375" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="190.20004882812498" valignment="CENTER" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="82.46674194335935" vgrow="SOMETIMES" />
          </rowConstraints>
@@ -50,73 +50,86 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Text>
-            <VBox alignment="CENTER" prefHeight="504.0" prefWidth="524.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+            <VBox alignment="CENTER" prefHeight="523.0" prefWidth="639.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
                <children>
-                  <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="Basic information :" textAlignment="CENTER" wrappingWidth="456.5790557861328">
+                  <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="Company information :" textAlignment="CENTER" wrappingWidth="499.7790069580078">
                      <font>
                         <Font name="Calibri Light" size="40.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
                   </Text>
                   <VBox prefHeight="346.0" prefWidth="522.0">
                      <children>
-                        <HBox prefHeight="64.0" prefWidth="810.0">
+                        <HBox alignment="CENTER" prefHeight="64.0" prefWidth="606.0">
                            <children>
-                              <Label prefHeight="38.0" prefWidth="201.0" text="First Name">
+                              <Label prefHeight="38.0" prefWidth="254.0" text="Company Name">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="firstNameField" prefWidth="163.0" />
+                              <TextField fx:id="companyNameField" prefHeight="26.0" prefWidth="158.0" />
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="810.0">
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="138.0" prefHeight="59.0" prefWidth="686.0">
                            <children>
-                              <Label prefHeight="38.0" prefWidth="201.0" text="Last Name">
+                              <Label prefHeight="38.0" prefWidth="262.0" text="Company Sector">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="lastNameField" />
+                              <ComboBox fx:id="sectorComboBox" prefWidth="150.0" />
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="74.0" prefHeight="64.0" prefWidth="810.0">
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="64.0" prefWidth="810.0">
                            <children>
-                              <Label prefHeight="38.0" prefWidth="201.0" text="Date of birth ">
+                              <Label prefHeight="38.0" prefWidth="250.0" text="Date of foundation">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <DatePicker fx:id="dateOfBirthPicker" />
+                              <DatePicker fx:id="dateOfFoundationDatePicker" prefHeight="26.0" prefWidth="172.0" />
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="138.0" prefHeight="59.0" prefWidth="686.0">
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="185.0" prefHeight="59.0" prefWidth="686.0">
                            <children>
-                              <Label prefHeight="38.0" prefWidth="201.0" text="Country">
+                              <Label prefHeight="38.0" prefWidth="266.0" text="Company size">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="countryComboBox" prefWidth="150.0" />
+                              <ComboBox fx:id="sizeComboBox" prefWidth="150.0" />
                            </children>
                         </HBox>
-                        <HBox layoutX="10.0" layoutY="60.0" prefHeight="64.0" prefWidth="810.0">
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="60.0" prefHeight="64.0" prefWidth="810.0">
                            <children>
-                              <Label prefHeight="38.0" prefWidth="201.0" text="Address">
+                              <Label prefHeight="38.0" prefWidth="272.0" text="Founder(s) or Owner(s)">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="physicalAdressField" />
+                              <TextField fx:id="foundersTextField" />
                            </children>
                         </HBox>
-                        <HBox prefHeight="64.0" prefWidth="810.0">
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="312.0" prefHeight="64.0" prefWidth="810.0">
                            <children>
-                              <Label prefHeight="38.0" prefWidth="201.0" text="Gender">
+                              <Label prefHeight="38.0" prefWidth="272.0" text="Website URL">
                                  <font>
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <ComboBox fx:id="genderComboBox" prefWidth="150.0" />
+                              <TextField fx:id="websiteTextField" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="317.0" prefHeight="64.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="272.0" text="Location of HQ">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="locationTextField" />
                            </children>
                         </HBox>
                      </children>
@@ -138,12 +151,12 @@
                   <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSignUp" text="Cancel" />
               </buttons>
             </ButtonBar>
-            <ImageView fx:id="profilePictureImg" fitHeight="285.0" fitWidth="365.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ImageView fx:id="companyLogoImageView" fitHeight="314.0" fitWidth="365.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <VBox prefHeight="46.0" prefWidth="392.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BASELINE">
                <children>
                   <ButtonBar prefHeight="246.0" prefWidth="392.0">
                      <buttons>
-                        <Button fx:id="btnUploadProfilePicture" mnemonicParsing="false" onAction="#uploadProfilePicture" prefHeight="52.0" prefWidth="186.0" text="Upload  your picture">
+                        <Button fx:id="btnUploadProfilePicture" mnemonicParsing="false" onAction="#uploadProfilePicture" prefHeight="52.0" prefWidth="186.0" text="Upload  Company logo">
                            <font>
                               <Font size="15.0" />
                            </font>

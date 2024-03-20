@@ -37,7 +37,7 @@ public class ForgotPasswordController {
 	
 	@FXML
     private void gotoSignUp() throws IOException {
-        App.setRoot("SignUpControllers/SignUpPage");
+        App.setRoot("SignUpControllers/SignUpPageCommon");
     }
 	
 	@FXML

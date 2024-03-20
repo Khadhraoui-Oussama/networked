@@ -1,19 +1,15 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
+import com.fsb.networked.App;
 import com.fsb.networked.dto.Skill;
-import com.fsb.networked.utils.Alerts;
-import com.fsb.networked.utils.ComboBoxes;
+import com.fsb.networked.utils.*;
 
-import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.ListCell;
@@ -92,7 +88,6 @@ public class SignUpIndividualSkillsController implements Initializable {
 			levelComboBox.getSelectionModel().select(0);
 		}
 	}
-	
 	@FXML
 	private void deleteSkill()
 	{
@@ -101,54 +96,15 @@ public class SignUpIndividualSkillsController implements Initializable {
 		skillsListView.getItems().remove(selectedSkill);
 		skillsArray.remove(skillsListView.getItems().indexOf(skillsListView.getSelectionModel().getSelectedItem()));
 	}
-	
-	private <T> void flashRedBorder(T field)
-	{
-		((Node) field).setStyle("-fx-border-color:red;");
-	}
-	
-	private boolean validateSkill()
-	{
-		if(skillTitleField.getText().isEmpty() || technologyField.getText().isEmpty() || descriptionTextArea.getText().isEmpty())
-		{
-			Alerts.AlertEmptyField();
-			return false;
-		}		
-		Pattern titlePattern = Pattern.compile("^[a-zA-Z0-9][a-zA-Z0-9 _-]{1,38}[a-zA-Z0-9]$");
-		Matcher titleMatcher = titlePattern.matcher(skillTitleField.getText());
-		Matcher technologyMatcher = titlePattern.matcher(technologyField.getText());
-		
-		Pattern descriptionPattern  = Pattern.compile("^(?=.{1,150}$)[a-zA-Z0-9]+(?:[ _-][a-zA-Z0-9]+)*$");
-		Matcher descriptionMatcher = descriptionPattern.matcher(descriptionTextArea.getText());
-				
-		if (technologyField.getText().isEmpty() || !technologyMatcher.matches())
-		{
-			flashRedBorder(technologyField);
-			return false;
-		}
-		else
-		{
-			technologyField.setStyle("");
-			if (skillTitleField.getText().isEmpty() || !titleMatcher.matches())
-			{
-				flashRedBorder(skillTitleField);
-				return false;
-			}
-			else
-			{
-				skillTitleField.setStyle("");
-				if (descriptionTextArea.getText().isEmpty() || !descriptionMatcher.matches())
-				{
-					flashRedBorder(descriptionTextArea);
-					return false;
-				}
-				else
-				{
-					descriptionTextArea.setStyle("");
-				}	
-				return true;
-			}
-		}
+
+	private boolean validateSkill() {
+		boolean isValid = true;
+
+		isValid &= Validator.validateField(skillTitleField, Regexes.TITLE_REGEX);
+		isValid &= Validator.validateField(technologyField, Regexes.TECHNOLOGY_REGEX);
+		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX);
+
+		return isValid;
 	}
 
 	@FXML
@@ -164,7 +120,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
-		levelComboBox.getItems().addAll(ComboBoxes.SKILLLEVELS);
+		levelComboBox.getItems().addAll(ComboBoxes.SKILL_LEVELS);
 		levelComboBox.getSelectionModel().selectFirst();	
 	
 		/*------------*/

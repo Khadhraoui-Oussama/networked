@@ -1,4 +1,4 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
 import java.io.IOException;
 import java.net.URL;
@@ -7,12 +7,11 @@ import java.util.ResourceBundle;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.fsb.networked.App;
 import com.fsb.networked.dto.Job;
 import com.fsb.networked.dto.Skill;
-import com.fsb.networked.utils.Alerts;
+import com.fsb.networked.utils.*;
 
-import com.fsb.networked.utils.Conversions;
-import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
@@ -107,73 +106,20 @@ public class SignUpIndividualWorkController implements Initializable {
 		jobListView.getItems().remove(selectedJob);
 		jobsArray.remove(jobListView.getItems().indexOf(jobListView.getSelectionModel().getSelectedItem()));
 	}
-	
-	private <T> void flashRedBorder(T field)
-	{
-		((Node) field).setStyle("-fx-border-color:red;");
-	}
-	
-	private boolean validateJob()
-	{
-		if(jobPositionField.getText().isEmpty() || companyField.getText().isEmpty() || jobTypeField.getText().isEmpty() || descriptionTextArea.getText().isEmpty() || startDate.getValue() == null || endDate.getValue() == null)
-		{
-			Alerts.AlertEmptyField();
-			return false;
-		}		
-		Pattern positionPattern = Pattern.compile("^[a-zA-Z][a-zA-Z_-]{1,38}[a-zA-Z]$");
-		Pattern technologyPattern = Pattern.compile("^[a-zA-Z0-9][a-zA-Z0-9 _-]{1,38}[a-zA-Z0-9]$");
-		
-		Matcher positionMatcher = positionPattern.matcher(jobPositionField.getText());
-		Matcher jobTypeMatcher = positionPattern.matcher(jobTypeField.getText());
-		
-		Matcher technologyMatcher = technologyPattern.matcher(companyField.getText());
-		
-		Pattern descriptionPattern  = Pattern.compile("^(?=.{1,150}$)[a-zA-Z0-9]+(?:[ _-][a-zA-Z0-9]+)*$");
-		Matcher descriptionMatcher = descriptionPattern.matcher(descriptionTextArea.getText());
-				
-		if (companyField.getText().isEmpty() || !technologyMatcher.matches())
-		{
-			flashRedBorder(companyField);
-			return false;
+
+	private boolean validateJob() {
+		boolean isValid = true;
+		isValid &= Validator.validateField(jobPositionField, Regexes.POSITION_REGEX);
+		isValid &= Validator.validateField(companyField, Regexes.TECHNOLOGY_REGEX);
+		isValid &= Validator.validateField(jobTypeField, Regexes.POSITION_REGEX);
+		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX);
+
+		//the end date must NOT be before the start date
+		if (endDate.getValue().isBefore(startDate.getValue())) {
+			Validator.flashRedBorder(endDate);
+			isValid = false;
 		}
-		else
-		{
-			companyField.setStyle("");
-			if (jobPositionField.getText().isEmpty() || !positionMatcher.matches())
-			{
-				flashRedBorder(jobPositionField);
-				return false;
-			}
-			else
-			{
-				jobPositionField.setStyle("");
-				if (jobTypeField.getText().isEmpty() || !jobTypeMatcher.matches())
-				{
-					flashRedBorder(jobTypeField);
-					return false;
-				}
-				else
-				{
-					jobTypeField.setStyle("");
-					if (descriptionTextArea.getText().isEmpty() || !descriptionMatcher.matches())
-					{
-						flashRedBorder(descriptionTextArea);
-						return false;
-					}
-					else
-					{
-						descriptionTextArea.setStyle("");
-						//end date should be after the start date
-						if(endDate.getValue().isBefore(startDate.getValue()))
-						{
-							flashRedBorder(endDate);
-							return false;
-						}
-					}	
-				}	
-				return true;
-			}
-		}
+		return isValid;
 	}
 
 	@FXML
@@ -207,7 +153,6 @@ public class SignUpIndividualWorkController implements Initializable {
                 };
             }
         });
-
 		JSONArray jobsArray = JSONParser.getJobsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
 		// Iterate over each skill object in the JSON array and extract each field
 		for (int i = 0; i < jobsArray.length(); i++) {
@@ -233,6 +178,4 @@ public class SignUpIndividualWorkController implements Initializable {
 		}
 
 	}
-	
-	
 }

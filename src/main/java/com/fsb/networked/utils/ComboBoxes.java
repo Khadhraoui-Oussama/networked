@@ -206,10 +206,46 @@ public class ComboBoxes
 			"Female"
 			};
 
-	public static String[] SKILLLEVELS= { //TIP : don't underscore '_' in the name , 
+	public static String[] SKILL_LEVELS = { //TIP : don't underscore '_' in the name ,
 										  //it causes a NULLPOINTEREXCEPTION 
 			"Beginner",
 			"Intermediate",
 			"Advanced"
 	};
+	public static String[] SECTORS =
+			{
+					"Technology",
+					"Healthcare",
+					"Finance and Banking",
+					"Retail",
+					"Real Estate",
+					"Manufacturing",
+					"Education",
+					"Hospitality and Tourism",
+					"Automotive",
+					"Energy and Utilities",
+					"Construction",
+					"Agriculture",
+					"Entertainment and Media",
+					"Transportation and Logistics",
+					"Telecommunications",
+					"Food and Beverage",
+					"Consulting",
+					"Legal Services",
+					"Marketing and Advertising",
+					"Non-profit and Social Services"
+			};
+	public static String[] COMPANY_SIZES =
+			{
+					"Micro (1-10 employees)",
+					"Small (11-50 employees)",
+					"Medium (51-250 employees)",
+					"Large (251-1000 employees)",
+					"Enterprise (1000+ employees)",
+					"Startup (Varies, typically small to medium)",
+					"Self-employed / Freelancer",
+					"Non-profit / NGO (Non-Governmental Organization)",
+					"Government / Public Sector",
+					"Not Applicable / Other",
+			};
 }

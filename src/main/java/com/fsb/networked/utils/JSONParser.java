@@ -99,7 +99,7 @@ public class JSONParser {
         signUpBasicObject.put("dob", "");
         signUpBasicObject.put("country", "");
         signUpBasicObject.put("address", "");
-        signUpBasicObject.put("gender", "");
+        signUpBasicObject.put("gender", "Male");
 
         String imagePath = "/images/male_avatar.png";
         signUpBasicObject.put("picture", FilePaths.getImagePath(imagePath));

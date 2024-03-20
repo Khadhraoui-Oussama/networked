@@ -91,12 +91,13 @@ public class SignUpIndividualVideoController implements Initializable {
     @FXML
     private void goBack() throws IOException
     {
-        App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
+        App.setRoot("SignUpScenes/SignUpPageIndividualProjects");
     }
 
     @FXML
-    private void goNext() throws IOException
+    private void finishSignUpIndividual() throws IOException
     {
+        JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpVideo", "videoPath", videoFile.toURI().getPath());
         System.out.println("All Info Gathered");
     }
 

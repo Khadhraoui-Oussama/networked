@@ -1,21 +1,23 @@
 package com.fsb.networked.dto;
 
+import org.json.JSONObject;
+
 import java.time.LocalDate;
 
 public class Job
 {
 	private String position;
-	private String technology;
+	private String company;
 	private String description;
 	private String type;
 	private LocalDate startDate;
 	private LocalDate endDate;
 	
-	public Job(String position, String technology, String type, String description,LocalDate startDate, LocalDate endDate)
+	public Job(String position, String company, String type, String description,LocalDate startDate, LocalDate endDate)
 	{
 		super();
 		this.position = position;
-		this.technology = technology;
+		this.company = company;
 		this.description = description;
 		this.type = type;
 		this.startDate = startDate;
@@ -50,13 +52,13 @@ public class Job
 	{
 		this.position = position;
 	}
-	public String getTechnology()
+	public String getCompany()
 	{
-		return technology;
+		return company;
 	}
-	public void setTechnology(String technology)
+	public void setCompany(String technology)
 	{
-		this.technology = technology;
+		this.company = technology;
 	}
 	public String getDescription()
 	{
@@ -74,6 +76,18 @@ public class Job
 	{
 		this.type = type;
 	}
-	
-	
+
+
+
+	public JSONObject toJSON() {
+		JSONObject jobJSON = new JSONObject();
+		jobJSON.put("position", position);
+		jobJSON.put("company", company);
+		jobJSON.put("description", description);
+		jobJSON.put("type", type);
+		jobJSON.put("startDate", startDate);
+		jobJSON.put("endDate", endDate);
+
+		return jobJSON;
+	}
 }

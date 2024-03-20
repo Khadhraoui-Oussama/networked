@@ -47,12 +47,10 @@ public class Alerts
 	        alert.setContentText("Please enter a valid password.\nA valid password must contain:\nat least 8 characters,\nincluding at least one uppercase letter,\none lowercase letter,\none special character,\nand should not exceed 30 characters.");
 	        alert.showAndWait();
 	 }
-	public static void AlertEmailInUse()
-	{
+	public static void AlertEmailInUse() {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Email already in use");
 		alert.setContentText("Please double check the address or try to log in");
 		alert.showAndWait();
 	}
-	 
 }

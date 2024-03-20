@@ -69,7 +69,7 @@
                      <font>
                         <Font size="19.0" />
                      </font></Button>
-                  <Button fx:id="finishBtn" mnemonicParsing="false" onAction="#goNext" prefHeight="38.0" prefWidth="249.0" text="Finish">
+                  <Button fx:id="finishBtn" mnemonicParsing="false" onAction="#finishSignUpIndividual" prefHeight="38.0" prefWidth="249.0" text="Finish">
                      <font>
                         <Font size="19.0" />
                      </font></Button>

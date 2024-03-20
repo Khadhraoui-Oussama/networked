@@ -7,8 +7,10 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.fsb.networked.dto.Job;
+import com.fsb.networked.dto.Project;
 import com.fsb.networked.utils.Alerts;
 
+import com.fsb.networked.utils.Conversions;
 import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,35 +22,31 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.util.Callback;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 public class SignUpIndividualProjectController implements Initializable {
 
 	@FXML
-	private TextField jobPositionField;
+	private TextField titleField;
 	
 	@FXML
 	private TextField technologyField;
 	
 	@FXML
-	private TextField jobTypeField;
+	private TextField linkField;
 	
 	@FXML
 	private TextArea descriptionTextArea;
-		
-	@FXML
-	private DatePicker startDate;
-	
-	@FXML
-	private DatePicker endDate;
 
 	@FXML
 	private Button btnCancel;
 
 	@FXML
-	private Button btnAddJob;
+	private Button btnAddProject;
 	
 	@FXML
-	private Button btnDeleteJob;
+	private Button btnDeleteProject;
 	
 	@FXML
 	private Button btnNext;
@@ -57,9 +55,9 @@ public class SignUpIndividualProjectController implements Initializable {
 	private Button btnBack;
 	
 	@FXML
-	private ListView<Job> jobListView;
-	
-	
+	private ListView<Project> projectListView;
+
+	JSONArray projectsArray = new JSONArray();
 	@FXML
     private void goBack() throws IOException
 	{
@@ -69,105 +67,86 @@ public class SignUpIndividualProjectController implements Initializable {
 	@FXML
     private void goNext() throws IOException
 	{
+		JSONParser.updateProjectsJSONArray(projectsArray);
 		App.setRoot("SignUpScenes/SignUpPageIndividualVideo");
-		System.out.println("Work INFO gathered");
+		System.out.println("Project INFO gathered");
     }
 
 	
 	@FXML
-	private void addJob()
+	private void addProject()
 	{
 		//DONE TODO : when add job btn is pressed the job must be added to the listview of jobs
 		
-		if(validateJob()) 
+		if(validateProject())
 		{
-			jobListView.getItems().add(new Job(jobPositionField.getText(),technologyField.getText(),jobTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue()));
+			Project project = new Project(titleField.getText(),technologyField.getText(),linkField.getText(),descriptionTextArea.getText());
 			//now clear all the fields
-			jobPositionField.clear();
+			titleField.clear();
 			technologyField.clear();
-			jobTypeField.clear();
-			startDate.setValue(null);
-			endDate.setValue(null);
+			linkField.clear();
 			descriptionTextArea.clear();
+			projectListView.getItems().add(project);
+			projectsArray.put(project.toJSON());
 		}
 	}
-	
 	@FXML
-	private void deleteJob()
+	private void deleteProject()
 	{
 		//DONE TODO : when delete skill btn is presses delete the job from the listview of jobs
-		Job selectedJob = jobListView.getSelectionModel().getSelectedItem();
-		jobListView.getItems().remove(selectedJob);
+		Project selectedproject = projectListView.getSelectionModel().getSelectedItem();
+		projectListView.getItems().remove(selectedproject);
+
+		projectsArray.remove(projectListView.getItems().indexOf(projectListView.getSelectionModel().getSelectedItem()));
 	}
 	
 	private <T> void flashRedBorder(T field)
 	{
 		((Node) field).setStyle("-fx-border-color:red;");
 	}
-	
-	private boolean validateJob()
-	{
-		if(jobPositionField.getText().isEmpty() || technologyField.getText().isEmpty() || jobTypeField.getText().isEmpty() || descriptionTextArea.getText().isEmpty() || startDate.getValue() == null || endDate.getValue() == null)
-		{
+
+	private boolean validateProject() {
+		if (titleField.getText().isEmpty() || technologyField.getText().isEmpty() || linkField.getText().isEmpty() || descriptionTextArea.getText().isEmpty()) {
 			Alerts.AlertEmptyField();
 			return false;
-		}		
-		Pattern positionPattern = Pattern.compile("^[a-zA-Z][a-zA-Z_-]{1,38}[a-zA-Z]$");
+		}
+
+		Pattern titlePattern = Pattern.compile("^[a-zA-Z][a-zA-Z_-]{1,38}[a-zA-Z]$");
 		Pattern technologyPattern = Pattern.compile("^[a-zA-Z0-9][a-zA-Z0-9 _-]{1,38}[a-zA-Z0-9]$");
-		
-		Matcher positionMatcher = positionPattern.matcher(jobPositionField.getText());
-		Matcher jobTypeMatcher = positionPattern.matcher(jobTypeField.getText());
-		
+		Pattern linkPattern = Pattern.compile("^(http|https)://.*$"); // Assuming the link should start with http:// or https://
+		Pattern descriptionPattern = Pattern.compile("^(?=.{1,150}$)[a-zA-Z0-9]+(?:[ _-][a-zA-Z0-9]+)*$");
+
+		Matcher titleMatcher = titlePattern.matcher(titleField.getText());
 		Matcher technologyMatcher = technologyPattern.matcher(technologyField.getText());
-		
-		Pattern descriptionPattern  = Pattern.compile("^(?=.{1,150}$)[a-zA-Z0-9]+(?:[ _-][a-zA-Z0-9]+)*$");
+		Matcher linkMatcher = linkPattern.matcher(linkField.getText());
 		Matcher descriptionMatcher = descriptionPattern.matcher(descriptionTextArea.getText());
-				
-		if (technologyField.getText().isEmpty() || !technologyMatcher.matches())
-		{
+
+		if (!technologyMatcher.matches()) {
 			flashRedBorder(technologyField);
 			return false;
-		}
-		else
-		{
+		} else {
 			technologyField.setStyle("");
-			if (jobPositionField.getText().isEmpty() || !positionMatcher.matches())
-			{
-				flashRedBorder(jobPositionField);
+			if (!titleMatcher.matches()) {
+				flashRedBorder(titleField);
 				return false;
-			}
-			else
-			{
-				jobPositionField.setStyle("");
-				if (jobTypeField.getText().isEmpty() || !jobTypeMatcher.matches())
-				{
-					flashRedBorder(jobTypeField);
+			} else {
+				titleField.setStyle("");
+				if (!linkMatcher.matches()) {
+					flashRedBorder(linkField);
 					return false;
-				}
-				else
-				{
-					jobTypeField.setStyle("");
-					if (descriptionTextArea.getText().isEmpty() || !descriptionMatcher.matches())
-					{
+				} else {
+					linkField.setStyle("");
+					if (!descriptionMatcher.matches()) {
 						flashRedBorder(descriptionTextArea);
 						return false;
-					}
-					else
-					{
+					} else {
 						descriptionTextArea.setStyle("");
-						//end date should be after the start date
-						if(endDate.getValue().isBefore(startDate.getValue()))
-						{
-							flashRedBorder(endDate);
-							return false;
-						}
-					}	
-				}	
-				return true;
+						return true;
+					}
+				}
 			}
 		}
 	}
-
 	@FXML
 	private void cancelSignUp() throws IOException
 	{
@@ -183,24 +162,46 @@ public class SignUpIndividualProjectController implements Initializable {
 	{
 		/*------------*/
 		//held together by glue
-		jobListView.setCellFactory(new Callback<ListView<Job>, ListCell<Job>>() {
+		projectListView.setCellFactory(new Callback<ListView<Project>, ListCell<Project>>() {
             @Override
-            public ListCell<Job> call(ListView<Job> param) {
-                return new ListCell<Job>() {
+            public ListCell<Project> call(ListView<Project> param) {
+                return new ListCell<Project>() {
                     @Override
-                    protected void updateItem(Job job, boolean empty) {
-                        super.updateItem(job, empty);
-                        if (job == null || empty) {
+                    protected void updateItem(Project project, boolean empty) {
+                        super.updateItem(project, empty);
+                        if (project == null || empty) {
                             setText(null);
                         } else {
-                            setText("Job position: " + job.getPosition() + "\nJob technology: " + job.getTechnology() + "\nJob type: " + job.getType() + "\nJob start date : " + job.getStartDate()  + "\nJob end date : " + job.getEndDate() + "\nJob description: " + job.getDescription()); 
-                        }
-                    }
+							setText("Project title: " + project.getTitle() + "\nProject technology: " + project.getTechnology() + "\nProject link: " + project.getLink() + "\nProject description : " + project.getDescription());
+						}
+					}
                 };
             }
         });
+		JSONArray projectsArray = JSONParser.getProjectsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+		// Iterate over each skill object in the JSON array and extract each field
+		for (int i = 0; i < projectsArray.length(); i++) {
+			JSONObject projectObject = projectsArray.getJSONObject(i);
+			String titleValue = projectObject.getString("title");
+			String technologyValue = projectObject.getString("technology");
+			String linkValue = projectObject.getString("link");
+			String descriptionValue = projectObject.getString("description");
+			//create a skill object with those extracted values
+			Project project = new Project(titleValue,technologyValue,linkValue,descriptionValue);
+			//add that skill object to the skillsListView list of items(skills)
+			//check if all fields are empty then don't add it
+			//without this check at the first signUp the user will find an empty ghost task
+			if(!(project.getTitle().isBlank() && project.getDescription().isBlank() && project.getLink().isBlank()))
+			{
+				projectListView.getItems().add(project);
+				//put the skillObject in the skillsArrays so that already filled in skills won't get lost after a scene go and back idk how to explain just trust
+				this.projectsArray.put(projectObject);
+			}
+		}
 	
 	}
-	
-	
 }
+
+///Validation
+///Reset Functionality
+///Initialization

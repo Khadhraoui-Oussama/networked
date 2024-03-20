@@ -16,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import com.fsb.networked.utils.Alerts;
 import com.fsb.networked.utils.ComboBoxes;
 
+import com.fsb.networked.utils.Conversions;
 import com.fsb.networked.utils.JSONParser;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -273,12 +274,17 @@ public class SignUpIndividualController implements Initializable {
 				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
 				"signUpBasic",
 				"gender"));
-		//image and DOB
+		//image
 		String imageURL = JSONParser.getValueFromJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture");
 		profilePictureImg.setImage(new Image(imageURL));
-
-		//format the string dob so that it becomes a LocalDate object
-
+		//and DOB
+		String dobString = JSONParser.getValueFromJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "dob");
+		if(!dobString.isBlank())
+		{
+			//format the string dob so that it becomes a LocalDate object
+			LocalDate dob = Conversions.stringtoLocalDate(dobString);
+			dateOfBirthPicker.setValue(dob);
+		}
 		//THIS IS ONLY TO SPEED UP THE DEVELEOPMENT REMOVE WHEN READY TO PUSH TO PROD
 		dateOfBirthPicker.setValue(LocalDate.of(2003, 10, 4));
 		firstNameField.setText("John");
@@ -287,6 +293,5 @@ public class SignUpIndividualController implements Initializable {
 		countryComboBox.getSelectionModel().select(177);
 		genderComboBox.getSelectionModel().select(0);
 		//REMOVE ALL THE ABOVE WHEN READY TO PUSH TO PROD
-
 	}
 }

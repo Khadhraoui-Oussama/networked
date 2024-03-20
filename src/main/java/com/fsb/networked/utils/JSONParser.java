@@ -113,16 +113,14 @@ public class JSONParser {
         jsonObject.put("signUpBasic", signUpBasicObject);
 
         JSONArray signUpSkillsArray = new JSONArray();
-
-        JSONObject signUpSkillsObject = new JSONObject();
+        JSONArray signUpworkArray = new JSONArray();
+        JSONArray signUpProjectArray = new JSONArray();
 
         jsonObject.put("signUpSkills", signUpSkillsArray);
 
-        JSONObject signUpWorkObject = new JSONObject();
-        jsonObject.put("signUpWork", signUpWorkObject);
+        jsonObject.put("signUpWork", signUpworkArray);
 
-        JSONObject signUpProjectsObject = new JSONObject();
-        jsonObject.put("signUpProjects", signUpProjectsObject);
+        jsonObject.put("signUpProjects", signUpProjectArray);
 
         JSONObject signUpVideoObject = new JSONObject();
         signUpVideoObject.put("videoPath", "");
@@ -174,6 +172,41 @@ public class JSONParser {
             e.printStackTrace();
         }
     }
+    public static void updateWorkJSONArray(JSONArray workArray) {
+        try {
+            // Read the existing JSON content
+            String content = new String(Files.readAllBytes(Paths.get("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")));
+            JSONObject jsonObject = new JSONObject(content);
+
+            // Update the skills array in the JSON object
+            jsonObject.put("signUpWork", workArray);
+
+            // Write the modified JSON back to the file
+            try (FileWriter file = new FileWriter("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")) {
+                file.write(jsonObject.toString());
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public static void updateProjectsJSONArray(JSONArray projectsArray) {
+        try {
+            // Read the existing JSON content
+            String content = new String(Files.readAllBytes(Paths.get("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")));
+            JSONObject jsonObject = new JSONObject(content);
+
+            // Update the skills array in the JSON object
+            jsonObject.put("signUpProjects", projectsArray);
+
+            // Write the modified JSON back to the file
+            try (FileWriter file = new FileWriter("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")) {
+                file.write(jsonObject.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     public static JSONArray getSkillsJSONArray(String filePath) {
         try {
             // Read the JSON content from the file
@@ -189,4 +222,35 @@ public class JSONParser {
             return new JSONArray(); // Return an empty array if an error occurs
         }
     }
+    public static JSONArray getProjectsJSONArray(String filePath) {
+        try {
+            // Read the JSON content from the file
+            String content = Files.readString(Paths.get(filePath));
+
+            // Parse the JSON string
+            JSONObject jsonObject = new JSONObject(content);
+
+            // Get the skills JSON array
+            return jsonObject.getJSONArray("signUpProjects");
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            return new JSONArray(); // Return an empty array if an error occurs
+        }
+    }
+    public static JSONArray getJobsJSONArray(String filePath) {
+        try {
+            // Read the JSON content from the file
+            String content = Files.readString(Paths.get(filePath));
+
+            // Parse the JSON string
+            JSONObject jsonObject = new JSONObject(content);
+
+            // Get the skills JSON array
+            return jsonObject.getJSONArray("signUpWork");
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+            return new JSONArray(); // Return an empty array if an error occurs
+        }
+    }
+
 }

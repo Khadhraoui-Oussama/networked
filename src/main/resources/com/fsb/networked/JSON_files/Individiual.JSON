@@ -1,1 +1,21 @@
-{"signUpVideo":{"videoPath":""},"signUpBasic":{"firstName":"","lastName":"","country":"","address":"","gender":"","dob":"","picture":"file:/C:/Users/khadh/IdeaProjects/networked/target/classes/images/male_avatar.png"},"signUpProjects":{},"signUpWork":{},"signUp":{"emailAddress":"","password":""},"signUpSkills":[]}
+{
+  "signUpVideo": {
+    "videoPath": "/C:/Users/khadh/Videos/Microworks/MicroWorks 2024.01.13 - 15.18.12.60.DVR.mp4"
+  },
+  "signUpBasic": {
+    "firstName": "John",
+    "lastName": "Doe",
+    "country": "Tunisia",
+    "address": "10 Jarzouna",
+    "gender": "Male",
+    "dob": "2003-10-04",
+    "picture": "file:/C:/Users/khadh/IdeaProjects/networked/target/classes/images/male_avatar.png"
+  },
+  "signUpProjects": [],
+  "signUpWork": [],
+  "signUp": {
+    "emailAddress": "example@xyz.com",
+    "password": "Azerty123!"
+  },
+  "signUpSkills": []
+}

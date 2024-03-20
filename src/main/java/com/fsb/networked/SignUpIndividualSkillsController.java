@@ -56,7 +56,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 	@FXML
 	private ListView<Skill> skillsListView;
 
-	private JSONArray skillsArrays = new JSONArray();
+	private JSONArray skillsArray = new JSONArray();
 	@FXML
     private void goBack() throws IOException
 	{
@@ -66,7 +66,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 	@FXML
     private void goNext() throws IOException
 	{
-		JSONParser.updateSkillsJSONArray(skillsArrays);
+		JSONParser.updateSkillsJSONArray(skillsArray);
 		App.setRoot("SignUpScenes/SignUpPageIndividualWork");
 		System.out.println("Individual Skills Information gathered");
     }
@@ -84,7 +84,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 			//add to the skillListView
 			skillsListView.getItems().add(skill);
 			//add to the skillsArray (JSON)
-			skillsArrays.put(skill.toJSON());
+			skillsArray.put(skill.toJSON());
 			//now clear all the fields
 			skillTitleField.clear();
 			technologyField.clear();
@@ -99,6 +99,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 		//DONE TODO : when delete skill btn is presses delete the skill from the listview of skills
 		Skill selectedSkill = skillsListView.getSelectionModel().getSelectedItem();
 		skillsListView.getItems().remove(selectedSkill);
+		skillsArray.remove(skillsListView.getItems().indexOf(skillsListView.getSelectionModel().getSelectedItem()));
 	}
 	
 	private <T> void flashRedBorder(T field)
@@ -204,7 +205,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 			{
 				skillsListView.getItems().add(skill);
 				//put the skillObject in the skillsArrays so that already filled in skills won't get lost after a scene go and back idk how to explain just trust
-				skillsArrays.put(skillObject);
+				this.skillsArray.put(skillObject);
 			}
 		}
 	}

@@ -38,6 +38,18 @@
             <artifactId>json</artifactId>
             <version>20231013</version>
         </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.apache.pdfbox/pdfbox -->
+        <dependency>
+            <groupId>org.apache.pdfbox</groupId>
+            <artifactId>pdfbox</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fsb</groupId>
+            <artifactId>networked</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -56,7 +56,6 @@ public class SignUpController implements Initializable{
 			App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
 		}
 	}
-
 	@FXML
     private void gotoSignUpEntreprise() throws IOException
 	{

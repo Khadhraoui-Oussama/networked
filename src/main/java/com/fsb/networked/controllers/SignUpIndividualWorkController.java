@@ -66,14 +66,14 @@ public class SignUpIndividualWorkController implements Initializable {
 	@FXML
     private void goBack() throws IOException
 	{
-        App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
+        App.setRoot("SignUpScenes/SignUpPageIndividualEducation");
     }
 	
 	@FXML
     private void goNext() throws IOException
 	{
 		JSONParser.updateWorkJSONArray(jobsArray);
-		App.setRoot("SignUpScenes/SignUpPageIndividualProject");
+		App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
 		System.out.println("Work INFO gathered");
     }
 

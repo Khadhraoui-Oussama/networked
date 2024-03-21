@@ -4,20 +4,20 @@ import org.json.JSONObject;
 
 import java.time.LocalDate;
 
-public class Job
+public class Education
 {
-	private String position;
-	private String company;
+	private String diploma;
+	private String institute;
 	private String description;
 	private String type;
 	private LocalDate startDate;
 	private LocalDate endDate;
-	
-	public Job(String position, String company, String type, String description,LocalDate startDate, LocalDate endDate)
+
+	public Education(String diploma, String institute, String type, String description, LocalDate startDate, LocalDate endDate)
 	{
 		super();
-		this.position = position;
-		this.company = company;
+		this.diploma = diploma;
+		this.institute = institute;
 		this.description = description;
 		this.type = type;
 		this.startDate = startDate;
@@ -44,22 +44,23 @@ public class Job
 		this.endDate = endDate;
 	}
 
-	public String getPosition()
+	public String getInstitute()
 	{
-		return position;
+		return institute;
 	}
-	public void setPosition(String position)
+	public void setInstitute(String institute)
 	{
-		this.position = position;
+		this.institute = institute;
 	}
-	public String getCompany()
-	{
-		return company;
+
+	public String getDiploma() {
+		return diploma;
 	}
-	public void setCompany(String company)
-	{
-		this.company = company;
+
+	public void setDiploma(String diploma) {
+		this.diploma = diploma;
 	}
+
 	public String getDescription()
 	{
 		return this.description;
@@ -80,14 +81,13 @@ public class Job
 
 
 	public JSONObject toJSON() {
-		JSONObject jobJSON = new JSONObject();
-		jobJSON.put("position", position);
-		jobJSON.put("company", company);
-		jobJSON.put("description", description);
-		jobJSON.put("type", type);
-		jobJSON.put("startDate", startDate);
-		jobJSON.put("endDate", endDate);
-
-		return jobJSON;
+		JSONObject educationJSON = new JSONObject();
+		educationJSON.put("diploma", diploma);
+		educationJSON.put("institute", institute);
+		educationJSON.put("description", description);
+		educationJSON.put("type", type);
+		educationJSON.put("startDate", startDate);
+		educationJSON.put("endDate", endDate);
+		return educationJSON;
 	}
 }

@@ -118,13 +118,10 @@ public class SignUpIndividualController implements Initializable {
 			}
 
 			// Navigate to the next scene
-			App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
+			App.setRoot("SignUpScenes/SignUpPageIndividualEducation");
 			System.out.println("Basic Individual Information gathered");
 		}
-
 	}
-
-
 	@FXML
 	private void goBack() throws IOException {
 		App.setRoot("SignUpScenes/SignUpPageCommon");

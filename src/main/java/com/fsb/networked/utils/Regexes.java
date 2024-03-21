@@ -1,10 +1,16 @@
 package com.fsb.networked.utils;
 
+import javafx.scene.control.TextField;
+
 public class Regexes {
     public static String LINK_REGEX = "^(http|https)://.*$";
     public static String DESCRIPTION_REGEX = "^(?=.{1,150}$)[a-zA-Z0-9]+(?:[ _-][a-zA-Z0-9]+)*$";
     public static String FOUNDERS_REGEX = "^([-A-Za-z]+(?:\\s[-A-Za-z]+)*(?:\\s*,\\s*[-A-Za-z]+(?:\\s[-A-Za-z]+)*)*$|^[A-Za-z-]+(?:\\s[-A-Za-z]+)*(?:\\s*-\\s*[A-Za-z-]+(?:\\s[-A-Za-z]+)*)*$)";
     public static String TITLE_REGEX = "^[a-zA-Z0-9][a-zA-Z0-9 _-]{1,38}[a-zA-Z0-9]$";
+
+    public static String EDUCATION_FIELD_REGEX = "^[a-zA-Z0-9][a-zA-Z0-9 _-]{1,150}$";
+
+
     public static String POSITION_REGEX = "[a-zA-Z][a-zA-Z_-]{1,38}[a-zA-Z]$";
     public static String TECHNOLOGY_REGEX = "[a-zA-Z0-9][a-zA-Z0-9 _-]{1,38}[a-zA-Z0-9]$";
     public static String NAME_REGEX = "^[A-Z][a-z]{1,39}$";

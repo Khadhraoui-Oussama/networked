@@ -7,6 +7,7 @@ import java.util.ResourceBundle;
 
 import com.fsb.networked.App;
 import com.fsb.networked.utils.JSONParser;
+import com.fsb.networked.utils.PDFCreator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -98,7 +99,7 @@ public class SignUpIndividualVideoController implements Initializable {
     @FXML
     private void goBack() throws IOException
     {
-        App.setRoot("SignUpScenes/SignUpPageIndividualProjects");
+        App.setRoot("SignUpScenes/SignUpPageIndividualProject");
     }
 
     @FXML
@@ -108,6 +109,8 @@ public class SignUpIndividualVideoController implements Initializable {
         {
             JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpVideo", "videoPath", videoFile.toURI().getPath());
             System.out.println("All Info Gathered");
+
+            PDFCreator.createPDF("C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\","pdfGenerated.pdf");
         }
     }
 

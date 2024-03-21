@@ -109,12 +109,15 @@ public class JSONParser {
         JSONArray signUpSkillsArray = new JSONArray();
         JSONArray signUpworkArray = new JSONArray();
         JSONArray signUpProjectArray = new JSONArray();
+        JSONArray signUpEducationArray = new JSONArray();
 
         jsonObject.put("signUpSkills", signUpSkillsArray);
 
         jsonObject.put("signUpWork", signUpworkArray);
 
         jsonObject.put("signUpProjects", signUpProjectArray);
+
+        jsonObject.put("signUpEducation", signUpEducationArray);
 
         JSONObject signUpVideoObject = new JSONObject();
         signUpVideoObject.put("videoPath", "");
@@ -148,6 +151,24 @@ public class JSONParser {
             e.printStackTrace();
         }
     }
+    public static void updateEducationJSONArray(JSONArray educationArray) {
+        try {
+            // Read the existing JSON content
+            String content = new String(Files.readAllBytes(Paths.get("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")));
+            JSONObject jsonObject = new JSONObject(content);
+
+            // Update the skills array in the JSON object
+            jsonObject.put("signUpEducation", educationArray);
+
+            // Write the modified JSON back to the file
+            try (FileWriter file = new FileWriter("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")) {
+                file.write(jsonObject.toString());
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void updateSkillsJSONArray(JSONArray skillsArray) {
         try {
             // Read the existing JSON content
@@ -247,4 +268,19 @@ public class JSONParser {
         }
     }
 
+    public static JSONArray getEducationsJSONArray(String filePath) {
+            try {
+                // Read the JSON content from the file
+                String content = Files.readString(Paths.get(filePath));
+
+                // Parse the JSON string
+                JSONObject jsonObject = new JSONObject(content);
+
+                // Get the skills JSON array
+                return jsonObject.getJSONArray("signUpEducation");
+            } catch (IOException | JSONException e) {
+                e.printStackTrace();
+                return new JSONArray(); // Return an empty array if an error occurs
+            }
+        }
 }

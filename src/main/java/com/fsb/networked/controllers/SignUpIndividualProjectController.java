@@ -101,10 +101,13 @@ public class SignUpIndividualProjectController implements Initializable {
 
 	private boolean validateProject() {
 		boolean isValid = true;
-		isValid &= Validator.validateField(titleField, Regexes.TITLE_REGEX);
-		isValid &= Validator.validateField(technologyField, Regexes.TECHNOLOGY_REGEX);
-		isValid &= Validator.validateField(linkField, Regexes.LINK_REGEX);
-		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX);
+		isValid &= Validator.validateField(titleField, Regexes.TITLE_REGEX,Alerts.AlertTitleField());
+
+		isValid &= Validator.validateField(technologyField, Regexes.TECHNOLOGY_REGEX,Alerts.AlertTechnologyField());
+		System.out.println(technologyField.getText());
+		isValid &= Validator.validateField(linkField, Regexes.LINK_REGEX,Alerts.AlertLinkField());
+		System.out.println(linkField.getText());
+		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
 		return isValid;
 	}
 	@FXML

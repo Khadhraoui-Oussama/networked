@@ -4,7 +4,6 @@ import com.fsb.networked.App;
 import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -14,10 +13,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.Year;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class SignUpEntrepriseController implements Initializable {
 
@@ -87,19 +83,16 @@ public class SignUpEntrepriseController implements Initializable {
 	private boolean validateInfo() {
 		boolean isValid = true;
 
-		//LocalDate date = dateOfFoundationDatePicker.getValue();
-		//isValid &= (date != null && date.isBefore(LocalDate.now()));
-		//System.out.println("Dob:" + isValid);
-		isValid &= Validator.validateField(companyNameField, Regexes.FOUNDERS_REGEX);
+		isValid &= Validator.validateField(companyNameField, Regexes.TITLE_REGEX,Alerts.AlertTitleField());
 		System.out.println("company name :" + isValid);
-		isValid &= Validator.validateField(foundersTextField, Regexes.FOUNDERS_REGEX);
+		isValid &= Validator.validateField(foundersTextField, Regexes.FOUNDERS_REGEX,Alerts.AlertFoundersField());
 		System.out.println("Founders :" + isValid);
-		isValid &= Validator.validateField(websiteTextField, Regexes.LINK_REGEX);
+		isValid &= Validator.validateField(websiteTextField, Regexes.LINK_REGEX,Alerts.AlertLinkField());
 		System.out.println("Website :" + isValid);
-		isValid &= Validator.validateField(locationTextField, Regexes.ADDRESS_REGEX);
+		isValid &= Validator.validateField(locationTextField, Regexes.LOCATION_REGEX,Alerts.AlertAddressField());
 		System.out.println("Address :" + isValid);
 
-		isValid &= Validator.validateField(dateOfFoundationDatePicker, null); // Date is not validated using regex
+		isValid &= Validator.validateField(dateOfFoundationDatePicker, null,null); // Date is not validated using regex
 		return isValid;
 	}
 

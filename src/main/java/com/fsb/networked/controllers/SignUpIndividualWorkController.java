@@ -15,12 +15,7 @@ import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -109,10 +104,10 @@ public class SignUpIndividualWorkController implements Initializable {
 
 	private boolean validateJob() {
 		boolean isValid = true;
-		isValid &= Validator.validateField(jobPositionField, Regexes.POSITION_REGEX);
-		isValid &= Validator.validateField(companyField, Regexes.TECHNOLOGY_REGEX);
-		isValid &= Validator.validateField(jobTypeField, Regexes.POSITION_REGEX);
-		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX);
+		isValid &= Validator.validateField(jobPositionField, Regexes.POSITION_REGEX,Alerts.AlertPositionField());
+		isValid &= Validator.validateField(companyField, Regexes.TITLE_REGEX,Alerts.AlertCompanyField());
+		isValid &= Validator.validateField(jobTypeField, Regexes.NAME_REGEX, Alerts.AlertTypeField());
+		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
 
 		//the end date must NOT be before the start date
 		if (endDate.getValue().isBefore(startDate.getValue())) {

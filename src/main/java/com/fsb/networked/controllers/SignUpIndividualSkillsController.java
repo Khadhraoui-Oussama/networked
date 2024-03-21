@@ -100,9 +100,9 @@ public class SignUpIndividualSkillsController implements Initializable {
 	private boolean validateSkill() {
 		boolean isValid = true;
 
-		isValid &= Validator.validateField(skillTitleField, Regexes.TITLE_REGEX);
-		isValid &= Validator.validateField(technologyField, Regexes.TECHNOLOGY_REGEX);
-		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX);
+		isValid &= Validator.validateField(skillTitleField, Regexes.TITLE_REGEX,Alerts.AlertTitleField());
+		isValid &= Validator.validateField(technologyField, Regexes.TECHNOLOGY_REGEX,Alerts.AlertTechnologyField());
+		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
 
 		return isValid;
 	}

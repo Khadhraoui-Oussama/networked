@@ -20,11 +20,7 @@ import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
@@ -129,10 +125,10 @@ public class SignUpIndividualController implements Initializable {
 
 	private boolean validateBasicInfo() {
 		boolean isValid = true;
-		isValid &= Validator.validateField(firstNameField, Regexes.NAME_REGEX);
-		isValid &= Validator.validateField(lastNameField, Regexes.NAME_REGEX);
-		isValid &= Validator.validateField(dateOfBirthPicker,"");
-		isValid &= Validator.validateField(physicalAdressField, Regexes.ADDRESS_REGEX);
+		isValid &= Validator.validateField(firstNameField, Regexes.NAME_REGEX, Alerts.AlertNameField());
+		isValid &= Validator.validateField(lastNameField, Regexes.NAME_REGEX,Alerts.AlertNameField());
+		isValid &= Validator.validateField(dateOfBirthPicker,null,null);
+		isValid &= Validator.validateField(physicalAdressField, Regexes.LOCATION_REGEX,Alerts.AlertAddressField());
 		return isValid;
 	}
 

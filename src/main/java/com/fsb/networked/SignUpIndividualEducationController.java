@@ -3,10 +3,7 @@ package com.fsb.networked;
 import com.fsb.networked.App;
 import com.fsb.networked.dto.Education;
 import com.fsb.networked.dto.Job;
-import com.fsb.networked.utils.Conversions;
-import com.fsb.networked.utils.JSONParser;
-import com.fsb.networked.utils.Regexes;
-import com.fsb.networked.utils.Validator;
+import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -104,17 +101,16 @@ public class SignUpIndividualEducationController implements Initializable {
 	//TODO FIX ALL VALIDATE FUNCTIONS ,ARE BROKE NOW AFTER CODEBASE REFACTORING I SHOULDVE NEVER TOUCHED IT
 	private boolean validateEducation() {
 		boolean isValid = true;
-		isValid = (Validator.validateField(diplomaField, Regexes.FOUNDERS_REGEX)
-				&& Validator.validateField(instituteField, Regexes.FOUNDERS_REGEX)
-				&& Validator.validateField(diplomaTypeField, Regexes.FOUNDERS_REGEX)
-				&& Validator.validateField(descriptionTextArea, Regexes.FOUNDERS_REGEX));
+		isValid &= (Validator.validateField(diplomaField, Regexes.TITLE_REGEX, Alerts.AlertTitleField()));
+		isValid	&= Validator.validateField(diplomaTypeField, Regexes.NAME_REGEX,Alerts.AlertTypeField());
+		isValid	&= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
 		//the end date must NOT be before the start date
-		if (endDate.getValue()!=null && startDate.getValue()!=null) {
+
 			if (endDate.getValue().isBefore(startDate.getValue())) {
 				Validator.flashRedBorder(endDate);
 				isValid = false;
 			}
-		}
+
 		return isValid;
 	}
 

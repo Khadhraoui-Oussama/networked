@@ -51,12 +51,6 @@ public class SignUpController implements Initializable{
 			}
 			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON","signUpBasic","picture",image.getUrl());
 
-			//SPEED UP DEV
-			String path = FilePaths.chooseDirectoryToSaveTo();
-			JSONParser.populateRealDataJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
-			PDFCreator.createPDF(path,"\\pdfGenerated.pdf");
-			//SPEED UP DEV
-
 			//go to next scene
 			App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
 		}

@@ -108,18 +108,7 @@ public class SignUpEntrepriseController implements Initializable {
 
 	@FXML
 	private void uploadProfilePicture() {
-		final FileChooser fc = new FileChooser();
-		//set the title
-		fc.setTitle("Choose a profile picture to use ");
-		//set the initial directory (default one)
-		fc.setInitialDirectory(new File(System.getProperty("user.home")));
-		//extension filters
-		//clear all extension filters
-		fc.getExtensionFilters().clear();
-		fc.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-		//set the selected file or use null if no file has been selected
-		File file = fc.showOpenDialog(null);
+		File file = FilePaths.uploadProfilePicture();
 		if (file != null) {
 			System.out.println("path :" + file.toURI().getPath());
 			// set the image view source as the file path

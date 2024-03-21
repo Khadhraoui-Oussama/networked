@@ -114,11 +114,26 @@ public class SignUpIndividualController implements Initializable {
 			}
 
 				//TODO REMOVE AFTER TESTING
-				String path = "C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\";
-				// FilePaths.chooseDirectoryToSaveTo();
-				//System.out.println(path);
-				System.out.println("C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\");
-				//PDFCreator.createPDF(path,"pdfGenerated.pdf");
+
+			//SPEED UP DEV
+			String path1 = FilePaths.chooseDirectoryToSaveTo();
+			JSONParser.populateRealDataJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+			if (currentImagePath.equals(defaultMaleAvatar) || currentImagePath.equals(defaultFemaleAvatar)) {
+				// Default avatar is selected
+				String imagePath;
+				if (genderComboBox.getValue().equals("Female")) {
+					imagePath = "/images/female_avatar.png";
+				} else {
+					imagePath = "/images/male_avatar.png";
+				}
+				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", FilePaths.getImagePath(imagePath));
+			} else {
+				// Custom profile picture is selected
+				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
+			}
+			PDFCreator.createPDF(path1,"\\pdfGenerated.pdf");
+			//SPEED UP DEV
+
 
 			// Navigate to the next scene
 			App.setRoot("SignUpScenes/SignUpPageIndividualEducation");
@@ -148,20 +163,8 @@ public class SignUpIndividualController implements Initializable {
 		App.setRoot("LogInPage");
 	}
 
-	@FXML
-	private void uploadProfilePicture() {
-		final FileChooser fc = new FileChooser();
-		//set the title
-		fc.setTitle("Choose a profile picture to use ");
-		//set the initial directory (default one)
-		fc.setInitialDirectory(new File(System.getProperty("user.home")));
-		//extension filters
-		//clear all extension filters
-		fc.getExtensionFilters().clear();
-		fc.getExtensionFilters().addAll(
-				new FileChooser.ExtensionFilter("Image Files", "*.png", "*.jpg", "*.gif"));
-		//set the selected file or use null if no file has been selected
-		File file = fc.showOpenDialog(null);
+	public void uploadProfilePicture() {
+		File file = FilePaths.uploadProfilePicture();
 		if (file != null) {
 			System.out.println("path :" + file.toURI().getPath());
 			// set the image view source as the file path

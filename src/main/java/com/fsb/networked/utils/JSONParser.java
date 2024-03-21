@@ -312,7 +312,8 @@ public class JSONParser {
             signUpBasicObject.put("address", "10 Jarzouna");
             signUpBasicObject.put("gender", "Male");
             signUpBasicObject.put("dob", "2003-10-04");
-            signUpBasicObject.put("picture", "file:/C:/Users/khadh/Pictures/417177134_7290152844381720_7370021647571908018_n.jpg");
+            String picture = FilePaths.getImagePath("/images/male_avatar.png");
+            signUpBasicObject.put("picture", "file:/C:/Users/khadh/IdeaProjects/networked/src/main/resources/images/male_avatar.png");
             jsonObject.put("signUpBasic", signUpBasicObject);
 
             // signUpEducation
@@ -395,7 +396,7 @@ public class JSONParser {
         signUpBasicObject.put("address", "10 Jarzouna");
         signUpBasicObject.put("gender", "Male");
         signUpBasicObject.put("dob", "2003-10-04");
-        signUpBasicObject.put("picture", "file:/C:/Users/khadh/Pictures/417177134_7290152844381720_7370021647571908018_n.jpg");
+        //signUpBasicObject.put("picture", "file:/C:/Users/khadh/Pictures/417177134_7290152844381720_7370021647571908018_n.jpg");
         jsonObject.put("signUpBasic", signUpBasicObject);
 
         // signUpEducation

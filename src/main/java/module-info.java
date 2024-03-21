@@ -8,6 +8,7 @@ module com.fsb.networked {
     requires org.json;
     requires org.apache.pdfbox;
     requires org.apache.fontbox;
+    requires org.apache.commons.lang3;
 
     opens com.fsb.networked to javafx.fxml;
     exports com.fsb.networked;

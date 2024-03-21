@@ -120,7 +120,6 @@ public class SignUpIndividualController implements Initializable {
 				System.out.println("C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\");
 				//PDFCreator.createPDF(path,"pdfGenerated.pdf");
 
-
 			// Navigate to the next scene
 			App.setRoot("SignUpScenes/SignUpPageIndividualEducation");
 			System.out.println("Basic Individual Information gathered");

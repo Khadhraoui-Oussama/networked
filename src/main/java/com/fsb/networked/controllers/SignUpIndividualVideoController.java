@@ -119,7 +119,6 @@ public class SignUpIndividualVideoController implements Initializable {
         {
             //add the video path to the json file
             JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpVideo", "videoPath", videoFile.toURI().getPath());
-            JSONParser.populateJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
             System.out.println("All Info Gathered");
 
             //create the pdf resume

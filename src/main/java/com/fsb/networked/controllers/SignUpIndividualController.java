@@ -113,6 +113,14 @@ public class SignUpIndividualController implements Initializable {
 				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
 			}
 
+				//TODO REMOVE AFTER TESTING
+				String path = "C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\";
+				// FilePaths.chooseDirectoryToSaveTo();
+				//System.out.println(path);
+				System.out.println("C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\");
+				//PDFCreator.createPDF(path,"pdfGenerated.pdf");
+
+
 			// Navigate to the next scene
 			App.setRoot("SignUpScenes/SignUpPageIndividualEducation");
 			System.out.println("Basic Individual Information gathered");

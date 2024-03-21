@@ -122,9 +122,9 @@
                         <Insets />
                      </VBox.margin>
                   </ButtonBar>
-                  <Label fx:id="statusLabel" prefHeight="56.0" prefWidth="203.0">
+                  <Label fx:id="statusLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="270.0" prefWidth="196.0" wrapText="true">
                      <font>
-                        <Font size="39.0" />
+                        <Font size="28.0" />
                      </font>
                      <opaqueInsets>
                         <Insets />

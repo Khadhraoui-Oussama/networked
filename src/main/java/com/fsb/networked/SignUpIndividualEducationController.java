@@ -78,6 +78,7 @@ public class SignUpIndividualEducationController implements Initializable {
 			Education education = new Education(diplomaField.getText(), instituteField.getText(),diplomaTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue());
 			//now clear all the fields
 			instituteField.clear();
+			diplomaField.clear();
 			diplomaTypeField.clear();
 			startDate.setValue(null);
 			endDate.setValue(null);
@@ -102,7 +103,7 @@ public class SignUpIndividualEducationController implements Initializable {
 	private boolean validateEducation() {
 		boolean isValid = true;
 		isValid &= (Validator.validateField(diplomaField, Regexes.TITLE_REGEX, Alerts.AlertTitleField()));
-		isValid	&= Validator.validateField(diplomaTypeField, Regexes.NAME_REGEX,Alerts.AlertTypeField());
+		isValid	&= Validator.validateField(diplomaTypeField, Regexes.TITLE_REGEX,Alerts.AlertTypeField());
 		isValid	&= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
 		//the end date must NOT be before the start date
 

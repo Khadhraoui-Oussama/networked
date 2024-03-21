@@ -17,9 +17,7 @@ public class Regexes {
     public static String NAME_REGEX = "^[A-Z][a-z]{1,39}$";
     public static String TITLE_REGEX = "^[a-zA-Z0-9][a-zA-Z0-9 _,-]{1,38}[a-zA-Z0-9]$";
     public static String POSITION_REGEX = "^[a-zA-Z][a-zA-Z _,-]{1,38}[a-zA-Z]$";
-
     public static String TECHNOLOGY_REGEX = "^[a-zA-Z0-9][a-zA-Z0-9 _,-]{1,38}[a-zA-Z0-9]$";
-
     public static String LOCATION_REGEX = "^[\\w\\s,.'-]{1,50}$";
     public static String DESCRIPTION_REGEX = "^.{1,150}$";
 

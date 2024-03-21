@@ -283,4 +283,130 @@ public class JSONParser {
                 return new JSONArray(); // Return an empty array if an error occurs
             }
         }
+
+
+    public static int extractArrayLength(String parentField) {
+        String filePath = "src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON";
+        String fileContent = JSONParser.getJSONFromFile(filePath);
+        JSONObject jsonObject = new JSONObject(fileContent);
+
+        if (jsonObject.has(parentField)) {
+            JSONArray jsonArray = jsonObject.getJSONArray(parentField);
+            return jsonArray.length();
+        }
+        return 0;
+    }
+
+        //this is only for debug purposes TODO REMOVEIT
+            public static void populateJSONFile(String filePath) {
+                JSONObject jsonObject = new JSONObject();
+
+                // signUpVideo
+                JSONObject signUpVideoObject = new JSONObject();
+                signUpVideoObject.put("videoPath", "/C:/Users/khadh/Videos/Microworks/MicroWorks 2024.01.13 - 15.18.12.60.DVR.mp4");
+                jsonObject.put("signUpVideo", signUpVideoObject);
+
+                // signUpBasic
+                JSONObject signUpBasicObject = new JSONObject();
+                signUpBasicObject.put("firstName", "John");
+                signUpBasicObject.put("lastName", "Doe");
+                signUpBasicObject.put("country", "Tunisia");
+                signUpBasicObject.put("address", "10 Jarzouna");
+                signUpBasicObject.put("gender", "Male");
+                signUpBasicObject.put("dob", "2003-10-04");
+                signUpBasicObject.put("picture", "file:/C:/Users/khadh/Pictures/417177134_7290152844381720_7370021647571908018_n.jpg");
+                jsonObject.put("signUpBasic", signUpBasicObject);
+
+                // signUpEducation
+                JSONArray signUpEducationArray = new JSONArray();
+                JSONObject education1 = new JSONObject();
+                education1.put("endDate", "2024-03-31");
+                education1.put("description", "First of my class");
+                education1.put("institute", "FSB");
+                education1.put("diploma", "MBA");
+                education1.put("type", "Finance");
+                education1.put("startDate", "2024-02-27");
+                signUpEducationArray.put(education1);
+
+                JSONObject education2 = new JSONObject();
+                education2.put("endDate", "2024-03-30");
+                education2.put("description", "Barely made it");
+                education2.put("institute", "FSS");
+                education2.put("diploma", "Masters");
+                education2.put("type", "Itt");
+                education2.put("startDate", "2021-03-10");
+                signUpEducationArray.put(education2);
+
+                jsonObject.put("signUpEducation", signUpEducationArray);
+
+                // signUpProjects
+                JSONArray signUpProjectsArray = new JSONArray();
+                JSONObject project1 = new JSONObject();
+                project1.put("link", "https://alpha1.project");
+                project1.put("description", "ProjectAlpha is for military purposes cant disclose any more info");
+                project1.put("technology", "Web dev");
+                project1.put("title", "ProjectAlpha");
+                signUpProjectsArray.put(project1);
+
+                JSONObject project2 = new JSONObject();
+                project2.put("link", "https://redacted.military");
+                project2.put("description", "https://redacted.military [REDACTED]");
+                project2.put("technology", "Radar Technology");
+                project2.put("title", "ProjectGamma");
+                signUpProjectsArray.put(project2);
+
+                jsonObject.put("signUpProjects", signUpProjectsArray);
+
+                // signUpWork
+                JSONArray signUpWorkArray = new JSONArray();
+                JSONObject work1 = new JSONObject();
+                work1.put("endDate", "2023-03-23");
+                work1.put("description", "Quality insurance");
+                work1.put("company", "Boga Cidre");
+                work1.put("position", "Manager");
+                work1.put("type", "Manager");
+                work1.put("startDate", "2018-03-07");
+                signUpWorkArray.put(work1);
+
+                JSONObject work2 = new JSONObject();
+                work2.put("endDate", "2024-03-14");
+                work2.put("description", "Got Fired for testing the product");
+                work2.put("company", "FlameThrower Inc");
+                work2.put("position", "President");
+                work2.put("type", "Managerial");
+                work2.put("startDate", "2024-03-14");
+                signUpWorkArray.put(work2);
+
+                jsonObject.put("signUpWork", signUpWorkArray);
+
+                // signUp
+                JSONObject signUpObject = new JSONObject();
+                signUpObject.put("emailAddress", "example@xyz.com");
+                signUpObject.put("password", "Azerty123!");
+                jsonObject.put("signUp", signUpObject);
+
+                // signUpSkills
+                JSONArray signUpSkillsArray = new JSONArray();
+                JSONObject skill1 = new JSONObject();
+                skill1.put("level", "Advanced");
+                skill1.put("description", "React hooks mastery");
+                skill1.put("technology", "Web dev");
+                skill1.put("title", "React");
+                signUpSkillsArray.put(skill1);
+
+                JSONObject skill2 = new JSONObject();
+                skill2.put("level", "Intermediate");
+                skill2.put("description", "JS mastery");
+                skill2.put("technology", "Web dev");
+                skill2.put("title", "JavaScript");
+                signUpSkillsArray.put(skill2);
+
+                jsonObject.put("signUpSkills", signUpSkillsArray);
+
+                try (FileWriter writer = new FileWriter(filePath,false)) {
+                    writer.write(jsonObject.toString(4)); // Indent with 4 spaces for better readability
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 }

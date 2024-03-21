@@ -23,7 +23,7 @@ public class Alerts
 	 {
 		 	Alert alert = new Alert(AlertType.WARNING);
 	        alert.setTitle("Invalid type");
-	        alert.setContentText("The Type should start with an Uppercase letter\ncontain only letters\nand should be at least be 2 letters long");
+	        alert.setContentText("Please enter a valid title.\nA valid title must:\n- Start with a letter or digit\n- Contain 1 to 38 characters\n- Only include letters, digits, spaces,\n underscores, commas, hyphens, and no trailing spaces");
 		 return alert;
 	 }
 	 public static Alert AlertDOBField()

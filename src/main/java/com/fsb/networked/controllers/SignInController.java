@@ -39,6 +39,7 @@ public class SignInController {
 	private void resetPassword() throws IOException
 	{
 		App.setRoot("ForgotPasswordPage");
+		System.out.println(App.getFxmlPath());
 	}
 	
 	@FXML

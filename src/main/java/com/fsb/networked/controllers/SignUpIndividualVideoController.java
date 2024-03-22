@@ -109,6 +109,7 @@ public class SignUpIndividualVideoController implements Initializable {
     @FXML
     private void goBack() throws IOException
     {
+        mediaPlayer.dispose();
         App.setRoot("SignUpScenes/SignUpPageIndividualProject");
     }
 
@@ -160,6 +161,8 @@ public class SignUpIndividualVideoController implements Initializable {
         // and returned to the original state
         JSONParser.resetIndividualJSONFile();
         JSONParser.resetEntrepriseJSONFile();
+        mediaView.setMediaPlayer(null);
+        mediaPlayer.dispose();
         App.setRoot("LogInPage");
     }
 

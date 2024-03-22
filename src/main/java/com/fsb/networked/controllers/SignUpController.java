@@ -50,7 +50,6 @@ public class SignUpController implements Initializable{
 				System.err.println("Image resource not found: " + imagePath);
 			}
 			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON","signUpBasic","picture",image.getUrl());
-
 			//go to next scene
 			App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
 		}

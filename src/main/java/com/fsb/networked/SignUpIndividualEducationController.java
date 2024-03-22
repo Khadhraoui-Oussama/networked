@@ -104,13 +104,13 @@ public class SignUpIndividualEducationController implements Initializable {
 		boolean isValid = true;
 		isValid &= (Validator.validateField(diplomaField, Regexes.TITLE_REGEX, Alerts.AlertTitleField()));
 		isValid	&= Validator.validateField(diplomaTypeField, Regexes.TITLE_REGEX,Alerts.AlertTypeField());
+		isValid	&= Validator.validateField(instituteField, Regexes.TITLE_REGEX,Alerts.AlertTitleField());
 		isValid	&= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
 		//the end date must NOT be before the start date
-
-			if (endDate.getValue().isBefore(startDate.getValue())) {
-				Validator.flashRedBorder(endDate);
-				isValid = false;
-			}
+		if (startDate.getValue() == null ||  endDate.getValue() == null  ||  endDate.getValue().isBefore(startDate.getValue())) {
+			Validator.flashRedBorder(endDate);
+			isValid = false;
+		}
 
 		return isValid;
 	}

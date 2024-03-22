@@ -32,8 +32,8 @@
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="154.2" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="57.93334350585937" vgrow="SOMETIMES" />
             <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="285.59995117187503" vgrow="SOMETIMES" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="177.93334960937506" valignment="CENTER" />
-            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="95.46665039062498" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="218.2" valignment="CENTER" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="55.200000000000045" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
             <ImageView fitHeight="99.0" fitWidth="771.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
@@ -121,7 +121,7 @@
                   <Insets left="30.0" />
                </GridPane.margin>
             </VBox>
-            <ButtonBar prefHeight="85.0" prefWidth="441.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <ButtonBar prefHeight="80.0" prefWidth="478.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
               <buttons>
                 <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" prefHeight="37.0" prefWidth="572.0" text="BACK">
                      <font>

@@ -396,7 +396,7 @@ public class JSONParser {
         signUpBasicObject.put("address", "10 Jarzouna");
         signUpBasicObject.put("gender", "Male");
         signUpBasicObject.put("dob", "2003-10-04");
-        //signUpBasicObject.put("picture", "file:/C:/Users/khadh/Pictures/417177134_7290152844381720_7370021647571908018_n.jpg");
+        signUpBasicObject.put("picture", "");
         jsonObject.put("signUpBasic", signUpBasicObject);
 
         // signUpEducation
@@ -504,7 +504,7 @@ public class JSONParser {
 
         // Work Experience 1
         JSONObject work1 = new JSONObject();
-        work1.put("endDate", "Present");
+        work1.put("endDate", "2025-08-10");
         work1.put("description", "Developed and maintained web applications using Java and Spring framework.");
         work1.put("company", "Tech Solutions Inc.");
         work1.put("position", "Software Engineer");

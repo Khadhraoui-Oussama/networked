@@ -126,7 +126,7 @@ public class SignUpIndividualVideoController implements Initializable {
             String path = FilePaths.chooseDirectoryToSaveTo();
             System.out.println(path);
             System.out.println("C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\");
-            PDFCreator.createPDF(path,"\\pdfGenerated.pdf");
+            PDFCreator.createPDF(path,"\\resume.pdf");
         }
         else {
             statusLabel.setText("Pls select a video resume first\nto be able to generate your PDF.");

@@ -130,7 +130,8 @@ public class SignUpIndividualController implements Initializable {
 				// Custom profile picture is selected
 				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
 			}
-			PDFCreator.createPDF(path1,"\\pdfGenerated.pdf");
+			PDFCreator.createPDF(path1,"\\resume" +
+					".pdf");
 			//SPEED UP DEV
 
 			// Navigate to the next scene

@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.HomePageController">
+    <children>
+        <BorderPane layoutY="-0.8" prefHeight="771.0" prefWidth="1274.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <VBox BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="79.0" prefWidth="1274.0">
+                            <children>
+                                <ImageView fitHeight="86.0" fitWidth="212.0">
+                                    <image>
+                                        <Image url="@../../../images/top/networked-high-resolution-logo-transparent.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="20.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <Separator layoutX="780.0" layoutY="10.0" orientation="VERTICAL" prefHeight="103.0" prefWidth="50.0" />
+                                <HBox alignment="CENTER" prefHeight="130.0" prefWidth="523.0" HBox.hgrow="ALWAYS">
+                                    <HBox.margin>
+                                        <Insets left="5.0" right="20.0" />
+                                    </HBox.margin>
+                                    <children>
+                                        <TextField fx:id="searchTextField" prefHeight="54.0" prefWidth="421.0" promptText="Search">
+                                            <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                            </cursor>
+                                        </TextField>
+                              <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#search" prefHeight="54.0" prefWidth="66.0">
+                                 <graphic>
+                                    <ImageView fitHeight="46.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/icons/search_icon_3.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                                    </children>
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </HBox>
+                                <Separator orientation="VERTICAL" prefHeight="103.0" prefWidth="45.0">
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </Separator>
+                                <ButtonBar prefHeight="102.0" prefWidth="483.0" HBox.hgrow="ALWAYS">
+                                    <buttons>
+                                        <Button fx:id="homeBtn" mnemonicParsing="false" onAction="#goHome">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/icons/home_icon_2.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                                        </Button>
+                              <Button fx:id="notificationsBtn" layoutX="52.0" layoutY="32.0" mnemonicParsing="false" onAction="#displayNotifications">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/icons/notification_icon_empty.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="messagesBtn" layoutX="138.0" layoutY="32.0" mnemonicParsing="false" onAction="#displayMessages">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/icons/messages_icon_3.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="profileBtn" layoutX="309.0" layoutY="32.0" mnemonicParsing="false" onAction="#goUsersProfile">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="83.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/icons/profile_icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button fx:id="settingsBtn" layoutX="224.0" layoutY="32.0" mnemonicParsing="false" onAction="#goSettings">
+                                 <graphic>
+                                    <ImageView fitHeight="32.0" fitWidth="62.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/icons/setting_icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                                    </buttons>
+                                    <HBox.margin>
+                                        <Insets right="10.0" />
+                                    </HBox.margin>
+                                </ButtonBar>
+                            </children>
+                        </HBox>
+                        <Separator prefHeight="15.0" prefWidth="1274.0" />
+                    </children>
+                </VBox>
+            </top>
+            <center>
+                <VBox BorderPane.alignment="CENTER">
+                    <children>
+                        <VBox>
+                            <children>
+                                <HBox alignment="CENTER" prefHeight="74.0" prefWidth="707.0">
+                                    <children>
+                                        <TextField fx:id="postTextField" prefHeight="47.0" prefWidth="359.0" promptText="Share a Thought">
+                                            <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                            </cursor>
+                                        </TextField>
+                                        <Button fx:id="normalPostBtn" mnemonicParsing="false" onAction="#createNormalPost" prefHeight="40.0" prefWidth="114.0" text="Normal Post">
+                                            <padding>
+                                                <Insets left="10.0" />
+                                            </padding>
+                                        </Button>
+                                        <Button fx:id="mediaPostBtn" layoutX="473.0" layoutY="28.0" mnemonicParsing="false" onAction="#createMediaPost" prefHeight="40.0" prefWidth="114.0" text="Media Post">
+                                            <padding>
+                                                <Insets left="10.0" />
+                                            </padding>
+                                            <HBox.margin>
+                                                <Insets left="10.0" />
+                                            </HBox.margin>
+                                        </Button>
+                                    </children>
+                                </HBox>
+                            </children>
+                        </VBox>
+                  <ListView fx:id="postsListView" prefHeight="587.0" prefWidth="716.0" />
+                    </children>
+                </VBox>
+            </center>
+            <left>
+                <VBox alignment="TOP_CENTER" prefHeight="668.0" prefWidth="277.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fx:id="profilePictureImageView" fitHeight="190.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true" />
+                        <Label fx:id="welcomeNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="43.0" prefWidth="291.0" text="Welcome Back UserName" textAlignment="CENTER" wrapText="true">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Button fx:id="changeAddPfpBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addChangePfp" prefHeight="47.0" prefWidth="153.0" text="Change/Add a pfp">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </Button>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="282.0">
+                            <children>
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="224.0" text="Add a @connection :" textAlignment="CENTER" wrapText="true">
+                                    <font>
+                                        <Font size="21.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="addConnectionBtn" minWidth="53.0" mnemonicParsing="false" onAction="#addConnection" prefHeight="49.0" prefWidth="53.0">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/icons/add_connection_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                                </Button>
+                            </children>
+                            <VBox.margin>
+                                <Insets right="10.0" top="15.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <VBox alignment="BASELINE_CENTER" prefHeight="293.0" prefWidth="291.0">
+                            <children>
+                                <Label alignment="CENTER" prefHeight="286.0" prefWidth="283.0" text="All Copyrights Reserved 2024" />
+                            </children>
+                        </VBox>
+                    </children>
+                </VBox>
+            </left>
+            <right>
+                <VBox prefHeight="668.0" prefWidth="302.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ListView fx:id="connectionSuggestionsListView" prefHeight="665.0" prefWidth="276.0" />
+               </children>
+                </VBox>
+            </right>
+        </BorderPane>
+    </children>
+</AnchorPane>

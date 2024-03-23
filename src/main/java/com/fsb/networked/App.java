@@ -21,6 +21,7 @@ public class App extends Application {
         scene = new Scene(loadFXML("LoginPage"));
         stage.setScene(scene);
         stage.setResizable(false);
+        scene.getStylesheets().clear();
         stage.show();
         stage.setOnCloseRequest(event -> {
             windowForceClosed = true;

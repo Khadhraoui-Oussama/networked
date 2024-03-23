@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.HomePageController">
+    <children>
+        <BorderPane layoutY="-0.8" prefHeight="770.0" prefWidth="1242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+            <top>
+                <VBox prefHeight="96.0" prefWidth="1274.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="83.0" prefWidth="1274.0">
+                            <children>
+                                <ImageView fitHeight="86.0" fitWidth="212.0">
+                                    <image>
+                                        <Image url="@../../../images/top/networked-high-resolution-logo-transparent.png" />
+                                    </image>
+                                    <HBox.margin>
+                                        <Insets bottom="5.0" left="20.0" />
+                                    </HBox.margin>
+                                </ImageView>
+                                <Separator layoutX="780.0" layoutY="10.0" orientation="VERTICAL" prefHeight="91.0" prefWidth="28.0" />
+                                <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="89.0" prefWidth="1005.0" HBox.hgrow="ALWAYS">
+                                    <HBox.margin>
+                                        <Insets left="5.0" right="10.0" />
+                                    </HBox.margin>
+                                    <children>
+                                        <TextField fx:id="searchTextField" prefHeight="54.0" prefWidth="406.0" promptText="Search">
+                                            <cursor>
+                                                <Cursor fx:constant="TEXT" />
+                                            </cursor>
+                                        </TextField>
+                              <Button fx:id="searchBtn" mnemonicParsing="false" onAction="#search" prefHeight="54.0" prefWidth="66.0">
+                                 <graphic>
+                                    <ImageView fitHeight="46.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../images/icons/search_icon_3.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                                      <HBox alignment="CENTER" prefHeight="91.0" prefWidth="500.0">
+                                          <children>
+                                    <Separator orientation="VERTICAL" prefHeight="91.0" prefWidth="28.0" />
+                                              <TextField fx:id="postTextField" prefHeight="47.0" prefWidth="320.0" promptText="Share a Thought">
+                                                  <cursor>
+                                                      <Cursor fx:constant="TEXT" />
+                                                  </cursor>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                              </TextField>
+                                              <Button fx:id="normalPostBtn" minWidth="53.0" mnemonicParsing="false" onAction="#createNormalPost" prefHeight="47.0" prefWidth="53.0">
+                                                  <padding>
+                                                      <Insets left="10.0" />
+                                                  </padding>
+                                       <graphic>
+                                          <ImageView fitHeight="39.0" fitWidth="34.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../images/icons/text_icon_2.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                              </Button>
+                                              <Button fx:id="mediaPostBtn" layoutX="473.0" layoutY="28.0" minWidth="51.0" mnemonicParsing="false" onAction="#createMediaPost" prefHeight="50.0" prefWidth="51.0">
+                                                  <padding>
+                                                      <Insets left="10.0" />
+                                                  </padding>
+                                                  <HBox.margin>
+                                                      <Insets left="10.0" />
+                                                  </HBox.margin>
+                                       <graphic>
+                                          <ImageView fitHeight="41.0" fitWidth="42.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../images/icons/media_post.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                              </Button>
+                                          </children>
+                                 <HBox.margin>
+                                    <Insets left="10.0" />
+                                 </HBox.margin>
+                                      </HBox>
+                                    </children>
+                                    <opaqueInsets>
+                                        <Insets />
+                                    </opaqueInsets>
+                                </HBox>
+                            </children>
+                        </HBox>
+                        <Separator maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="150.0" prefWidth="500.0" />
+                    </children>
+                </VBox>
+            </top>
+            <center>
+            <TabPane fx:id="tabPane" cache="true" depthTest="DISABLE" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="675.0" style="-fx-tab-min-height: 50; -fx-tab-min-width: 80;" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+              <tabs>
+                <Tab fx:id="tabHome" onSelectionChanged="#reloadHome">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/home_icon_2.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <content>
+                        <AnchorPane maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="632.0" prefWidth="800.0">
+                           <children>
+                              <ScrollPane fx:id="homeScrollPane" prefHeight="617.0" prefWidth="689.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <VBox fx:id="postsLayoutVbox" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
+                                 </content>
+                              </ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                </Tab>
+                  <Tab fx:id="tabNotifications" onSelectionChanged="#loadTabNotifications">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane fx:id="notificationsScrollPane" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <VBox fx:id="notificationsLayoutVbox" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
+                                 </content></ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fx:id="NotificationImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/notification_icon_empty.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="tabMessages" onSelectionChanged="#loadTabMessages">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane fx:id="messagesScrollpane" prefHeight="617.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <VBox fx:id="messagesLayoutVbox" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
+                                 </content></ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fx:id="messageImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/messages_icon_3.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="tabProfile" onSelectionChanged="#loadTabProfile">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane fx:id="profileScrollpane" prefHeight="617.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <VBox fx:id="profileLayoutVbox" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
+                                 </content></ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/profile_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="tabJobs" onSelectionChanged="#loadTabJobs">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane fx:id="jobsScrollPane" prefHeight="617.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <VBox fx:id="jobPostsLayoutVbox" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
+                                 </content></ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fx:id="jobImageView" fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/job_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="tabSettings" onSelectionChanged="#loadTabSettings">
+                     <content>
+                        <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <ScrollPane fx:id="settingsScrollPane" prefHeight="617.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <content>
+                                    <VBox fx:id="settingsLayoutVbox" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
+                                 </content></ScrollPane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/setting_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+              </tabs>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <padding>
+                  <Insets bottom="5.0" top="5.0" />
+               </padding>
+               <BorderPane.margin>
+                  <Insets />
+               </BorderPane.margin>
+            </TabPane>
+            </center>
+            <left>
+                <VBox alignment="TOP_CENTER" prefHeight="668.0" prefWidth="277.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <ImageView fx:id="profilePictureImageView" fitHeight="190.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../../../images/male_avatar.png" />
+                     </image></ImageView>
+                        <Label fx:id="welcomeNameLabel" alignment="CENTER" contentDisplay="CENTER" prefHeight="43.0" prefWidth="291.0" text="Welcome Back UserName" textAlignment="CENTER" wrapText="true">
+                            <font>
+                                <Font size="21.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="10.0" />
+                            </VBox.margin>
+                        </Label>
+                        <Button fx:id="changeAddPfpBtn" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#addChangePfp" prefHeight="47.0" prefWidth="153.0" text="Change/Add a pfp">
+                            <font>
+                                <Font size="24.0" />
+                            </font>
+                            <VBox.margin>
+                                <Insets top="15.0" />
+                            </VBox.margin>
+                        </Button>
+                        <HBox alignment="CENTER" prefHeight="53.0" prefWidth="282.0">
+                            <children>
+                                <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="55.0" prefWidth="224.0" text="Add a @connection :" textAlignment="CENTER" wrapText="true">
+                                    <font>
+                                        <Font size="21.0" />
+                                    </font>
+                                </Label>
+                                <Button fx:id="addConnectionBtn" minWidth="53.0" mnemonicParsing="false" onAction="#addConnection" prefHeight="49.0" prefWidth="53.0">
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../images/icons/add_connection_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                                </Button>
+                            </children>
+                            <VBox.margin>
+                                <Insets right="10.0" top="15.0" />
+                            </VBox.margin>
+                        </HBox>
+                        <VBox alignment="BASELINE_CENTER" prefHeight="289.0" prefWidth="278.0">
+                            <children>
+                                <Label alignment="CENTER" prefHeight="277.0" prefWidth="278.0" text="All Copyrights Reserved 2024">
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin></Label>
+                            </children>
+                        </VBox>
+                    </children>
+               <BorderPane.margin>
+                  <Insets top="10.0" />
+               </BorderPane.margin>
+                </VBox>
+            </left>
+            <right>
+                <VBox prefHeight="668.0" prefWidth="302.0" BorderPane.alignment="CENTER">
+               <children>
+                  <ScrollPane fx:id="connectionSuggestionsScrollPane" prefHeight="675.0" prefWidth="274.0" />
+               </children>
+                </VBox>
+            </right>
+        </BorderPane>
+    </children>
+</AnchorPane>

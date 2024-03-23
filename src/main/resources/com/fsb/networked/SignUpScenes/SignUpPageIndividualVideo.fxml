@@ -19,8 +19,8 @@
    <children>
       <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="248.26670303344727" />
-            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="406.99997558593753" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="208.40000610351564" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="411.59999389648436" />
             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="374.20002441406245" />
             <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="283.9332275390625" />
          </columnConstraints>
@@ -48,7 +48,7 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Text>
-            <ButtonBar prefHeight="58.0" prefWidth="422.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+            <ButtonBar prefHeight="107.0" prefWidth="778.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
               <buttons>
                   <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="37.0" prefWidth="572.0" text="BACK">
                      <font>
@@ -60,7 +60,7 @@
                         <Font size="19.0" />
                      </font>
                   </Button>
-                  <Button fx:id="chooseVideoBtn" mnemonicParsing="false" onAction="#uploadVideoResume" prefHeight="37.0" prefWidth="572.0" text="Choose video">
+                  <Button fx:id="chooseVideoBtn" mnemonicParsing="false" onAction="#uploadVideoResume" prefHeight="41.0" prefWidth="572.0" text="Choose video">
                      <font>
                         <Font size="19.0" />
                      </font>

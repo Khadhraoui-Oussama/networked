@@ -17,12 +17,15 @@ public class LoginController {
 	
 	@FXML
     private void gotoSignIn() throws IOException {
-        App.setRoot("SignInPage");
-        FilePaths.chooseDirectoryToSaveTo();
+        // original stmt App.setRoot("SignInPage");
+       // App.setRoot("HomePageIndividual");
+        App.setRoot("HomePageIndividual");
+       // FilePaths.chooseDirectoryToSaveTo();
     }
 	@FXML
     private void gotoSignUp() throws IOException {
         App.setRoot("SignUpScenes/SignUpPageCommon");
+        System.out.println(FilePaths.getImagePath("/images/default_user.png"));
     }	
 	
 }

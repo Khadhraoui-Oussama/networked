@@ -15,20 +15,21 @@ import java.nio.file.Paths;
 public class JSONParser {
     public static String getJSONFromFile(String filename) {
         String jsonText = "";
+        StringBuilder stringBuilder = new StringBuilder(jsonText);
         try {
             BufferedReader bufferedReader =
                     new BufferedReader(new FileReader(filename));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
-                jsonText += line + "\n";
+                stringBuilder.append(line);
             }
 
             bufferedReader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return jsonText;
+        return stringBuilder.toString();
     }
 
     public static <T> T getValueFromJSONFile(String JSONFilePath, String parentField, String nestedField) {

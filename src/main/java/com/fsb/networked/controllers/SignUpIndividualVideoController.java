@@ -77,7 +77,7 @@ public class SignUpIndividualVideoController implements Initializable {
        videoFile = fc.showOpenDialog(null);
        if (videoFile != null) {
            try {
-               System.out.println("Path to video :" + videoFile.toURI().getPath());
+               System.out.println("Path to video : " + videoFile.toURI().getPath());
                // Set the source as the file path
                statusLabel.setText("Video resume uploaded successfully");
 

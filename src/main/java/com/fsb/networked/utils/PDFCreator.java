@@ -102,9 +102,9 @@ public class PDFCreator {
     }
     public static String extractArrayValueByIndex(String parentField, String field,int index) {
         String filePath = "src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON";
-        String fileContent = "";
+        String fileContent;
         fileContent = JSONParser.getJSONFromFile(filePath);
-        JSONObject item = null;
+        JSONObject item;
         JSONObject jsonObject = new JSONObject(fileContent);
         if (jsonObject.has(parentField)) {
             JSONArray jsonArray = jsonObject.getJSONArray(parentField);
@@ -246,7 +246,7 @@ public class PDFCreator {
     static String[] storageOfWrappedText = null;
     //this wraps the text to wraplength of under 45 characters and then splits them on a newline character
     private static void wrapText(String textToWrap, PDPageContentStream contentStream, float xOffset, float yOffset, PDFont font, float fontSize, PDColor fontColor) throws IOException {
-        String text = null;
+        String text;
         storageOfWrappedText = WordUtils.wrap(textToWrap, 45).split("\\r?\\n");
         contentStream.setFont(font,fontSize);
         contentStream.setNonStrokingColor(fontColor);

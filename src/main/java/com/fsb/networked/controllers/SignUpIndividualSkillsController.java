@@ -157,7 +157,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 			//add that skill object to the skillsListView list of items(skills)
 			//check if all fields are empty then don't add it
 			//without this check at the first signUp the user will find an empty ghost task
-			if(!(skill.getTitle().isBlank() && skill.getDescription().isBlank() && skill.getDescription().isBlank()))
+			if(!(skill.getTitle().isBlank() && skill.getDescription().isBlank()))
 			{
 				skillsListView.getItems().add(skill);
 				//put the skillObject in the skillsArrays so that already filled in skills won't get lost after a scene go and back idk how to explain just trust

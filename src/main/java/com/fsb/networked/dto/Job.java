@@ -23,7 +23,11 @@ public class Job
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
-	
+
+	public Job() {
+
+	}
+
 	public LocalDate getStartDate()
 	{
 		return startDate;

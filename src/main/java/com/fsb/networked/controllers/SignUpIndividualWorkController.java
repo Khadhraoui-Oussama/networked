@@ -1,24 +1,18 @@
 package com.fsb.networked.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.fsb.networked.App;
-import com.fsb.networked.dto.Job;
-import com.fsb.networked.dto.Skill;
+import com.fsb.networked.dto.JobDTO;
 import com.fsb.networked.utils.*;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class SignUpIndividualWorkController implements Initializable {
 
@@ -56,7 +50,7 @@ public class SignUpIndividualWorkController implements Initializable {
 	private Button btnCancel;
 
 	@FXML
-	private ListView<Job> jobListView;
+	private ListView<JobDTO> jobListView;
 	private JSONArray jobsArray = new JSONArray();
 	@FXML
     private void goBack() throws IOException
@@ -80,7 +74,7 @@ public class SignUpIndividualWorkController implements Initializable {
 
 		if(validateJob()) 
 		{
-			Job job = new Job(jobPositionField.getText(), companyField.getText(),jobTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue());
+			JobDTO job = new JobDTO(jobPositionField.getText(), companyField.getText(),jobTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue());
 			//now clear all the fields
 			jobPositionField.clear();
 			companyField.clear();
@@ -97,7 +91,7 @@ public class SignUpIndividualWorkController implements Initializable {
 	private void deleteJob()
 	{
 		//DONE TODO : when delete skill btn is presses delete the job from the listview of jobs
-		Job selectedJob = jobListView.getSelectionModel().getSelectedItem();
+		JobDTO selectedJob = jobListView.getSelectionModel().getSelectedItem();
 		jobListView.getItems().remove(selectedJob);
 		jobsArray.remove(jobListView.getItems().indexOf(jobListView.getSelectionModel().getSelectedItem()));
 	}
@@ -132,12 +126,12 @@ public class SignUpIndividualWorkController implements Initializable {
 	{
 		/*------------*/
 		//held together by glue
-		jobListView.setCellFactory(new Callback<ListView<Job>, ListCell<Job>>() {
+		jobListView.setCellFactory(new Callback<ListView<JobDTO>, ListCell<JobDTO>>() {
             @Override
-            public ListCell<Job> call(ListView<Job> param) {
-                return new ListCell<Job>() {
+            public ListCell<JobDTO> call(ListView<JobDTO> param) {
+                return new ListCell<JobDTO>() {
                     @Override
-                    protected void updateItem(Job job, boolean empty) {
+                    protected void updateItem(JobDTO job, boolean empty) {
                         super.updateItem(job, empty);
                         if (job == null || empty) {
                             setText(null);
@@ -160,7 +154,7 @@ public class SignUpIndividualWorkController implements Initializable {
 			String endDateValue = jobObject.getString("endDate");
 
 			//create a skill object with those extracted values
-			Job job = new Job(positionValue,companyValue,descriptionValue,typeValue, Conversions.stringtoLocalDate(startDateValue),Conversions.stringtoLocalDate(endDateValue));
+			JobDTO job = new JobDTO(positionValue,companyValue,descriptionValue,typeValue, Conversions.stringtoLocalDate(startDateValue),Conversions.stringtoLocalDate(endDateValue));
 			//add that skill object to the skillsListView list of items(skills)
 			//check if all fields are empty then don't add it
 			//without this check at the first signUp the user will find an empty ghost task

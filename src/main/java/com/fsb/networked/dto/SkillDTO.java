@@ -2,14 +2,14 @@ package com.fsb.networked.dto;
 
 import org.json.JSONObject;
 
-public class Skill
+public class SkillDTO
 {
 	private String title;
 	private String technology;
 	private String description;
 	private String level;
 	
-	public Skill(String title, String technology, String description, String level)
+	public SkillDTO(String title, String technology, String description, String level)
 	{
 		super();
 		this.title = title;

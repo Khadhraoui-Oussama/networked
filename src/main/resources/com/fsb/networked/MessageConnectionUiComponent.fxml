@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="218.0" prefWidth="780.0" style="-fx-border-color: blue; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.MessageConnectionItemController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="634.0" spacing="20.0">
+         <children>
+            <ImageView fx:id="opImgView" fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/female_avatar.png" />
+               </image>
+               <HBox.margin>
+                  <Insets left="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="opNameLabel" prefHeight="54.0" prefWidth="257.0" text="Connection name">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ButtonBar prefHeight="90.0" prefWidth="410.0">
+               <buttons>
+                  <Button fx:id="messageConnectionBtn" mnemonicParsing="false" onAction="#messageConnection" prefHeight="46.0">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/chat.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="removeConnectionBtn" alignment="CENTER" layoutX="569.0" layoutY="15.0" minWidth="62.0" mnemonicParsing="false" onAction="#removeConnection" prefHeight="46.0">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/remove-friend.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </buttons>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </ButtonBar>
+         </children>
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <Separator layoutX="10.0" layoutY="81.0" prefWidth="200.0" />
+      <HBox prefHeight="128.0" prefWidth="779.0">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin>
+         <children>
+            <VBox>
+               <children>
+                  <Label fx:id="lastMessageBodyLabel" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="94.0" prefWidth="773.0" text="last message body " wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="11.0" right="10.0" />
+                     </padding>
+                  </Label>
+                  <Separator prefWidth="200.0" />
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label fx:id="lastMessageDateLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="411.0" text="last message date" wrapText="true">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="11.0" right="10.0" />
+                           </padding>
+                        </Label>
+                        <Label fx:id="lastMessageTimeLabel" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="359.0" text="last Message Time" wrapText="true">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="11.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefWidth="634.0">
+         <VBox.margin>
+            <Insets bottom="5.0" right="5.0" />
+         </VBox.margin>
+         <children>
+            <HBox />
+         </children>
+      </HBox>
+   </children>
+</VBox>

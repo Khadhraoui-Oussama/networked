@@ -1,24 +1,18 @@
 package com.fsb.networked.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-
 import com.fsb.networked.App;
-import com.fsb.networked.dto.Skill;
+import com.fsb.networked.dto.SkillDTO;
 import com.fsb.networked.utils.*;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class SignUpIndividualSkillsController implements Initializable {
 
@@ -50,7 +44,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 	private Button btnBack;
 	
 	@FXML
-	private ListView<Skill> skillsListView;
+	private ListView<SkillDTO> skillsListView;
 
 	private JSONArray skillsArray = new JSONArray();
 	@FXML
@@ -76,7 +70,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 		if(validateSkill()) 
 		{
 			//make a new skill object
-			Skill skill = new Skill(skillTitleField.getText(),technologyField.getText(),descriptionTextArea.getText(),levelComboBox.getValue());
+			SkillDTO skill = new SkillDTO(skillTitleField.getText(),technologyField.getText(),descriptionTextArea.getText(),levelComboBox.getValue());
 			//add to the skillListView
 			skillsListView.getItems().add(skill);
 			//add to the skillsArray (JSON)
@@ -92,7 +86,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 	private void deleteSkill()
 	{
 		//DONE TODO : when delete skill btn is presses delete the skill from the listview of skills
-		Skill selectedSkill = skillsListView.getSelectionModel().getSelectedItem();
+		SkillDTO selectedSkill = skillsListView.getSelectionModel().getSelectedItem();
 		skillsListView.getItems().remove(selectedSkill);
 		skillsArray.remove(skillsListView.getItems().indexOf(skillsListView.getSelectionModel().getSelectedItem()));
 	}
@@ -125,12 +119,12 @@ public class SignUpIndividualSkillsController implements Initializable {
 	
 		/*------------*/
 		
-		skillsListView.setCellFactory(new Callback<ListView<Skill>, ListCell<Skill>>() {
+		skillsListView.setCellFactory(new Callback<ListView<SkillDTO>, ListCell<SkillDTO>>() {
             @Override
-            public ListCell<Skill> call(ListView<Skill> param) {
-                return new ListCell<Skill>() {
+            public ListCell<SkillDTO> call(ListView<SkillDTO> param) {
+                return new ListCell<SkillDTO>() {
                     @Override
-                    protected void updateItem(Skill skill, boolean empty) {
+                    protected void updateItem(SkillDTO skill, boolean empty) {
                         super.updateItem(skill, empty);
                         if (skill == null || empty) {
                             setText(null);
@@ -153,7 +147,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 			String descriptionValue = skillObject.getString("description");
 			String levelValue = skillObject.getString("level");
 			//create a skill object with those extracted values
-			Skill skill = new Skill(titleValue,technologyValue,descriptionValue,levelValue);
+			SkillDTO skill = new SkillDTO(titleValue,technologyValue,descriptionValue,levelValue);
 			//add that skill object to the skillsListView list of items(skills)
 			//check if all fields are empty then don't add it
 			//without this check at the first signUp the user will find an empty ghost task

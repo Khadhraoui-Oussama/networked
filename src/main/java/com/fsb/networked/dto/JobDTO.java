@@ -4,26 +4,30 @@ import org.json.JSONObject;
 
 import java.time.LocalDate;
 
-public class Education
+public class JobDTO
 {
-	private String diploma;
-	private String institute;
+	private String position;
+	private String company;
 	private String description;
 	private String type;
 	private LocalDate startDate;
 	private LocalDate endDate;
-
-	public Education(String diploma, String institute, String type, String description, LocalDate startDate, LocalDate endDate)
+	
+	public JobDTO(String position, String company, String type, String description, LocalDate startDate, LocalDate endDate)
 	{
 		super();
-		this.diploma = diploma;
-		this.institute = institute;
+		this.position = position;
+		this.company = company;
 		this.description = description;
 		this.type = type;
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
-	
+
+	public JobDTO() {
+
+	}
+
 	public LocalDate getStartDate()
 	{
 		return startDate;
@@ -44,23 +48,22 @@ public class Education
 		this.endDate = endDate;
 	}
 
-	public String getInstitute()
+	public String getPosition()
 	{
-		return institute;
+		return position;
 	}
-	public void setInstitute(String institute)
+	public void setPosition(String position)
 	{
-		this.institute = institute;
+		this.position = position;
 	}
-
-	public String getDiploma() {
-		return diploma;
+	public String getCompany()
+	{
+		return company;
 	}
-
-	public void setDiploma(String diploma) {
-		this.diploma = diploma;
+	public void setCompany(String company)
+	{
+		this.company = company;
 	}
-
 	public String getDescription()
 	{
 		return this.description;
@@ -81,13 +84,14 @@ public class Education
 
 
 	public JSONObject toJSON() {
-		JSONObject educationJSON = new JSONObject();
-		educationJSON.put("diploma", diploma);
-		educationJSON.put("institute", institute);
-		educationJSON.put("description", description);
-		educationJSON.put("type", type);
-		educationJSON.put("startDate", startDate);
-		educationJSON.put("endDate", endDate);
-		return educationJSON;
+		JSONObject jobJSON = new JSONObject();
+		jobJSON.put("position", position);
+		jobJSON.put("company", company);
+		jobJSON.put("description", description);
+		jobJSON.put("type", type);
+		jobJSON.put("startDate", startDate);
+		jobJSON.put("endDate", endDate);
+
+		return jobJSON;
 	}
 }

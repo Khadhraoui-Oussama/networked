@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class JobOffer {
+public class DTO {
     private String company;
     private LocalDate publicationDate;
     private LocalTime publicationTime;
@@ -12,7 +12,7 @@ public class JobOffer {
     private int numberOfApplicants;
     private String logoImgSrc;
 
-    public JobOffer(String company, LocalDate publicationDate, LocalTime publicationTime, String description, int numberOfApplicants, String logoImgSrc) {
+    public DTO(String company, LocalDate publicationDate, LocalTime publicationTime, String description, int numberOfApplicants, String logoImgSrc) {
         this.company = company;
         this.publicationDate = publicationDate;
         this.publicationTime = publicationTime;
@@ -21,7 +21,7 @@ public class JobOffer {
         this.logoImgSrc = logoImgSrc;
     }
 
-    public JobOffer() {
+    public DTO() {
     }
 
     public String getCompany() {
@@ -76,7 +76,7 @@ public class JobOffer {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        JobOffer jobOffer = (JobOffer) o;
+        DTO jobOffer = (DTO) o;
         return numberOfApplicants == jobOffer.numberOfApplicants && Objects.equals(company, jobOffer.company) && Objects.equals(publicationDate, jobOffer.publicationDate) && Objects.equals(publicationTime, jobOffer.publicationTime) && Objects.equals(description, jobOffer.description) && Objects.equals(logoImgSrc, jobOffer.logoImgSrc);
     }
 

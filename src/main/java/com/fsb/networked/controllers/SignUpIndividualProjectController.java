@@ -1,28 +1,21 @@
 package com.fsb.networked.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.fsb.networked.App;
-import com.fsb.networked.dto.Job;
-import com.fsb.networked.dto.Project;
-import com.fsb.networked.utils.*;
-
+import com.fsb.networked.dto.ProjectDTO;
+import com.fsb.networked.utils.Alerts;
+import com.fsb.networked.utils.JSONParser;
+import com.fsb.networked.utils.Regexes;
+import com.fsb.networked.utils.Validator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.control.Button;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.ListCell;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class SignUpIndividualProjectController implements Initializable {
 
@@ -54,7 +47,7 @@ public class SignUpIndividualProjectController implements Initializable {
 	private Button btnBack;
 	
 	@FXML
-	private ListView<Project> projectListView;
+	private ListView<ProjectDTO> projectListView;
 
 	JSONArray projectsArray = new JSONArray();
 	@FXML
@@ -79,7 +72,7 @@ public class SignUpIndividualProjectController implements Initializable {
 		
 		if(validateProject())
 		{
-			Project project = new Project(titleField.getText(),technologyField.getText(),linkField.getText(),descriptionTextArea.getText());
+			ProjectDTO project = new ProjectDTO(titleField.getText(),technologyField.getText(),linkField.getText(),descriptionTextArea.getText());
 			//now clear all the fields
 			titleField.clear();
 			technologyField.clear();
@@ -93,7 +86,7 @@ public class SignUpIndividualProjectController implements Initializable {
 	private void deleteProject()
 	{
 		//DONE TODO : when delete skill btn is presses delete the job from the listview of jobs
-		Project selectedproject = projectListView.getSelectionModel().getSelectedItem();
+		ProjectDTO selectedproject = projectListView.getSelectionModel().getSelectedItem();
 		projectListView.getItems().remove(selectedproject);
 
 		projectsArray.remove(projectListView.getItems().indexOf(projectListView.getSelectionModel().getSelectedItem()));
@@ -125,12 +118,12 @@ public class SignUpIndividualProjectController implements Initializable {
 	{
 		/*------------*/
 		//held together by glue
-		projectListView.setCellFactory(new Callback<ListView<Project>, ListCell<Project>>() {
+		projectListView.setCellFactory(new Callback<ListView<ProjectDTO>, ListCell<ProjectDTO>>() {
             @Override
-            public ListCell<Project> call(ListView<Project> param) {
-                return new ListCell<Project>() {
+            public ListCell<ProjectDTO> call(ListView<ProjectDTO> param) {
+                return new ListCell<ProjectDTO>() {
                     @Override
-                    protected void updateItem(Project project, boolean empty) {
+                    protected void updateItem(ProjectDTO project, boolean empty) {
                         super.updateItem(project, empty);
                         if (project == null || empty) {
                             setText(null);
@@ -150,7 +143,7 @@ public class SignUpIndividualProjectController implements Initializable {
 			String linkValue = projectObject.getString("link");
 			String descriptionValue = projectObject.getString("description");
 			//create a skill object with those extracted values
-			Project project = new Project(titleValue,technologyValue,linkValue,descriptionValue);
+			ProjectDTO project = new ProjectDTO(titleValue,technologyValue,linkValue,descriptionValue);
 			//add that skill object to the skillsListView list of items(skills)
 			//check if all fields are empty then don't add it
 			//without this check at the first signUp the user will find an empty ghost task

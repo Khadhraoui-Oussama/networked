@@ -1,6 +1,6 @@
 package com.fsb.networked;
 
-import com.fsb.networked.dto.JobOffer;
+import com.fsb.networked.dto.DTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -49,12 +49,12 @@ public class JobPostItemController implements Initializable {
     }
 
     //
-    public void setData(JobOffer jobOffer)
+    public void setData(DTO jobOffer)
     {
         Image logoImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/default_user.png")));
         companyLogoImgView.setImage(logoImage);
         companyNameLabel.setText(jobOffer.getCompany());
-        dateOfPublicationLabel.setText(jobOffer.getPublicationDate().toString());
+        dateOfPublicationLabel.setText("Offer created at : " + jobOffer.getPublicationDate().toString());
         jobDescriptionLabel.setText(jobOffer.getDescription());
         numberOfApplicantsLabel.setText(jobOffer.getNumberOfApplicants() + " : Applicants");
     }

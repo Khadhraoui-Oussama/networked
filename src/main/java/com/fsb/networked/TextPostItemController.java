@@ -1,6 +1,6 @@
 package com.fsb.networked;
 
-import com.fsb.networked.dto.TextPost;
+import com.fsb.networked.dto.TextPostDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -50,7 +50,7 @@ public class TextPostItemController implements Initializable {
 
     }
 
-    public void setData(TextPost textPost)
+    public void setData(TextPostDTO textPost)
     {
         //get  image from database
         Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/female_avatar.png")));

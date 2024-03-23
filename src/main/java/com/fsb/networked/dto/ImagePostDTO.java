@@ -4,15 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class VideoPost extends TextPost {
+public class ImagePostDTO extends TextPostDTO {
 
     private String attachmentFileSrc;
-    public VideoPost(String originalPosterName, LocalDate publicationDate, LocalTime publicationTime, String postText, int numberOfReactions, int numberOfComments, String opImgSrc, String attachementImgSrc) {
+    public ImagePostDTO(String originalPosterName, LocalDate publicationDate, LocalTime publicationTime, String postText, int numberOfReactions, int numberOfComments, String opImgSrc, String attachementImgSrc) {
         super(originalPosterName, publicationDate,publicationTime, postText, numberOfReactions, numberOfComments, opImgSrc);
         this.attachmentFileSrc = attachementImgSrc;
     }
 
-    public VideoPost() {
+    public ImagePostDTO() {
     }
 
     public String getAttachmentFileSrc() {
@@ -25,7 +25,8 @@ public class VideoPost extends TextPost {
 
     @Override
     public String toString() {
-        return "Video Post : " + super.toString() + " , {" +
+
+        return "Image Post : " + super.toString() + " , {" +
                 "attachmentFileSrc='" + attachmentFileSrc +
                 '}';
     }
@@ -35,7 +36,7 @@ public class VideoPost extends TextPost {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         if (!super.equals(o)) return false;
-        VideoPost mediaPost = (VideoPost) o;
+        ImagePostDTO mediaPost = (ImagePostDTO) o;
         return Objects.equals(attachmentFileSrc, mediaPost.attachmentFileSrc);
     }
 

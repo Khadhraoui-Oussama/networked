@@ -1,8 +1,7 @@
 package com.fsb.networked.controllers;
 
 import com.fsb.networked.App;
-import com.fsb.networked.dto.Education;
-import com.fsb.networked.dto.Job;
+import com.fsb.networked.dto.EducationDTO;
 import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -51,7 +50,7 @@ public class SignUpIndividualEducationController implements Initializable {
 	private Button btnCancel;
 
 	@FXML
-	private ListView<Education> educationListView;
+	private ListView<EducationDTO> educationListView;
 	private JSONArray educationArray = new JSONArray();
 	@FXML
     private void goBack() throws IOException
@@ -75,7 +74,7 @@ public class SignUpIndividualEducationController implements Initializable {
 		System.out.println(res);
 		if(res)
 		{
-			Education education = new Education(diplomaField.getText(), instituteField.getText(),diplomaTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue());
+			EducationDTO education = new EducationDTO(diplomaField.getText(), instituteField.getText(),diplomaTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue());
 			//now clear all the fields
 			instituteField.clear();
 			diplomaField.clear();
@@ -94,7 +93,7 @@ public class SignUpIndividualEducationController implements Initializable {
 	private void deleteEducation()
 	{
 		//DONE TODO : when delete skill btn is presses delete the job from the listview of jobs
-		Education selectedEducation = educationListView.getSelectionModel().getSelectedItem();
+		EducationDTO selectedEducation = educationListView.getSelectionModel().getSelectedItem();
 		educationListView.getItems().remove(selectedEducation);
 		educationArray.remove(educationListView.getItems().indexOf(educationListView.getSelectionModel().getSelectedItem()));
 	}
@@ -130,12 +129,12 @@ public class SignUpIndividualEducationController implements Initializable {
 	{
 		/*------------*/
 		//held together by glue
-		educationListView.setCellFactory(new Callback<ListView<Education>, ListCell<Education>>() {
+		educationListView.setCellFactory(new Callback<ListView<EducationDTO>, ListCell<EducationDTO>>() {
             @Override
-            public ListCell<Education> call(ListView<Education> param) {
-                return new ListCell<Education>() {
+            public ListCell<EducationDTO> call(ListView<EducationDTO> param) {
+                return new ListCell<EducationDTO>() {
                     @Override
-                    protected void updateItem(Education education, boolean empty) {
+                    protected void updateItem(EducationDTO education, boolean empty) {
                         super.updateItem(education, empty);
                         if (education == null || empty) {
                             setText(null);
@@ -157,7 +156,7 @@ public class SignUpIndividualEducationController implements Initializable {
 			String startDateValue = educationObject.getString("startDate");
 			String endDateValue = educationObject.getString("endDate");
 
-			Education education = new Education(positionValue,companyValue,descriptionValue,typeValue, Conversions.stringtoLocalDate(startDateValue),Conversions.stringtoLocalDate(endDateValue));
+			EducationDTO education = new EducationDTO(positionValue,companyValue,descriptionValue,typeValue, Conversions.stringtoLocalDate(startDateValue),Conversions.stringtoLocalDate(endDateValue));
 			if(!(education.getDiploma().isBlank() && education.getType().isBlank() && education.getDescription().isBlank() && education.getInstitute().isBlank()))
 			{
 				educationListView.getItems().add(education);

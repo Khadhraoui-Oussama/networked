@@ -2,14 +2,14 @@ package com.fsb.networked.dto;
 
 import org.json.JSONObject;
 
-public class Project
+public class ProjectDTO
 {
 	private String title;
 	private String technology;
 	private String link;
 	private String description;
 
-	public Project(String title, String technology, String link, String description)
+	public ProjectDTO(String title, String technology, String link, String description)
 	{
 		super();
 		this.title = title;

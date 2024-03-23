@@ -1,8 +1,6 @@
 package com.fsb.networked;
 
-import com.fsb.networked.dto.ImagePost;
-import com.fsb.networked.dto.VideoPost;
-import com.fsb.networked.utils.FilePaths;
+import com.fsb.networked.dto.VideoPostDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -82,8 +80,6 @@ public class VideoPostItemController implements Initializable {
     {
         mediaPlayer.pause();
         mediaPlayer.seek(Duration.ZERO);
-
-        mediaPlayer.play();
     }
 
     ////clear media : media = null;
@@ -96,7 +92,7 @@ public class VideoPostItemController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
     }
 
-    public <T> void setData(VideoPost videoPost)
+    public <T> void setData(VideoPostDTO videoPost)
     {
         //get  image from database
         Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/male_avatar.png")));
@@ -110,9 +106,8 @@ public class VideoPostItemController implements Initializable {
         File videoFile = new File(videoPost.getAttachmentFileSrc());
         media = new Media(videoFile.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
-        while(mediaView.getMediaPlayer() == null)
-        {
-            mediaView.setMediaPlayer(mediaPlayer);
-        }
+        mediaPlayer.setVolume(.1);
+        mediaView.setMediaPlayer(mediaPlayer);
+
     }
 }

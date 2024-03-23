@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="153.0" prefWidth="780.0" style="-fx-border-color: blue; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.NotificationConnectionSharedPostController">
+   <children>
+      <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="634.0" spacing="20.0">
+         <children>
+            <ImageView fx:id="opImgView" fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../images/female_avatar.png" />
+               </image>
+               <HBox.margin>
+                  <Insets bottom="5.0" left="10.0" />
+               </HBox.margin>
+            </ImageView>
+            <Label fx:id="opNameLabel" prefHeight="54.0" prefWidth="501.0" text="Connection name has shared a post">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <ButtonBar prefHeight="59.0" prefWidth="193.0">
+               <buttons>
+                  <Button fx:id="seeSharedPostBtn" mnemonicParsing="false" onAction="#seeSharedPost" prefHeight="46.0">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/see_post.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="removeConnectionBtn" alignment="CENTER" layoutX="569.0" layoutY="15.0" minWidth="62.0" mnemonicParsing="false" onAction="#removeConnection" prefHeight="46.0">
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../images/icons/remove-friend.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </buttons>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </ButtonBar>
+         </children>
+         <padding>
+            <Insets left="5.0" top="5.0" />
+         </padding>
+      </HBox>
+      <Separator layoutX="10.0" layoutY="81.0" prefHeight="14.0" prefWidth="772.0" />
+      <HBox prefHeight="128.0" prefWidth="779.0">
+         <VBox.margin>
+            <Insets bottom="5.0" top="5.0" />
+         </VBox.margin>
+         <children>
+            <VBox prefHeight="86.0" prefWidth="774.0">
+               <children>
+                  <Label fx:id="sharedPostStartBodyLabel" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="101.0" prefWidth="774.0" text="Post Body Start limited to 150 characters" wrapText="true">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <padding>
+                        <Insets left="11.0" right="10.0" />
+                     </padding>
+                  </Label>
+                  <Separator prefWidth="200.0" />
+                  <HBox alignment="CENTER_LEFT">
+                     <children>
+                        <Label fx:id="sharedPostDateLabel" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="774.0" text="Post Created at : post creation date" wrapText="true">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <padding>
+                              <Insets left="11.0" right="10.0" />
+                           </padding>
+                        </Label>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <HBox prefWidth="634.0">
+         <VBox.margin>
+            <Insets bottom="5.0" right="5.0" />
+         </VBox.margin>
+         <children>
+            <HBox />
+         </children>
+      </HBox>
+   </children>
+</VBox>

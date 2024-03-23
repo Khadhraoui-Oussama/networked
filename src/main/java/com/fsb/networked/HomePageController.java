@@ -1,9 +1,6 @@
 package com.fsb.networked;
 
-import com.fsb.networked.dto.JobOffer;
-import com.fsb.networked.dto.ImagePost;
-import com.fsb.networked.dto.TextPost;
-import com.fsb.networked.dto.VideoPost;
+import com.fsb.networked.dto.*;
 import com.fsb.networked.utils.Conversions;
 import com.fsb.networked.utils.FilePaths;
 import javafx.fxml.FXML;
@@ -13,7 +10,6 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,8 +17,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class HomePageController  implements Initializable {
-
-    private final String HOMEPAGECONTROLLERPATH = "HomePageController";
 
     //textfields
     @FXML
@@ -49,7 +43,6 @@ public class HomePageController  implements Initializable {
     //panes
     @FXML
     TabPane tabPane;
-
     //tabs
     @FXML
     Tab tabHome;
@@ -102,41 +95,41 @@ public class HomePageController  implements Initializable {
     @FXML
     private VBox profileLayoutVbox;
     @FXML
-    private VBox messagesLayoutVbox;
+    private VBox messageConnectionLayoutVbox;
     //in notifications and messages button if user has messages or notifications replace the Icon with a red one
     //just change the imageview resource in the tab imageview
 
     @FXML
-    private void reloadHome() throws IOException {
+    private void reloadHomeTab() throws IOException {
         System.out.println("Reloaded");
     }
 
     @FXML
-    private void loadTabNotifications()
+    private void loadNotificationsTab()
     {
-
+        initializeConnectionSharedPostNotificationLayoutVbox();
     }
 
     @FXML
-    private void loadTabMessages()
+    private void loadMessagesTab()
     {
-
+        initializeMessageConnectionLayoutVbox();
     }
 
     @FXML
-    private void loadTabProfile()
-    {
-
-    }
-    @FXML
-    private void loadTabSettings()
+    private void loadTabProfileTab()
     {
 
     }
     @FXML
-    private void loadTabJobs()
+    private void loadSettingsTab()
     {
-        //jobsScrollPane
+
+    }
+    @FXML
+    private void loadJobsTab()
+    {
+        initializeJobOffersVbox();
     }
 
     @FXML
@@ -169,10 +162,10 @@ public class HomePageController  implements Initializable {
     //TODO MAKE SURE THAT GETxxFROMdb RETURNS DATA ORDRED BY PUBLICATION DATE AND TIME
     private void initializeJobOffersVbox()
     {
-        List<JobOffer> jobOffers = new ArrayList<>(getJobOffersFromDB());
+        List<DTO> jobOffers = new ArrayList<>(getJobOffersFromDB());
             for (int i = 0; i < jobOffers.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("jobPostUiComponent.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("JobPostUiComponent.fxml"));
             try {
                 VBox jobPostVbox = fxmlLoader.load();
                 JobPostItemController jpic = fxmlLoader.getController();
@@ -183,12 +176,12 @@ public class HomePageController  implements Initializable {
             }
         }
     }
-    private List<JobOffer> getJobOffersFromDB()
+    private List<DTO> getJobOffersFromDB()
     {
         //TODO GET JOB OFFERS FROM DATABASE AND FILL THEM HERE INSTEAD OF THIS FOR LOOP
-        List<JobOffer> ls = new ArrayList<>();
+        List<DTO> ls = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            JobOffer job1 = new JobOffer();
+            DTO job1 = new DTO();
             job1.setCompany("Boga cidre");
             job1.setDescription("work in a fast paced environment where you prepare drinks for a living XD,\"work in a fast paced environment where you prepare drinks for a living XD");
             job1.setLogoImgSrc(FilePaths.getImagePath("/images/default_user.png").substring(6));
@@ -203,44 +196,43 @@ public class HomePageController  implements Initializable {
         List<T> posts = new ArrayList<>(getPostsFromDB());
         for (int i = 0; i < posts.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            if(posts.get(i) instanceof ImagePost)
+            if(posts.get(i) instanceof ImagePostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("imagePostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("ImagePostUiComponent.fxml"));
                 try {
                     VBox imagePostVbox = fxmlLoader.load();
                     ImagePostItemController controller = fxmlLoader.getController();
-                    controller.setData((ImagePost) posts.get(i));
+                    controller.setData((ImagePostDTO) posts.get(i));
                     postsLayoutVbox.getChildren().add(imagePostVbox);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
-            else if(posts.get(i) instanceof VideoPost)
+            else if(posts.get(i) instanceof VideoPostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("videoPostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("VideoPostUiComponent.fxml"));
                 try {
                     VBox videoPostVbox = fxmlLoader.load();
                     VideoPostItemController controller = fxmlLoader.getController();
-                    controller.setData((VideoPost) posts.get(i));
+                    controller.setData((VideoPostDTO) posts.get(i));
                     postsLayoutVbox.getChildren().add(videoPostVbox);
 
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
-            else if(posts.get(i) instanceof TextPost)
+            else if(posts.get(i) instanceof TextPostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("textPostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("TextPostUiComponent.fxml"));
                 try {
                     VBox textPostVbox = fxmlLoader.load();
                     TextPostItemController controller = fxmlLoader.getController();
-                    controller.setData((TextPost) posts.get(i));
+                    controller.setData((TextPostDTO) posts.get(i));
                     postsLayoutVbox.getChildren().add(textPostVbox);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
             }
-            System.out.println(posts.get(i));
         }
     }
     private <T> List<T> getPostsFromDB()
@@ -248,7 +240,7 @@ public class HomePageController  implements Initializable {
         List<T> ls = new ArrayList<T>();
         //TODO FILL THIS WITH SKELETON DATA
         //TODO
-        ImagePost post2 = new ImagePost();
+        ImagePostDTO post2 = new ImagePostDTO();
         post2.setPostText ("IMAGE Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         post2.setNumberOfComments(10);
         post2.setNumberOfLikes(1000);
@@ -257,8 +249,8 @@ public class HomePageController  implements Initializable {
         post2.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
         post2.setAttachmentFileSrc(FilePaths.getImagePath("/images/male_avatar.png").substring(6));
         ls.add((T) post2);
-        ImagePost post23 = new ImagePost();
-        TextPost postds110 = new TextPost();
+        ImagePostDTO post23 = new ImagePostDTO();
+        TextPostDTO postds110 = new TextPostDTO();
         postds110.setPostText ("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         postds110.setNumberOfComments(10);
         postds110.setNumberOfLikes(1000);
@@ -275,42 +267,40 @@ public class HomePageController  implements Initializable {
         post23.setAttachmentFileSrc(FilePaths.getImagePath("/images/male_avatar.png").substring(6));
         ls.add((T) post2);
 
-        VideoPost post4 = new VideoPost();
+        VideoPostDTO post4 = new VideoPostDTO();
         post4.setPostText ("VIDEO Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         post4.setNumberOfComments(10);
         post4.setNumberOfLikes(1000);
         post4.setOpImgSrc(FilePaths.getImagePath("/images/default_user.png").substring(6));
         post4.setPublicationDate(Conversions.stringtoLocalDate("2020-10-5"));
         post4.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
-        post4.setAttachmentFileSrc(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
+        post4.setAttachmentFileSrc(FilePaths.getImagePath("/images/o2.mp4").substring(6));
         //figure it out later post4.setAttachmentFileSrc("/images/");
         ls.add((T) post4);
 
         //TODO
 
-        VideoPost post10 = new VideoPost();
+        VideoPostDTO post10 = new VideoPostDTO();
         post10.setPostText ("VIDEO Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         post10.setNumberOfComments(10);
         post10.setNumberOfLikes(1000);
         post10.setOpImgSrc(FilePaths.getImagePath("/images/default_user.png").substring(6));
         post10.setPublicationDate(Conversions.stringtoLocalDate("2020-10-5"));
         post10.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
-        System.out.println(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
         post10.setAttachmentFileSrc(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
         //figure it out later post4.setAttachmentFileSrc("/images/");
         ls.add((T) post10);
-        VideoPost post1a0 = new VideoPost();
+        VideoPostDTO post1a0 = new VideoPostDTO();
         post1a0.setPostText ("VIDEO Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         post1a0.setNumberOfComments(10);
         post1a0.setNumberOfLikes(1000);
         post1a0.setOpImgSrc(FilePaths.getImagePath("/images/default_user.png").substring(6));
         post1a0.setPublicationDate(Conversions.stringtoLocalDate("2020-10-5"));
         post1a0.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
-        System.out.println(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
-        post1a0.setAttachmentFileSrc(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
+        post1a0.setAttachmentFileSrc(FilePaths.getImagePath("/images/o2.mp4").substring(6));
         //figure it out later post4.setAttachmentFileSrc("/images/");
         ls.add((T) post1a0);
-        TextPost postaz110 = new TextPost();
+        TextPostDTO postaz110 = new TextPostDTO();
         postaz110.setPostText ("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         postaz110.setNumberOfComments(10);
         postaz110.setNumberOfLikes(1000);
@@ -318,18 +308,17 @@ public class HomePageController  implements Initializable {
         postaz110.setPublicationDate(Conversions.stringtoLocalDate("2020-10-5"));
         postaz110.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
         ls.add((T) postaz110);
-        VideoPost post1aa0 = new VideoPost();
+        VideoPostDTO post1aa0 = new VideoPostDTO();
         post1aa0.setPostText ("VIDEO Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         post1aa0.setNumberOfComments(10);
         post1aa0.setNumberOfLikes(1000);
         post1aa0.setOpImgSrc(FilePaths.getImagePath("/images/default_user.png").substring(6));
         post1aa0.setPublicationDate(Conversions.stringtoLocalDate("2020-10-5"));
         post1aa0.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
-        System.out.println(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
         post1aa0.setAttachmentFileSrc(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
         //figure it out later post4.setAttachmentFileSrc("/images/");
         ls.add((T) post1aa0);
-        ImagePost post2a3 = new ImagePost();
+        ImagePostDTO post2a3 = new ImagePostDTO();
         post2a3.setPostText ("IMAGE Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         post2a3.setNumberOfComments(10);
         post2a3.setNumberOfLikes(1000);
@@ -338,18 +327,17 @@ public class HomePageController  implements Initializable {
         post2a3.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
         post2a3.setAttachmentFileSrc(FilePaths.getImagePath("/images/male_avatar.png").substring(6));
         ls.add((T) post2a3);
-        VideoPost post1aaa0 = new VideoPost();
+        VideoPostDTO post1aaa0 = new VideoPostDTO();
         post1aaa0.setPostText ("VIDEO Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         post1aaa0.setNumberOfComments(10);
         post1aaa0.setNumberOfLikes(1000);
         post1aaa0.setOpImgSrc(FilePaths.getImagePath("/images/default_user.png").substring(6));
         post1aaa0.setPublicationDate(Conversions.stringtoLocalDate("2020-10-5"));
         post1aaa0.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
-        System.out.println(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
         post1aaa0.setAttachmentFileSrc(FilePaths.getImagePath("/images/test_video.mp4").substring(6));
         //figure it out later post4.setAttachmentFileSrc("/images/");
         ls.add((T) post1aa0);
-        ImagePost posat2a3 = new ImagePost();
+        ImagePostDTO posat2a3 = new ImagePostDTO();
         posat2a3.setPostText ("IMAGE Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         posat2a3.setNumberOfComments(10);
         posat2a3.setNumberOfLikes(1000);
@@ -359,7 +347,7 @@ public class HomePageController  implements Initializable {
         posat2a3.setAttachmentFileSrc(FilePaths.getImagePath("/images/male_avatar.png").substring(6));
         ls.add((T) posat2a3);
 
-        TextPost post110 = new TextPost();
+        TextPostDTO post110 = new TextPostDTO();
         post110.setPostText ("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         post110.setNumberOfComments(10);
         post110.setNumberOfLikes(1000);
@@ -367,7 +355,7 @@ public class HomePageController  implements Initializable {
         post110.setPublicationDate(Conversions.stringtoLocalDate("2020-10-5"));
         post110.setPublicationTime(Conversions.stringToLocaleTime("10:15:12"));
         ls.add((T) post110);
-        TextPost posta110 = new TextPost();
+        TextPostDTO posta110 = new TextPostDTO();
         posta110.setPostText ("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");
         posta110.setNumberOfComments(10);
         posta110.setNumberOfLikes(1000);
@@ -379,9 +367,74 @@ public class HomePageController  implements Initializable {
         return ls;
     }
 
+    private void initializeMessageConnectionLayoutVbox()
+    {
+        List<MessageConnectionDTO> messageConnections = new ArrayList<>(getMessageConnectionFromDB());
+        for (int i = 0; i < messageConnections.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("MessageConnectionUiComponent.fxml"));
+            try {
+                VBox messageConnectionVBox = fxmlLoader.load();
+                MessageConnectionItemController controller = fxmlLoader.getController();
+                controller.setData(messageConnections.get(i));
+                messageConnectionLayoutVbox.getChildren().add(messageConnectionVBox);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    private List<MessageConnectionDTO> getMessageConnectionFromDB()
+    {
+        //TODO gets all the connections and the last message from the database
+        //TODO GET JOB OFFERS FROM DATABASE AND FILL THEM HERE INSTEAD OF THIS FOR LOOP
+        List<MessageConnectionDTO> ls = new ArrayList<>();
+        //for now we fill with random data
+        for (int i = 0; i < 5; i++) {
+            MessageConnectionDTO msg = new MessageConnectionDTO();
+            msg.setConnectionName("Boga cidre Man");
+            msg.setLastMessageBody("Fama ken boga !! boga bidha LE !!");
+            msg.setConnectionImgSrc(FilePaths.getImagePath("/images/boga_cidre.jpg").substring(6));
+            msg.setLastMessageDate(Conversions.stringtoLocalDate("2100-12-31"));
+            msg.setLastMessageTime(Conversions.stringToLocaleTime("23-59-59"));
+            ls.add(msg);
+        }
+        return ls;
+    }
+
+    private void initializeConnectionSharedPostNotificationLayoutVbox()
+    {
+        List<NotificationConnectionSharedPostDTO> notifications = new ArrayList<>(getNotificationConnectionSharedPostsFromDB());
+        for (int i = 0; i < notifications.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("NotificationUiComponent.fxml"));
+            try {
+                VBox notificationVBox = fxmlLoader.load();
+                NotificationConnectionSharedPostController controller = fxmlLoader.getController();
+                controller.setData(notifications.get(i));
+                notificationsLayoutVbox.getChildren().add(notificationVBox);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+    private List<NotificationConnectionSharedPostDTO> getNotificationConnectionSharedPostsFromDB()
+    {
+        //TODO gets all the connections and the last message from the database
+        //TODO GET JOB OFFERS FROM DATABASE AND FILL THEM HERE INSTEAD OF THIS FOR LOOP
+        List<NotificationConnectionSharedPostDTO> ls = new ArrayList<>();
+        //for now, we fill with random data
+        for (int i = 0; i < 5; i++) {
+            NotificationConnectionSharedPostDTO notification = new NotificationConnectionSharedPostDTO();
+            notification.setConnectionName("SuperMan");
+            notification.setPostContentStart("So excited to start my new project with batman , Gotham isn't ready ☻☻");
+            notification.setConnectionImgSrc(FilePaths.getImagePath("/images/male_avatar.png").substring(6));
+            notification.setPostShareDate(Conversions.stringtoLocalDate("2100-12-31"));
+            ls.add(notification);
+        }
+        return ls;
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        //initializeJobOffersVbox();
         initializePostsVbox();
     }
 

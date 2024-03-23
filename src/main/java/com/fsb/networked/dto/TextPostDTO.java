@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Objects;
 
-public class TextPost {
+public class TextPostDTO {
     private String originalPosterName;
     private LocalDate publicationDate;
     private LocalTime publicationTime;
@@ -13,7 +13,7 @@ public class TextPost {
     private int numberOfComments;
     private String opImgSrc;
 
-    public TextPost(String originalPosterName, LocalDate publicationDate, LocalTime publicationTime, String postText, int numberOfReactions, int numberOfComments, String opImgSrc) {
+    public TextPostDTO(String originalPosterName, LocalDate publicationDate, LocalTime publicationTime, String postText, int numberOfReactions, int numberOfComments, String opImgSrc) {
         this.originalPosterName = originalPosterName;
         this.publicationDate = publicationDate;
         this.publicationTime = publicationTime;
@@ -23,7 +23,7 @@ public class TextPost {
         this.opImgSrc = opImgSrc;
     }
 
-    public TextPost() {
+    public TextPostDTO() {
     }
 
     public String getOriginalPosterName() {
@@ -98,7 +98,7 @@ public class TextPost {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TextPost textPost = (TextPost) o;
+        TextPostDTO textPost = (TextPostDTO) o;
         return numberOfLikes == textPost.numberOfLikes && numberOfComments == textPost.numberOfComments && Objects.equals(originalPosterName, textPost.originalPosterName) && Objects.equals(publicationDate, textPost.publicationDate) && Objects.equals(publicationTime, textPost.publicationTime) && Objects.equals(postText, textPost.postText) && Objects.equals(opImgSrc, textPost.opImgSrc);
     }
 

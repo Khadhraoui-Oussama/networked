@@ -1,7 +1,6 @@
 package com.fsb.networked;
 
-import com.fsb.networked.dto.ImagePost;
-import com.fsb.networked.utils.FilePaths;
+import com.fsb.networked.dto.ImagePostDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -54,7 +53,7 @@ public class ImagePostItemController implements Initializable {
 
     }
 
-    public <T> void setData(ImagePost imagePost)
+    public <T> void setData(ImagePostDTO imagePost)
     {
         //get  image from database
         Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/male_avatar.png")));
@@ -67,7 +66,6 @@ public class ImagePostItemController implements Initializable {
         numberOfLikesLabel.setText(imagePost.getNumberOfLikes() + " : Likes");
         File file = new File(imagePost.getAttachmentFileSrc());
         Image postImage = new Image(file.toURI().toString());
-        System.out.println(postImage.getUrl());
         postImageView.setImage(postImage);
     }
 }

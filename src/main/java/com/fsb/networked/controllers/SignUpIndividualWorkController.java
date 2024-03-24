@@ -51,7 +51,7 @@ public class SignUpIndividualWorkController implements Initializable {
 
 	@FXML
 	private ListView<JobDTO> jobListView;
-	private JSONArray jobsArray = new JSONArray();
+	private final JSONArray jobsArray = new JSONArray();
 	@FXML
     private void goBack() throws IOException
 	{
@@ -104,9 +104,13 @@ public class SignUpIndividualWorkController implements Initializable {
 		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
 
 		//the end date must NOT be before the start date
-		if (endDate.getValue().isBefore(startDate.getValue())) {
+		if (endDate.getValue() != null && endDate.getValue() != null )
+		{
+			if(endDate.getValue().isBefore(startDate.getValue()))
+		 	{
 			Validator.flashRedBorder(endDate);
 			isValid = false;
+			}
 		}
 		return isValid;
 	}
@@ -136,7 +140,7 @@ public class SignUpIndividualWorkController implements Initializable {
                         if (job == null || empty) {
                             setText(null);
                         } else {
-                            setText("Job position: " + job.getPosition() + "\nJob technology: " + job.getCompany() + "\nJob type: " + job.getType() + "\nJob start date : " + job.getStartDate()  + "\nJob end date : " + job.getEndDate() + "\nJob description: " + job.getDescription());
+                            setText("Job position: " + job.getPosition() + "\nCompany: " + job.getCompany() + "\nJob type: " + job.getType() + "\nJob start date : " + job.getStartDate()  + "\nJob end date : " + job.getEndDate() + "\nJob description: " + job.getDescription());
                         }
                     }
                 };

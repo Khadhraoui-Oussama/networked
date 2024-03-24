@@ -81,7 +81,7 @@
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/icons/chat%20(1).png" />
+                        <Image url="@../../../../images/icons/comment_icon.png" />
                      </image>
                   </ImageView>
                </graphic>

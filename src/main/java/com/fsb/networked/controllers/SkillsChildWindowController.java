@@ -1,6 +1,5 @@
 package com.fsb.networked.controllers;
 
-import com.fsb.networked.App;
 import com.fsb.networked.dto.SkillDTO;
 import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
@@ -10,11 +9,10 @@ import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignUpIndividualSkillsController implements Initializable {
+public class SkillsChildWindowController implements Initializable {
 
 	@FXML
 	private TextField skillTitleField;
@@ -32,42 +30,18 @@ public class SignUpIndividualSkillsController implements Initializable {
 	private Button btnAddSkill;
 
 	@FXML
-	private Button btnCancel;
-
-	@FXML
 	private Button btnDeleteSkill;
-	
-	@FXML
-	private Button btnNext;
-	
-	@FXML
-	private Button btnBack;
-	
+
 	@FXML
 	private ListView<SkillDTO> skillsListView;
 
 	private final JSONArray skillsArray = new JSONArray();
 	@FXML
-    private void goBack() throws IOException
-	{
-		App.setRoot("SignUpScenes/SignUpPageIndividualWork");
-    }
-	
-	@FXML
-    private void goNext() throws IOException
-	{
-		JSONParser.updateSkillsJSONArray(skillsArray);
-		App.setRoot("SignUpScenes/SignUpPageIndividualProject");
-		System.out.println("Individual Skills Information gathered");
-    }
-
-	
-	@FXML
 	private void addSkill()
 	{
 		//DONE TODO : when add skill btn is pressed the skill must be added to the listview of skill
-		//also figure out how it should be added to Skills class or person DAO iDK yet
-		if(validateSkill()) 
+		//TODO ADD TO GET FROM DB
+		if(validateSkill())
 		{
 			//make a new skill object
 			SkillDTO skill = new SkillDTO(skillTitleField.getText(),technologyField.getText(),descriptionTextArea.getText(),levelComboBox.getValue());
@@ -86,6 +60,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 	private void deleteSkill()
 	{
 		//DONE TODO : when delete skill btn is presses delete the skill from the listview of skills
+		//TODO REMOVE GET FROM DB
 		SkillDTO selectedSkill = skillsListView.getSelectionModel().getSelectedItem();
 		skillsListView.getItems().remove(selectedSkill);
 		skillsArray.remove(skillsListView.getItems().indexOf(skillsListView.getSelectionModel().getSelectedItem()));
@@ -93,7 +68,6 @@ public class SignUpIndividualSkillsController implements Initializable {
 
 	private boolean validateSkill() {
 		boolean isValid = true;
-
 		isValid &= Validator.validateField(skillTitleField, Regexes.TITLE_REGEX,Alerts.AlertTitleField());
 		isValid &= Validator.validateField(technologyField, Regexes.TECHNOLOGY_REGEX,Alerts.AlertTechnologyField());
 		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
@@ -101,16 +75,6 @@ public class SignUpIndividualSkillsController implements Initializable {
 		return isValid;
 	}
 
-	@FXML
-	private void cancelSignUp() throws IOException
-	{
-		//if the user decides he no longer want to sign up the json files must be cleared of all inputs
-		// and returned to the original state
-		JSONParser.resetIndividualJSONFile();
-		JSONParser.resetEntrepriseJSONFile();
-		App.setRoot("LogInPage");
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -135,7 +99,7 @@ public class SignUpIndividualSkillsController implements Initializable {
                 };
             }
         });
-
+		//TODO LOAD FROM DB
 		//this bit of code makes sure the skillsListView gets populated with whatever skills the user has added
 		// so that in case of going to next scene and going back, the inputed data doesn't get lost
 		JSONArray skillsArray = JSONParser.getSkillsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");

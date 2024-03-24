@@ -51,7 +51,7 @@ public class SignUpIndividualEducationController implements Initializable {
 
 	@FXML
 	private ListView<EducationDTO> educationListView;
-	private JSONArray educationArray = new JSONArray();
+	private final JSONArray educationArray = new JSONArray();
 	@FXML
     private void goBack() throws IOException
 	{

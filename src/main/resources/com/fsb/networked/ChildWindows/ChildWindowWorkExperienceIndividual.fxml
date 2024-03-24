@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.WorkExperienceChildWindowController">
+   <children>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="248.26670303344727" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="514.1333374023438" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="340.26666259765625" />
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="283.9332275390625" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="154.2" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="57.93334350585937" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="285.59995117187503" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="0.0" prefHeight="216.59997558593756" valignment="CENTER" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="57.00002441406252" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="99.0" fitWidth="771.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <image>
+                  <Image url="@../../../../images/networked-high-resolution-logo-transparent.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="Sign up today:" textAlignment="CENTER" wrappingWidth="625.1124267578125" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font name="Calibri Light" size="40.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <VBox alignment="CENTER" prefHeight="504.0" prefWidth="524.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+               <children>
+                  <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="Add your Work experience :" textAlignment="CENTER" wrappingWidth="456.5790557861328">
+                     <font>
+                        <Font name="Calibri Light" size="40.0" />
+                     </font>
+                  </Text>
+                  <VBox prefHeight="442.0" prefWidth="659.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="201.0" text="Job Position">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="jobPositionField" prefHeight="26.0" prefWidth="263.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="201.0" text="Company">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="companyField" prefHeight="26.0" prefWidth="267.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="65.0" prefHeight="64.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="201.0" text="Job Type">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="jobTypeField" prefHeight="26.0" prefWidth="267.0" />
+                           </children>
+                        </HBox>
+                        <HBox>
+                           <children>
+                              <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="810.0">
+                                 <children>
+                                    <Label prefHeight="38.0" prefWidth="201.0" text="Job Start">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <DatePicker fx:id="startDate" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets right="10.0" />
+                                 </opaqueInsets>
+                              </HBox>
+                              <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="810.0">
+                                 <children>
+                                    <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="38.0" prefWidth="201.0" text="Job End">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                       <opaqueInsets>
+                                          <Insets left="10.0" />
+                                       </opaqueInsets>
+                                    </Label>
+                                    <DatePicker fx:id="endDate" />
+                                 </children>
+                                 <opaqueInsets>
+                                    <Insets left="10.0" />
+                                 </opaqueInsets>
+                              </HBox>
+                           </children>
+                        </HBox>
+                        <HBox alignment="BASELINE_LEFT" layoutX="10.0" layoutY="74.0" prefHeight="211.0" prefWidth="557.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="201.0" text="Job Description">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="descriptionTextArea" prefHeight="299.0" prefWidth="461.0" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </VBox>
+            <ButtonBar prefHeight="58.0" prefWidth="540.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <buttons>
+                  <Button fx:id="btnAddJob" mnemonicParsing="false" onAction="#addJob" prefHeight="37.0" prefWidth="111.0" text="Add Job">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnDeleteJob" alignment="CENTER" mnemonicParsing="false" onAction="#deleteJob" prefHeight="38.0" prefWidth="174.0" text="Delete Job">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+               </buttons>
+               <padding>
+                  <Insets right="30.0" />
+               </padding>
+            </ButtonBar>
+            <VBox prefHeight="454.0" prefWidth="530.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+               <children>
+                  <Label text="Work experience that you have added :">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="jobListView" prefHeight="454.0" prefWidth="530.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ListView>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </VBox>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

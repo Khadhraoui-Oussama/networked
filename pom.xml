@@ -46,11 +46,7 @@
             <artifactId>pdfbox</artifactId>
             <version>3.0.1</version>
         </dependency>
-        <dependency>
-            <groupId>com.fsb</groupId>
-            <artifactId>networked</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
         <dependency>
             <groupId>org.apache.commons</groupId>

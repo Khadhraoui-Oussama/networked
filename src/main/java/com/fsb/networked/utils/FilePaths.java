@@ -7,7 +7,6 @@ import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
 
 public class FilePaths {
 
@@ -49,7 +48,7 @@ public class FilePaths {
         File selectedDirectory = directoryChooser.showDialog(null);
         if (selectedDirectory != null) {
             System.out.println("Selected folder: " + selectedDirectory.getAbsolutePath());
-            return selectedDirectory.getAbsolutePath().toString();
+            return selectedDirectory.getAbsolutePath();
         } else {
             System.out.println("Folder selection cancelled.");
             return "Folder selection cancelled.";

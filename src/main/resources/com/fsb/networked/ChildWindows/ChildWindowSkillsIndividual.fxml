@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.SkillsChildWindowController">
+   <children>
+      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="248.26670303344727" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="514.1333374023438" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="340.26666259765625" />
+            <ColumnConstraints halignment="RIGHT" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="283.9332275390625" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="154.2" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="57.93334350585937" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="285.59995117187503" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="212.6000244140625" valignment="CENTER" />
+            <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="60.99997558593748" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <ImageView fitHeight="99.0" fitWidth="771.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <image>
+                  <Image url="@../../../../images/networked-high-resolution-logo-transparent.png" />
+               </image>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </ImageView>
+            <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="Modify Your Skills" textAlignment="CENTER" wrappingWidth="625.1124267578125" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+               <font>
+                  <Font name="Calibri Light" size="40.0" />
+               </font>
+               <GridPane.margin>
+                  <Insets left="20.0" />
+               </GridPane.margin>
+            </Text>
+            <VBox alignment="CENTER" prefHeight="527.0" prefWidth="659.0" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.rowSpan="2" GridPane.valignment="CENTER">
+               <children>
+                  <VBox prefHeight="500.0" prefWidth="659.0">
+                     <children>
+                        <HBox alignment="CENTER_LEFT" prefHeight="64.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="201.0" text="Skill Title">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="skillTitleField" prefHeight="26.0" prefWidth="263.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="64.0" prefWidth="810.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="201.0" text="Technology">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextField fx:id="technologyField" prefHeight="26.0" prefWidth="267.0" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="BASELINE_LEFT" layoutX="10.0" layoutY="74.0" prefHeight="211.0" prefWidth="557.0">
+                           <children>
+                              <Label prefHeight="38.0" prefWidth="201.0" text="Description">
+                                 <font>
+                                    <Font size="25.0" />
+                                 </font>
+                              </Label>
+                              <TextArea fx:id="descriptionTextArea" prefHeight="266.0" prefWidth="455.0" />
+                           </children>
+                        </HBox>
+                        <VBox alignment="CENTER_RIGHT">
+                           <children>
+                              <HBox alignment="BASELINE_LEFT" prefHeight="117.0" prefWidth="659.0">
+                                 <children>
+                                    <Label prefHeight="38.0" prefWidth="202.0" text="Level">
+                                       <font>
+                                          <Font size="25.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="levelComboBox" prefHeight="32.0" prefWidth="150.0">
+                                       <opaqueInsets>
+                                          <Insets top="20.0" />
+                                       </opaqueInsets>
+                                    </ComboBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </VBox>
+               </children>
+               <GridPane.margin>
+                  <Insets left="30.0" />
+               </GridPane.margin>
+            </VBox>
+            <ButtonBar prefHeight="52.0" prefWidth="478.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER" />
+            <VBox GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
+               <children>
+                  <Label text="The skills that you have added :">
+                     <font>
+                        <Font size="31.0" />
+                     </font>
+                  </Label>
+                  <ListView fx:id="skillsListView" prefHeight="459.0" prefWidth="551.0">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </ListView>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <GridPane.margin>
+                  <Insets left="10.0" right="10.0" />
+               </GridPane.margin>
+            </VBox>
+            <ButtonBar prefHeight="58.0" prefWidth="540.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="4">
+               <buttons>
+                  <Button fx:id="btnAddSkill" mnemonicParsing="false" onAction="#addSkill" prefHeight="37.0" prefWidth="111.0" text="Add Skill">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Button>
+                  <Button fx:id="btnDeleteSkill" alignment="CENTER" mnemonicParsing="false" onAction="#deleteSkill" prefHeight="38.0" prefWidth="174.0" text="Delete Skill">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                  </Button>
+               </buttons>
+               <padding>
+                  <Insets right="30.0" />
+               </padding>
+            </ButtonBar>
+         </children>
+      </GridPane>
+   </children>
+</AnchorPane>

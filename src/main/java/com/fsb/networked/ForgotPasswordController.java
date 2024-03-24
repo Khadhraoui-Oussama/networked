@@ -1,14 +1,14 @@
 package com.fsb.networked;
 
-import java.io.IOException;
-
+import com.fsb.networked.service.ForgotPasswordService;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import com.fsb.networked.service.ForgotPasswordService;
+
+import java.io.IOException;
 public class ForgotPasswordController {
 
-	private ForgotPasswordService forgotPasswordService;
+	private final ForgotPasswordService forgotPasswordService;
 	
 	public ForgotPasswordController()
 	{

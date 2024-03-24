@@ -1,6 +1,5 @@
 package com.fsb.networked.utils;
 
-import com.fsb.networked.utils.JSONParser;
 import org.apache.commons.lang3.text.WordUtils;
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
@@ -27,7 +26,7 @@ public class PDFCreator {
     static PDColor colorSecondary = new PDColor(rgbValues2, PDDeviceRGB.INSTANCE);
     static PDFont helveticaFont = new PDType1Font(Standard14Fonts.FontName.HELVETICA_BOLD);
     static PDFont italicFont = new PDType1Font(Standard14Fonts.FontName.TIMES_BOLD_ITALIC);
-    private static int currentPageNumber = 1; // global variable to keep track of the current page number
+    private static final int currentPageNumber = 1; // global variable to keep track of the current page number
     private static int yOffset = 750; // initial yoOffset
     static PDImageXObject backImg;
     //create a blank page

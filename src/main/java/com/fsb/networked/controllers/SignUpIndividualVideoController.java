@@ -1,11 +1,5 @@
 package com.fsb.networked.controllers;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.nio.file.Path;
-import java.util.ResourceBundle;
-
 import com.fsb.networked.App;
 import com.fsb.networked.utils.FilePaths;
 import com.fsb.networked.utils.JSONParser;
@@ -19,6 +13,11 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.util.Duration;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class SignUpIndividualVideoController implements Initializable {
 
@@ -101,10 +100,7 @@ public class SignUpIndividualVideoController implements Initializable {
 
 
     public static boolean isValidVideo(File file) {
-        if (file == null) {
-            return false;
-        }
-        return true;
+        return file != null;
     }
     @FXML
     private void goBack() throws IOException

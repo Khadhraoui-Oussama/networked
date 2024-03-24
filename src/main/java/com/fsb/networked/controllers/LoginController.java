@@ -1,12 +1,11 @@
 package com.fsb.networked.controllers;
 
-import java.io.IOException;
-
 import com.fsb.networked.App;
 import com.fsb.networked.utils.FilePaths;
-import com.fsb.networked.utils.PDFCreator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+
+import java.io.IOException;
 public class LoginController {
 
 	@FXML
@@ -18,8 +17,7 @@ public class LoginController {
 	@FXML
     private void gotoSignIn() throws IOException {
         // original stmt App.setRoot("SignInPage");
-       // App.setRoot("HomePageIndividual");
-        App.setRoot("HomePageIndividual");
+        App.setRoot("HomePageScenes/HomePageIndividual");
        // FilePaths.chooseDirectoryToSaveTo();
     }
 	@FXML

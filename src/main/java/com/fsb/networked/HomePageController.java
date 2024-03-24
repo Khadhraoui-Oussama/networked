@@ -4,12 +4,17 @@ import com.fsb.networked.controllers.*;
 import com.fsb.networked.dto.*;
 import com.fsb.networked.utils.Conversions;
 import com.fsb.networked.utils.FilePaths;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -38,9 +43,6 @@ public class HomePageController  implements Initializable {
     Button mediaPostBtn;
     @FXML
     Button changeAddPfpBtn;
-    @FXML
-    Button addConnectionBtn;
-
     //panes
     @FXML
     TabPane tabPane;
@@ -108,19 +110,19 @@ public class HomePageController  implements Initializable {
     @FXML
     private void loadNotificationsTab()
     {
-        initializeConnectionSharedPostNotificationLayoutVbox();
+        loadConnectionSharedPostNotificationLayoutVbox();
     }
 
     @FXML
     private void loadMessagesTab()
     {
-        initializeMessageConnectionLayoutVbox();
+        loadMessageConnectionLayoutVbox();
     }
 
     @FXML
     private void loadTabProfileTab()
     {
-
+        loadProfileLayoutVbox();
     }
     @FXML
     private void loadSettingsTab()
@@ -130,7 +132,7 @@ public class HomePageController  implements Initializable {
     @FXML
     private void loadJobsTab()
     {
-        initializeJobOffersVbox();
+        loadJobOffersVbox();
     }
 
     @FXML
@@ -161,12 +163,12 @@ public class HomePageController  implements Initializable {
 
     //yt video
     //TODO MAKE SURE THAT GETxxFROMdb RETURNS DATA ORDRED BY PUBLICATION DATE AND TIME
-    private void initializeJobOffersVbox()
+    private void loadJobOffersVbox()
     {
         List<JobOfferDTO> jobOffers = new ArrayList<>(getJobOffersFromDB());
             for (int i = 0; i < jobOffers.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("HomePageScenes/JobPostUiComponent.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("UiComponents/JobPostUiComponent.fxml"));
             try {
                 VBox jobPostVbox = fxmlLoader.load();
                 JobPostItemController jpic = fxmlLoader.getController();
@@ -192,14 +194,14 @@ public class HomePageController  implements Initializable {
         }
         return ls;
     }
-    private <T> void initializePostsVbox()
+    private <T> void loadPostsVbox()
     {
         List<T> posts = new ArrayList<>(getPostsFromDB());
         for (int i = 0; i < posts.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             if(posts.get(i) instanceof ImagePostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("HomePageScenes/ImagePostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("UiComponents/ImagePostUiComponent.fxml"));
                 try {
                     VBox imagePostVbox = fxmlLoader.load();
                     ImagePostItemController controller = fxmlLoader.getController();
@@ -211,7 +213,7 @@ public class HomePageController  implements Initializable {
             }
             else if(posts.get(i) instanceof VideoPostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("HomePageScenes/VideoPostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("UiComponents/VideoPostUiComponent.fxml"));
                 try {
                     VBox videoPostVbox = fxmlLoader.load();
                     VideoPostItemController controller = fxmlLoader.getController();
@@ -224,7 +226,7 @@ public class HomePageController  implements Initializable {
             }
             else if(posts.get(i) instanceof TextPostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("HomePageScenes/TextPostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("UiComponents/TextPostUiComponent.fxml"));
                 try {
                     VBox textPostVbox = fxmlLoader.load();
                     TextPostItemController controller = fxmlLoader.getController();
@@ -368,12 +370,12 @@ public class HomePageController  implements Initializable {
         return ls;
     }
 
-    private void initializeMessageConnectionLayoutVbox()
+    private void loadMessageConnectionLayoutVbox()
     {
         List<MessageConnectionDTO> messageConnections = new ArrayList<>(getMessageConnectionFromDB());
         for (int i = 0; i < messageConnections.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("HomePageScenes/MessageConnectionUiComponent.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("UiComponents/MessageConnectionUiComponent.fxml"));
             try {
                 VBox messageConnectionVBox = fxmlLoader.load();
                 MessageConnectionItemController controller = fxmlLoader.getController();
@@ -402,12 +404,12 @@ public class HomePageController  implements Initializable {
         return ls;
     }
 
-    private void initializeConnectionSharedPostNotificationLayoutVbox()
+    private void loadConnectionSharedPostNotificationLayoutVbox()
     {
         List<NotificationConnectionSharedPostDTO> notifications = new ArrayList<>(getNotificationConnectionSharedPostsFromDB());
         for (int i = 0; i < notifications.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("HomePageScenes/NotificationUiComponent.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("UiComponents/NotificationUiComponent.fxml"));
             try {
                 VBox notificationVBox = fxmlLoader.load();
                 NotificationConnectionSharedPostController controller = fxmlLoader.getController();
@@ -434,9 +436,125 @@ public class HomePageController  implements Initializable {
         }
         return ls;
     }
+
+
+    private void loadProfileLayoutVbox()
+    {
+        List<SettingDTO> settings = new ArrayList<>();
+        profileLayoutVbox.getChildren().clear();
+        settings.add(new SettingDTO("Modify Work Experience", this::modifyWorkExperience));
+        settings.add(new SettingDTO("Modify Skills ",this::modifySkills));
+        settings.add(new SettingDTO("Modify Education",this::modifyEducation));
+        settings.add(new SettingDTO("Modify Personal Projects",this::modifyProjects));
+        System.out.println(settings.size());
+        for (int i = 0; i < settings.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("UiComponents/SettingsUiComponent.fxml"));
+            try {
+                VBox settingVBox = fxmlLoader.load();
+                SettingsItemController controller = fxmlLoader.getController();
+                controller.setData(settings.get(i));
+                profileLayoutVbox.getChildren().add(settingVBox);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private void modifyWorkExperience(ActionEvent event)
+    {
+        try {
+            // Load the FXML file for the child window
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowWorkExperienceIndividual.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage for the child window
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Modify Work Experience");
+
+            // Set the scene with the FXML content
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            // Show the child window
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void modifySkills(ActionEvent event)
+    {
+        try {
+        // Load the FXML file for the child window
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowSkillsIndividual.fxml"));
+        Parent root = fxmlLoader.load();
+
+        // Create a new stage for the child window
+        Stage stage = new Stage();
+        stage.setResizable(false);
+        //APPLICATION_MODAL THIS MEANS THAT THE APPLICATION IS INACCESSIBLE WHILE THIS WINDOWS IS OPEN
+        stage.initModality(Modality.APPLICATION_MODAL);
+        stage.setTitle("Modify Skills");
+
+        // Set the scene with the FXML content
+        Scene scene = new Scene(root);
+        stage.setScene(scene);
+        // Show the child window
+        stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void modifyEducation(ActionEvent event)
+    {
+        try {
+            // Load the FXML file for the child window
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowEducationIndividual.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage for the child window
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            //APPLICATION_MODAL THIS MEANS THAT THE APPLICATION IS INACCESSIBLE WHILE THIS WINDOWS IS OPEN
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Modify Education");
+
+            // Set the scene with the FXML content
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            // Show the child window
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    private void modifyProjects(ActionEvent event)
+    {
+        try {
+            // Load the FXML file for the child window
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowProjectIndividual.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage for the child window
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            //APPLICATION_MODAL THIS MEANS THAT THE APPLICATION IS INACCESSIBLE WHILE THIS WINDOWS IS OPEN
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Modify Personnal Projects");
+
+            // Set the scene with the FXML content
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            // Show the child window
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        initializePostsVbox();
+        loadPostsVbox();
     }
 
 }

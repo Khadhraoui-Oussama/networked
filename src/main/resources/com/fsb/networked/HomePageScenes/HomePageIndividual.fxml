@@ -159,14 +159,15 @@
                         </Tab>
                         <Tab fx:id="tabProfile" onSelectionChanged="#loadTabProfileTab">
                             <content>
-                                <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                                    <children>
-                                        <ScrollPane fx:id="profileScrollpane" prefHeight="617.0" prefWidth="682.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <StackPane>
+                           <children>
+                                        <ScrollPane fx:id="profileScrollpane" prefHeight="617.0" prefWidth="682.0">
                                             <content>
                                                 <VBox fx:id="profileLayoutVbox" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
-                                            </content></ScrollPane>
-                                    </children>
-                                </AnchorPane>
+                                            </content>
+                              </ScrollPane>
+                           </children>
+                        </StackPane>
                             </content>
                             <graphic>
                                 <ImageView fitHeight="25.0" fitWidth="25.0" pickOnBounds="true" preserveRatio="true">

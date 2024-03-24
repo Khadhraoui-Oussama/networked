@@ -1,4 +1,4 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
 import com.fsb.networked.dto.ImagePostDTO;
 import javafx.fxml.FXML;

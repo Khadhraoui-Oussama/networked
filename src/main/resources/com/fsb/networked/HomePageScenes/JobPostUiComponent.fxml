@@ -5,13 +5,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="262.0" prefWidth="780.0" style="-fx-border-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.JobPostItemController">
+<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="262.0" prefWidth="780.0" style="-fx-border-color: black; -fx-border-width: 3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.JobPostItemController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="634.0" spacing="20.0">
          <children>
             <ImageView fx:id="companyLogoImgView" fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/anonymous_logo.jpg" />
+                  <Image url="@../../../../images/anonymous_logo.jpg" />
                </image>
                <HBox.margin>
                   <Insets left="10.0" />
@@ -26,7 +26,7 @@
                <graphic>
                   <ImageView fitHeight="35.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/icons/follow.png" />
+                        <Image url="@../../../../images/icons/follow.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -82,7 +82,7 @@
                      <graphic>
                         <ImageView fitHeight="27.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/icons/like.png" />
+                              <Image url="@../../../../images/icons/like.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
@@ -90,7 +90,7 @@
                      <graphic>
                         <ImageView fitHeight="27.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/icons/apply_icon.png" />
+                              <Image url="@../../../../images/icons/apply_icon.png" />
                            </image>
                         </ImageView>
                      </graphic>

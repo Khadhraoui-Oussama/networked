@@ -1,5 +1,6 @@
 package com.fsb.networked;
 
+import com.fsb.networked.controllers.*;
 import com.fsb.networked.dto.*;
 import com.fsb.networked.utils.Conversions;
 import com.fsb.networked.utils.FilePaths;
@@ -162,10 +163,10 @@ public class HomePageController  implements Initializable {
     //TODO MAKE SURE THAT GETxxFROMdb RETURNS DATA ORDRED BY PUBLICATION DATE AND TIME
     private void initializeJobOffersVbox()
     {
-        List<DTO> jobOffers = new ArrayList<>(getJobOffersFromDB());
+        List<JobOfferDTO> jobOffers = new ArrayList<>(getJobOffersFromDB());
             for (int i = 0; i < jobOffers.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("JobPostUiComponent.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("HomePageScenes/JobPostUiComponent.fxml"));
             try {
                 VBox jobPostVbox = fxmlLoader.load();
                 JobPostItemController jpic = fxmlLoader.getController();
@@ -176,12 +177,12 @@ public class HomePageController  implements Initializable {
             }
         }
     }
-    private List<DTO> getJobOffersFromDB()
+    private List<JobOfferDTO> getJobOffersFromDB()
     {
         //TODO GET JOB OFFERS FROM DATABASE AND FILL THEM HERE INSTEAD OF THIS FOR LOOP
-        List<DTO> ls = new ArrayList<>();
+        List<JobOfferDTO> ls = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            DTO job1 = new DTO();
+            JobOfferDTO job1 = new JobOfferDTO();
             job1.setCompany("Boga cidre");
             job1.setDescription("work in a fast paced environment where you prepare drinks for a living XD,\"work in a fast paced environment where you prepare drinks for a living XD");
             job1.setLogoImgSrc(FilePaths.getImagePath("/images/default_user.png").substring(6));
@@ -198,7 +199,7 @@ public class HomePageController  implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             if(posts.get(i) instanceof ImagePostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("ImagePostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("HomePageScenes/ImagePostUiComponent.fxml"));
                 try {
                     VBox imagePostVbox = fxmlLoader.load();
                     ImagePostItemController controller = fxmlLoader.getController();
@@ -210,7 +211,7 @@ public class HomePageController  implements Initializable {
             }
             else if(posts.get(i) instanceof VideoPostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("VideoPostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("HomePageScenes/VideoPostUiComponent.fxml"));
                 try {
                     VBox videoPostVbox = fxmlLoader.load();
                     VideoPostItemController controller = fxmlLoader.getController();
@@ -223,7 +224,7 @@ public class HomePageController  implements Initializable {
             }
             else if(posts.get(i) instanceof TextPostDTO)
             {
-                fxmlLoader.setLocation(getClass().getResource("TextPostUiComponent.fxml"));
+                fxmlLoader.setLocation(getClass().getResource("HomePageScenes/TextPostUiComponent.fxml"));
                 try {
                     VBox textPostVbox = fxmlLoader.load();
                     TextPostItemController controller = fxmlLoader.getController();
@@ -372,7 +373,7 @@ public class HomePageController  implements Initializable {
         List<MessageConnectionDTO> messageConnections = new ArrayList<>(getMessageConnectionFromDB());
         for (int i = 0; i < messageConnections.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("MessageConnectionUiComponent.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("HomePageScenes/MessageConnectionUiComponent.fxml"));
             try {
                 VBox messageConnectionVBox = fxmlLoader.load();
                 MessageConnectionItemController controller = fxmlLoader.getController();
@@ -406,7 +407,7 @@ public class HomePageController  implements Initializable {
         List<NotificationConnectionSharedPostDTO> notifications = new ArrayList<>(getNotificationConnectionSharedPostsFromDB());
         for (int i = 0; i < notifications.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("NotificationUiComponent.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("HomePageScenes/NotificationUiComponent.fxml"));
             try {
                 VBox notificationVBox = fxmlLoader.load();
                 NotificationConnectionSharedPostController controller = fxmlLoader.getController();

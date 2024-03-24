@@ -6,13 +6,13 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
-<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="723.0" prefWidth="780.0" style="-fx-border-color: green; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.VideoPostItemController">
+<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="723.0" prefWidth="780.0" style="-fx-border-color: green; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.VideoPostItemController">
    <children>
       <HBox prefHeight="66.0" prefWidth="634.0" spacing="20.0">
          <children>
             <ImageView fx:id="opImgView" fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/female_avatar.png" />
+                  <Image url="@../../../../images/female_avatar.png" />
                </image>
                <HBox.margin>
                   <Insets left="10.0" />
@@ -55,7 +55,7 @@
                      <graphic>
                         <ImageView fitHeight="17.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/icons/play-button.png" />
+                              <Image url="@../../../../images/icons/play-button.png" />
                            </image>
                         </ImageView>
                      </graphic></Button>
@@ -63,7 +63,7 @@
                      <graphic>
                         <ImageView fitHeight="17.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/icons/pause.png" />
+                              <Image url="@../../../../images/icons/pause.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -72,7 +72,7 @@
                      <graphic>
                         <ImageView fitHeight="17.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/icons/reset.png" />
+                              <Image url="@../../../../images/icons/reset.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -106,7 +106,7 @@
                <graphic>
                   <ImageView fitHeight="27.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/icons/like.png" />
+                        <Image url="@../../../../images/icons/like.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -124,7 +124,7 @@
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/icons/share.png" />
+                        <Image url="@../../../../images/icons/share.png" />
                      </image>
                   </ImageView>
                </graphic>

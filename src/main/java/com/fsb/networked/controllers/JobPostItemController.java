@@ -1,6 +1,6 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
-import com.fsb.networked.dto.DTO;
+import com.fsb.networked.dto.JobOfferDTO;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -49,7 +49,7 @@ public class JobPostItemController implements Initializable {
     }
 
     //
-    public void setData(DTO jobOffer)
+    public void setData(JobOfferDTO jobOffer)
     {
         Image logoImage = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/default_user.png")));
         companyLogoImgView.setImage(logoImage);

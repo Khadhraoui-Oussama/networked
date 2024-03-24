@@ -1,4 +1,4 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers;
 
 import com.fsb.networked.dto.NotificationConnectionSharedPostDTO;
 import javafx.fxml.FXML;

@@ -5,13 +5,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<VBox alignment="BOTTOM_CENTER" prefHeight="619.0" prefWidth="780.0" style="-fx-border-color: yellow; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.ImagePostItemController">
+<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="288.0" prefWidth="780.0" style="-fx-border-color: brown; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.TextPostItemController">
    <children>
       <HBox prefHeight="66.0" prefWidth="634.0" spacing="20.0">
          <children>
             <ImageView fx:id="opImgView" fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/female_avatar.png" />
+                  <Image url="@../../../../images/female_avatar.png" />
                </image>
                <HBox.margin>
                   <Insets left="10.0" />
@@ -21,7 +21,7 @@
                <padding>
                   <Insets left="10.0" />
                </padding></Label>
-            <Label fx:id="dateOfPublicationLabel" alignment="CENTER_RIGHT" layoutX="89.0" layoutY="15.0" prefHeight="54.0" prefWidth="262.0" text="Date of publication">
+            <Label fx:id="dateOfPublicationLabel" alignment="CENTER_RIGHT" layoutX="89.0" layoutY="15.0" prefHeight="54.0" prefWidth="347.0" text="Date of publication">
                <padding>
                   <Insets right="10.0" />
                </padding>
@@ -34,47 +34,45 @@
             <Insets left="5.0" top="5.0" />
          </padding>
       </HBox>
-      <Label fx:id="postContentLabel" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="780.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." wrapText="true">
+      <Label fx:id="postContentLabel" alignment="TOP_LEFT" minHeight="-Infinity" minWidth="-Infinity" prefHeight="127.0" prefWidth="778.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat." wrapText="true">
          <font>
             <Font size="20.0" />
          </font>
          <padding>
-            <Insets left="6.0" />
+            <Insets left="11.0" />
          </padding>
          <VBox.margin>
             <Insets bottom="5.0" top="5.0" />
          </VBox.margin>
       </Label>
-      <VBox alignment="BOTTOM_CENTER" prefHeight="384.0" prefWidth="631.0" spacing="20.0">
+      <VBox alignment="BOTTOM_CENTER" prefHeight="31.0" prefWidth="634.0" spacing="20.0">
          <children>
-            <ImageView fx:id="postImageView" fitHeight="339.0" fitWidth="618.0" pickOnBounds="true" preserveRatio="true">
-               <viewport>
-                  <Rectangle2D />
-               </viewport>
-            </ImageView>
             <HBox minHeight="-Infinity" prefHeight="40.0" prefWidth="634.0">
                <children>
-                  <Label fx:id="numberOfLikesLabel" prefHeight="40.0" prefWidth="322.0" text="#NUMBER OF REACTIONS">
+                  <Label fx:id="numberOfLikesLabel" prefHeight="40.0" prefWidth="363.0" text="#NUMBER OF REACTIONS">
                      <padding>
-                        <Insets left="10.0" />
+                        <Insets left="15.0" />
                      </padding>
                   </Label>
-                  <Label fx:id="numberOfCommentsLabel" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="325.0" text="#NUMBER OF COMMENTS">
+                  <Label fx:id="numberOfCommentsLabel" alignment="CENTER_RIGHT" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="426.0" text="#NUMBER OF COMMENTS">
                      <padding>
-                        <Insets right="10.0" />
+                        <Insets left="15.0" right="10.0" />
                      </padding>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
                   </Label>
                </children>
             </HBox>
          </children>
       </VBox>
-      <ButtonBar minHeight="-Infinity" prefHeight="58.0" prefWidth="634.0">
+      <ButtonBar minHeight="-Infinity" prefHeight="50.0" prefWidth="788.0">
          <buttons>
-            <Button fx:id="likeBtn" minWidth="42.0" mnemonicParsing="false" onAction="#likePost" prefHeight="38.0">
+            <Button fx:id="likeBtn" minWidth="59.0" mnemonicParsing="false" onAction="#likePost" prefHeight="23.0">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/icons/like.png" />
+                        <Image url="@../../../../images/icons/like.png" />
                      </image>
                   </ImageView>
                </graphic>
@@ -88,11 +86,11 @@
                   </ImageView>
                </graphic>
             </Button>
-            <Button fx:id="shareBtn" layoutX="569.0" layoutY="15.0" mnemonicParsing="false" onAction="#sharePost">
+            <Button layoutX="569.0" layoutY="15.0" mnemonicParsing="false" onAction="#sharePost">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../../images/icons/share.png" />
+                        <Image url="@../../../../images/icons/share.png" />
                      </image>
                   </ImageView>
                </graphic>

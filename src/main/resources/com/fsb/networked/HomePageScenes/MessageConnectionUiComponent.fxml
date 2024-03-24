@@ -5,13 +5,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="218.0" prefWidth="780.0" style="-fx-border-color: blue; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.MessageConnectionItemController">
+<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="218.0" prefWidth="780.0" style="-fx-border-color: blue; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.MessageConnectionItemController">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="66.0" prefWidth="634.0" spacing="20.0">
          <children>
             <ImageView fx:id="opImgView" fitHeight="54.0" fitWidth="91.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../images/female_avatar.png" />
+                  <Image url="@../../../../images/female_avatar.png" />
                </image>
                <HBox.margin>
                   <Insets left="10.0" />
@@ -28,7 +28,7 @@
                      <graphic>
                         <ImageView fitHeight="37.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/icons/chat.png" />
+                              <Image url="@../../../../images/icons/chat.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -37,7 +37,7 @@
                      <graphic>
                         <ImageView fitHeight="37.0" fitWidth="52.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@../../../images/icons/remove-friend.png" />
+                              <Image url="@../../../../images/icons/remove-friend.png" />
                            </image>
                         </ImageView>
                      </graphic>

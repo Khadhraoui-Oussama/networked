@@ -127,7 +127,7 @@ public class HomePageController  implements Initializable {
     @FXML
     private void loadSettingsTab()
     {
-
+        loadSettingsLayoutVbox();
     }
     @FXML
     private void loadJobsTab()
@@ -460,7 +460,93 @@ public class HomePageController  implements Initializable {
             }
         }
     }
+    private void loadSettingsLayoutVbox()
+    {
+        List<SettingDTO> settings = new ArrayList<>();
+        settingsLayoutVbox.getChildren().clear();
+        settings.add(new SettingDTO("Change My Password", this::changePassword));
+        settings.add(new SettingDTO("Modifiy Connections List ",this::modifyConnectionsList));
+        settings.add(new SettingDTO("Modify Posts List",this::modifyPostsList));
+        System.out.println(settings.size());
+        for (int i = 0; i < settings.size(); i++) {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            fxmlLoader.setLocation(getClass().getResource("UiComponents/SettingsUiComponent.fxml"));
+            try {
+                VBox settingVBox = fxmlLoader.load();
+                SettingsItemController controller = fxmlLoader.getController();
+                controller.setData(settings.get(i));
+                settingsLayoutVbox.getChildren().add(settingVBox);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
 
+    private void modifyPostsList(ActionEvent actionEvent) {
+        try {
+            // Load the FXML file for the child window
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowManagePosts.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage for the child window
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Manage Posts List");
+
+            // Set the scene with the FXML content
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            // Show the child window
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void modifyConnectionsList(ActionEvent actionEvent) {
+        try {
+            // Load the FXML file for the child window
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowManageConnections.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage for the child window
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Manage Connections List");
+
+            // Set the scene with the FXML content
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            // Show the child window
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void changePassword(ActionEvent actionEvent) {
+        try {
+            // Load the FXML file for the child window
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowChangePassword.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage for the child window
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Change Password");
+
+            // Set the scene with the FXML content
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            // Show the child window
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
     private void modifyWorkExperience(ActionEvent event)
     {
         try {
@@ -555,6 +641,18 @@ public class HomePageController  implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         loadPostsVbox();
+
+        //change the button text based on the user pfp
+        if(profilePictureImageView.getImage().getUrl().toString().substring(6)
+                .equals(FilePaths.getImagePath("/images/male_avatar.png").substring(6)) ||
+                        profilePictureImageView.getImage().getUrl().toString().substring(6)
+                                .equals(FilePaths.getImagePath("/images/female_avatar.png").substring(6)))
+        {
+            changeAddPfpBtn.setText("Add a profile picture");
+        }
+        else {
+            changeAddPfpBtn.setText("Change the profile picture");
+        }
     }
 
 }

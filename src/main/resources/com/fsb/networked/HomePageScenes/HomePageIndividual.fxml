@@ -197,7 +197,7 @@
                             <content>
                         <StackPane>
                            <children>
-                                        <ScrollPane fx:id="settingsScrollPane" prefHeight="617.0" prefWidth="682.0">
+                                        <ScrollPane fx:id="settingsScrollpane" prefHeight="617.0" prefWidth="682.0">
                                             <content>
                                                 <VBox fx:id="settingsLayoutVbox" alignment="BOTTOM_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minWidth="-Infinity" />
                                             </content>

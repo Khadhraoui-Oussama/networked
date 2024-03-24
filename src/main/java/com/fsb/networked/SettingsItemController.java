@@ -16,5 +16,4 @@ public class SettingsItemController {
         settingBtn.setOnAction(settingDTO.getOnActionFunction());
     }
     //TODO CHANGE PFP SEE CHANGE LIST OF FOLLOWERS SEE INFORMATION THE USER HAS ENTERED
-    //TODO THE TGINF IS THAT S IT JKSL JLKSQM JREKLZ MFDS
 }

@@ -7,7 +7,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
 
 import java.io.File;
 import java.io.IOException;
@@ -91,11 +90,9 @@ public class SignUpEntrepriseController implements Initializable {
 		System.out.println("Website :" + isValid);
 		isValid &= Validator.validateField(locationTextField, Regexes.LOCATION_REGEX,Alerts.AlertAddressField());
 		System.out.println("Address :" + isValid);
-
 		isValid &= Validator.validateField(dateOfFoundationDatePicker, null,null); // Date is not validated using regex
 		return isValid;
 	}
-
 
 	@FXML
 	private void cancelSignUp() throws IOException {
@@ -140,7 +137,5 @@ public class SignUpEntrepriseController implements Initializable {
 		sizeComboBox.getSelectionModel().select(3);
 		//REMOVE ALL THE ABOVE WHEN READY TO PUSH TO PROD
 
-		}
-
+	}
 }
-

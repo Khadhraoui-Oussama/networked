@@ -138,7 +138,25 @@ public class HomePageController  implements Initializable {
     @FXML
     private void createNormalPost()
     {
+        try {
+            // Load the FXML file for the child window
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowCreateTextPost.fxml"));
+            Parent root = fxmlLoader.load();
 
+            // Create a new stage for the child window
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Create a Text Post");
+
+            // Set the scene with the FXML content
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            // Show the child window
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
     @FXML
     private void createMediaPost()

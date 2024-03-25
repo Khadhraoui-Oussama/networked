@@ -1,9 +1,9 @@
 package com.fsb.networked.controllers.SignUpControllers;
 
 import com.fsb.networked.App;
+import com.fsb.networked.dao.IndividualDAO;
 import com.fsb.networked.utils.FileLoader;
 import com.fsb.networked.utils.JSONParser;
-import com.fsb.networked.utils.PDFCreator;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -95,7 +95,7 @@ public class SignUpIndividualVideoController implements Initializable {
         mediaPlayer.dispose();
         App.setRoot("SignUpScenes/SignUpPageIndividualProject");
     }
-
+    IndividualDAO individualDAO = new IndividualDAO();
     @FXML
     private void finishSignUpIndividual() throws IOException
     {
@@ -109,7 +109,8 @@ public class SignUpIndividualVideoController implements Initializable {
             String path = FileLoader.chooseDirectoryToSaveTo();
             System.out.println(path);
             System.out.println("C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\");
-            PDFCreator.createPDF(path,"\\resume.pdf");
+            //PDFCreator.createPDF(path,"\\resume.pdf");
+            individualDAO.save();
         }
         else {
             statusLabel.setText("Pls select a video resume first\nto be able to generate your PDF.");

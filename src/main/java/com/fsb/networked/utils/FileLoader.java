@@ -69,4 +69,8 @@ public class FileLoader {
     }
 
 
+    public static String truncateFileName(String name) {
+        String result = name.substring(0, Math.min(name.length(), ImportantFileReferences.MAX_FILE_NAME_LENGTH));
+        return  result;
+    }
 }

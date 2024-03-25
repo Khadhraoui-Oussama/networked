@@ -89,7 +89,7 @@ public class Alerts
 	public static Alert AlertEmailInUse() {
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Email already in use");
-		alert.setContentText("Please double check the address or try to log in");
+		alert.setContentText("Please choose another address \nor log in to your account");
 		return alert;
 	}
 
@@ -107,4 +107,17 @@ public class Alerts
 		return alert;
 	}
 
+    public static Alert AlertImagePathTooLong() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Image Path Is Too Long");
+		alert.setContentText("Try renaming it to a shorter name\nOr putting closer to root directory");
+		return alert;
+    }
+
+	public static Alert AlertImageSizeTooBig() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Image Size Is Too Big");
+		alert.setContentText("Try Uploading a smaller image file\nMaximum Size id 16MB");
+		return alert;
+	}
 }

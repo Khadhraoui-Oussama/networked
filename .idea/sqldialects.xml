@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SqlDialectMappings">
+    <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/ef769a07-2739-4f2e-9b78-d9fee85d2bae/console.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/fsb/networked/dao/IndividualDAO.java" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/src/main/java/com/fsb/networked/utils/SQLHelper.java" dialect="GenericSQL" />
+    <file url="PROJECT" dialect="MySQL" />
+  </component>
+</project>

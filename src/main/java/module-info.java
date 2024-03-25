@@ -9,6 +9,7 @@ module com.fsb.networked {
     requires org.apache.pdfbox;
     requires org.apache.fontbox;
     requires org.apache.commons.lang3;
+    requires mysql.connector.java;
 
     opens com.fsb.networked to javafx.fxml;
     exports com.fsb.networked;

@@ -102,10 +102,9 @@ public class SignUpIndividualController implements Initializable {
 				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
 			}
 			//TODO REMOVE AFTER TESTING
-
 			//SPEED UP DEV
-			String path1 = FileLoader.chooseDirectoryToSaveTo();
-			JSONParser.populateRealDataJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+			//String path1 = FileLoader.chooseDirectoryToSaveTo();
+			//JSONParser.populateRealDataJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
 			if (currentImagePath.equals(defaultMaleAvatar) || currentImagePath.equals(defaultFemaleAvatar)) {
 				// Default avatar is selected
 				String imagePath;
@@ -119,8 +118,7 @@ public class SignUpIndividualController implements Initializable {
 				// Custom profile picture is selected
 				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
 			}
-			PDFCreator.createPDF(path1,"\\resume" +
-					".pdf");
+			//PDFCreator.createPDF(path1,"\\resume" + ".pdf");
 			//SPEED UP DEV
 
 			// Navigate to the next scene
@@ -139,6 +137,8 @@ public class SignUpIndividualController implements Initializable {
 		isValid &= Validator.validateField(lastNameField, Regexes.NAME_REGEX,Alerts.AlertNameField());
 		isValid &= Validator.validateField(dateOfBirthPicker,null,null);
 		isValid &= Validator.validateField(physicalAdressField, Regexes.LOCATION_REGEX,Alerts.AlertAddressField());
+		isValid &= Validator.validateImagePath(profilePictureImg,Alerts.AlertImagePathTooLong());
+		isValid &= Validator.validateImageSize(profilePictureImg,Alerts.AlertImageSizeTooBig());
 		return isValid;
 	}
 
@@ -158,10 +158,15 @@ public class SignUpIndividualController implements Initializable {
 			// set the image view source as the file path
 			profilePictureImg.setImage(new Image(file.toURI().toString()));
 			statusLabel.setText("Profile Image uploaded successfully");
-		} else {
+		}
+	//	else if(file.length() > ImportantFileReferences.MAX_FILE_SIZE_BYTES){
+	//		statusLabel.setText("Picture size over hte limit ");
+
+		else {
 			statusLabel.setText("Invalid profile image used !!");
 		}
 	}
+
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -233,6 +238,6 @@ public class SignUpIndividualController implements Initializable {
 			profilePictureImg.setImage(new Image(FileLoader.getImagePath(imagePath)));
 		}
 	}
-
 }
+
 

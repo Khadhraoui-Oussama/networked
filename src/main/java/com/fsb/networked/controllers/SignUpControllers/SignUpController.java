@@ -32,7 +32,7 @@ public class SignUpController implements Initializable{
 	
 	
 	@FXML
-    private void gotoSignUpIndivdual() throws IOException {
+    private void gotoSignUpIndividual() throws IOException {
 		if (validateBasicInfo()) {
 			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUp", "emailAddress", emailAddressField.getText());
 			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUp", "password", passwordField.getText());
@@ -74,6 +74,8 @@ public class SignUpController implements Initializable{
 		boolean isValid = true;
 		isValid &= Validator.validateField(emailAddressField, Regexes.EMAIL_REGEX,Alerts.AlertEmailField());
 		isValid &= Validator.validateField(passwordField, Regexes.PASSWORD_REGEX,Alerts.AlertPasswordField());
+		// TODO UNCOMMENT THIS TO CHECK FOR EMAIL UNIQNESS I LEFT IT TO SPEED UP DEV
+		isValid &= Validator.validateTextFieldSQLUnique(emailAddressField,Alerts.AlertEmailInUse(),"email","user");
 		return isValid;
 	}
 	@Override

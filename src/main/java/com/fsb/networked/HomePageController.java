@@ -526,8 +526,6 @@ public class HomePageController  implements Initializable {
         }
         return ls;
     }
-
-
     private void loadProfileLayoutVbox()
     {
         List<SettingDTO> settings = new ArrayList<>();
@@ -571,7 +569,6 @@ public class HomePageController  implements Initializable {
             }
         }
     }
-
     private void modifyPostsList(ActionEvent actionEvent) {
         try {
             // Load the FXML file for the child window

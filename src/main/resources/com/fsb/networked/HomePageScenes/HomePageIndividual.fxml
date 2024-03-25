@@ -286,7 +286,7 @@
                         <Font size="20.0" />
                      </font>
                   </Label>
-                        <ScrollPane fx:id="connectionSuggestionsScrollPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="2000.0" prefWidth="302.0">
+                        <ScrollPane fx:id="connectionSuggestionsScrollPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefHeight="2000.0" prefWidth="320.0">
                      <content>
                         <VBox fx:id="connectionSuggestionsLayoutVbox" minWidth="-Infinity" prefHeight="644.0" prefWidth="302.0" />
                      </content>

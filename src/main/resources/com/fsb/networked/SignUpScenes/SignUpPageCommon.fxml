@@ -75,7 +75,7 @@
                               <Font name="Calibri" size="27.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnIndividual" mnemonicParsing="false" onAction="#gotoSignUpIndivdual" text="Individual">
+                        <Button fx:id="btnIndividual" mnemonicParsing="false" onAction="#gotoSignUpIndividual" text="Individual">
                            <font>
                               <Font name="Calibri" size="27.0" />
                            </font>

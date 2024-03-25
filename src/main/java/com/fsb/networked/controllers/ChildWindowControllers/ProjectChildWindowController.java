@@ -1,6 +1,5 @@
-package com.fsb.networked.controllers;
+package com.fsb.networked.controllers.ChildWindowControllers;
 
-import com.fsb.networked.App;
 import com.fsb.networked.dto.ProjectDTO;
 import com.fsb.networked.utils.Alerts;
 import com.fsb.networked.utils.JSONParser;
@@ -13,11 +12,10 @@ import javafx.util.Callback;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class SignUpIndividualProjectController implements Initializable {
+public class ProjectChildWindowController implements Initializable {
 
 	@FXML
 	private TextField titleField;
@@ -31,45 +29,23 @@ public class SignUpIndividualProjectController implements Initializable {
 	@FXML
 	private TextArea descriptionTextArea;
 
-	@FXML
-	private Button btnCancel;
 
 	@FXML
 	private Button btnAddProject;
 	
 	@FXML
 	private Button btnDeleteProject;
-	
-	@FXML
-	private Button btnNext;
-	
-	@FXML
-	private Button btnBack;
-	
+
 	@FXML
 	private ListView<ProjectDTO> projectListView;
 
 	JSONArray projectsArray = new JSONArray();
-	@FXML
-    private void goBack() throws IOException
-	{
-        App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
-    }
-	
-	@FXML
-    private void goNext() throws IOException
-	{
-		JSONParser.updateProjectsJSONArray(projectsArray);
-		App.setRoot("SignUpScenes/SignUpPageIndividualVideo");
-		System.out.println("Project INFO gathered");
-    }
 
-	
 	@FXML
 	private void addProject()
 	{
 		//DONE TODO : when add job btn is pressed the job must be added to the listview of jobs
-		
+		//TODO ADD TO DB
 		if(validateProject())
 		{
 			ProjectDTO project = new ProjectDTO(titleField.getText(),technologyField.getText(),linkField.getText(),descriptionTextArea.getText());
@@ -86,6 +62,8 @@ public class SignUpIndividualProjectController implements Initializable {
 	private void deleteProject()
 	{
 		//DONE TODO : when delete skill btn is presses delete the job from the listview of jobs
+		//TODO GET FROM DB
+
 		ProjectDTO selectedproject = projectListView.getSelectionModel().getSelectedItem();
 		projectListView.getItems().remove(selectedproject);
 
@@ -103,16 +81,7 @@ public class SignUpIndividualProjectController implements Initializable {
 		isValid &= Validator.validateField(descriptionTextArea, Regexes.DESCRIPTION_REGEX,Alerts.AlertDescriptionField());
 		return isValid;
 	}
-	@FXML
-	private void cancelSignUp() throws IOException
-	{
-		//if the user decides he no longer want to sign up the json files must be cleared of all inputs
-		// and returned to the original state
-		JSONParser.resetIndividualJSONFile();
-		JSONParser.resetEntrepriseJSONFile();
-		App.setRoot("LogInPage");
-	}
-	
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources)
 	{
@@ -134,6 +103,7 @@ public class SignUpIndividualProjectController implements Initializable {
                 };
             }
         });
+		//TODO GET FROM DB
 		JSONArray projectsArray = JSONParser.getProjectsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
 		// Iterate over each skill object in the JSON array and extract each field
 		for (int i = 0; i < projectsArray.length(); i++) {
@@ -157,7 +127,3 @@ public class SignUpIndividualProjectController implements Initializable {
 	
 	}
 }
-
-///Validation
-///Reset Functionality
-///Initialization

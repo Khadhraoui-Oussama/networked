@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.CreateTextPostChildWindowController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="266.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.ChildWindowControllers.CreateTextPostChildWindowController">
    <children>
       <VBox prefHeight="358.0" prefWidth="650.0">
          <children>
@@ -33,7 +33,15 @@
             </TextArea>
             <HBox alignment="CENTER_RIGHT">
                <children>
-                  <Button fx:id="postBtn" alignment="CENTER" contentDisplay="CENTER" minWidth="20.0" mnemonicParsing="false" onAction="#post" prefHeight="40.0" prefWidth="40.0">
+                  <Label fx:id="statusLabel" prefHeight="35.0" prefWidth="606.0" text="Status label">
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Button fx:id="postBtn" alignment="CENTER" contentDisplay="CENTER" minWidth="20.0" mnemonicParsing="false" onAction="#postTextPost" prefHeight="40.0" prefWidth="40.0">
                      <font>
                         <Font size="18.0" />
                      </font>

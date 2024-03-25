@@ -1,4 +1,4 @@
-package com.fsb.networked;
+package com.fsb.networked.controllers.UiItemsControllers;
 
 import com.fsb.networked.dto.SettingDTO;
 import javafx.fxml.FXML;

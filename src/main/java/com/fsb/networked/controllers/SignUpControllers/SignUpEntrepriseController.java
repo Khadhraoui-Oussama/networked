@@ -1,4 +1,4 @@
-package com.fsb.networked.controllers;
+package com.fsb.networked.controllers.SignUpControllers;
 
 import com.fsb.networked.App;
 import com.fsb.networked.utils.*;
@@ -105,7 +105,7 @@ public class SignUpEntrepriseController implements Initializable {
 
 	@FXML
 	private void uploadProfilePicture() {
-		File file = FilePaths.uploadProfilePicture();
+		File file = FileLoader.uploadPicture("Choose a profile picture to use ");
 		if (file != null) {
 			System.out.println("path :" + file.toURI().getPath());
 			// set the image view source as the file path
@@ -123,7 +123,7 @@ public class SignUpEntrepriseController implements Initializable {
 		sizeComboBox.getItems().addAll(ComboBoxes.COMPANY_SIZES);
 
 		//image
-		String imageURL = FilePaths.getImagePath("/images/anonymous_logo.jpg");
+		String imageURL = FileLoader.getImagePath("/images/anonymous_logo.jpg");
 		companyLogoImageView.setImage(new Image(imageURL));
 
 

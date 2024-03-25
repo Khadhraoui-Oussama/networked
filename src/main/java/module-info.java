@@ -14,4 +14,10 @@ module com.fsb.networked {
     exports com.fsb.networked;
     exports com.fsb.networked.controllers;
     opens com.fsb.networked.controllers to javafx.fxml;
+    exports com.fsb.networked.controllers.SignUpControllers;
+    opens com.fsb.networked.controllers.SignUpControllers to javafx.fxml;
+    exports com.fsb.networked.controllers.ChildWindowControllers;
+    opens com.fsb.networked.controllers.ChildWindowControllers to javafx.fxml;
+    exports com.fsb.networked.controllers.UiItemsControllers;
+    opens com.fsb.networked.controllers.UiItemsControllers to javafx.fxml;
 }

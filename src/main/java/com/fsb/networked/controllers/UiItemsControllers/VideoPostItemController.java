@@ -1,4 +1,4 @@
-package com.fsb.networked.controllers;
+package com.fsb.networked.controllers.UiItemsControllers;
 
 import com.fsb.networked.dto.VideoPostDTO;
 import javafx.fxml.FXML;
@@ -66,20 +66,29 @@ public class VideoPostItemController implements Initializable {
     @FXML
     private void playVideo()
     {
-        mediaPlayer.play();
+        if(mediaPlayer!=null)
+        {
+            mediaPlayer.play();
+        }
     }
 
     @FXML
     private void pauseVideo()
     {
-        mediaPlayer.pause();
+        if(mediaPlayer!=null)
+        {
+            mediaPlayer.pause();
+        }
     }
 
     @FXML
     private void resetVideo()
     {
-        mediaPlayer.pause();
-        mediaPlayer.seek(Duration.ZERO);
+        if(mediaPlayer!=null)
+        {
+            mediaPlayer.pause();
+            mediaPlayer.seek(Duration.ZERO);
+        }
     }
 
     ////clear media : media = null;

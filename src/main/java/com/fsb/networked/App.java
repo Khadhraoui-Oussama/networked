@@ -20,7 +20,7 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("LoginPage"));
         stage.setScene(scene);
-        stage.setResizable(false);
+        stage.setResizable(true);
         scene.getStylesheets().clear();
         stage.show();
         stage.setOnCloseRequest(event -> {

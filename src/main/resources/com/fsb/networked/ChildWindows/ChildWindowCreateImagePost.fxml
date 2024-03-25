@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="352.0" prefWidth="880.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.ChildWindowControllers.CreateImagePostChildWindowController">
+   <children>
+      <VBox prefHeight="358.0" prefWidth="650.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="600.0">
+               <children>
+                  <Label alignment="CENTER" prefHeight="40.0" prefWidth="444.0" text="Post Text">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <Label alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="444.0" text="Image Attachment">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox>
+               <children>
+                  <VBox prefHeight="290.0" prefWidth="460.0">
+                     <children>
+                        <TextArea fx:id="postContentTextArea" prefHeight="252.0" prefWidth="473.0" wrapText="true">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </TextArea>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="19.0" prefWidth="880.0">
+                           <padding>
+                              <Insets bottom="10.0" right="10.0" top="10.0" />
+                           </padding>
+                           <children>
+                              <Label fx:id="statusLabel" prefHeight="41.0" prefWidth="390.0" text="Status label">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="postBtn" alignment="CENTER" contentDisplay="CENTER" minWidth="20.0" mnemonicParsing="false" onAction="#post" prefHeight="40.0" prefWidth="40.0">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="27.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../images/icons/post_icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </HBox>
+                     </children>
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </VBox>
+                  <VBox alignment="TOP_RIGHT" prefHeight="307.0" prefWidth="430.0">
+                     <children>
+                        <ImageView fx:id="imgView" fitHeight="238.0" fitWidth="430.0" pickOnBounds="true" preserveRatio="true" />
+                        <Button fx:id="uploadImageBtn" alignment="CENTER" contentDisplay="CENTER" minWidth="20.0" mnemonicParsing="false" onAction="#uploadImage" prefHeight="40.0" prefWidth="40.0">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <graphic>
+                              <ImageView fitHeight="27.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/icons/add_image_icon.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets right="10.0" top="10.0" />
+                           </VBox.margin>
+                        </Button>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

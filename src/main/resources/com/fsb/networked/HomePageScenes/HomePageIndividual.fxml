@@ -47,10 +47,7 @@
                                     <Font size="30.0" />
                                  </font>
                               </Label>
-                                          <Button fx:id="normalPostBtn" minWidth="53.0" mnemonicParsing="false" onAction="#createNormalPost" prefHeight="47.0" prefWidth="53.0">
-                                              <padding>
-                                                  <Insets left="10.0" />
-                                              </padding>
+                                          <Button fx:id="normalPostBtn" minWidth="53.0" mnemonicParsing="false" onAction="#createNormalPost" prefHeight="49.0" prefWidth="80.0">
                                               <graphic>
                                                   <ImageView fitHeight="39.0" fitWidth="34.0" pickOnBounds="true">
                                                       <image>
@@ -59,26 +56,40 @@
                                                   </ImageView>
                                               </graphic>
                                           </Button>
-                              <Label alignment="CENTER" prefHeight="62.0" prefWidth="258.0" text="Media Post">
+                              <Label alignment="CENTER" prefHeight="62.0" prefWidth="258.0" text="Image Post">
                                  <font>
                                     <Font size="30.0" />
                                  </font>
                               </Label>
-                                          <Button fx:id="mediaPostBtn" alignment="CENTER" minWidth="51.0" mnemonicParsing="false" onAction="#createMediaPost" prefHeight="50.0" prefWidth="51.0">
-                                              <padding>
-                                                  <Insets left="10.0" />
-                                              </padding>
+                                          <Button fx:id="imagePostBtn" alignment="CENTER" minWidth="51.0" mnemonicParsing="false" onAction="#createImagePost" prefHeight="49.0" prefWidth="89.0">
                                               <HBox.margin>
                                                   <Insets left="10.0" />
                                               </HBox.margin>
                                               <graphic>
                                                   <ImageView fitHeight="41.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                                       <image>
-                                                          <Image url="@../../../../images/icons/media_post.png" />
+                                                          <Image url="@../../../../images/icons/add_image_icon.png" />
                                                       </image>
                                                   </ImageView>
                                               </graphic>
                                           </Button>
+                              <Label alignment="CENTER" layoutX="683.0" layoutY="24.0" prefHeight="62.0" prefWidth="258.0" text="Video Post">
+                                 <font>
+                                    <Font size="30.0" />
+                                 </font>
+                              </Label>
+                              <Button fx:id="videoPostBtn" alignment="CENTER" layoutX="952.0" layoutY="31.0" minWidth="51.0" mnemonicParsing="false" onAction="#createVideoPost" prefHeight="50.0" prefWidth="51.0">
+                                 <padding>
+                                    <Insets left="1.0" />
+                                 </padding>
+                                 <graphic>
+                                    <ImageView fitHeight="41.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../images/icons/add_video_icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
                                     </children>
                                     <opaqueInsets>
                                         <Insets />
@@ -218,7 +229,7 @@
                         <Insets />
                     </opaqueInsets>
                     <padding>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="1.0" top="-3.0" />
                     </padding>
                     <BorderPane.margin>
                         <Insets />
@@ -268,9 +279,20 @@
                 </VBox>
             </left>
             <right>
-                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="668.0" prefWidth="302.0" BorderPane.alignment="CENTER">
+                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="710.0" prefWidth="302.0" BorderPane.alignment="CENTER">
                     <children>
-                        <ScrollPane fx:id="connectionSuggestionsScrollPane" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="9000.0" prefWidth="274.0" />
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="302.0" text="You Might Know these people :">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Label>
+                        <ScrollPane fx:id="connectionSuggestionsScrollPane" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="2000.0" prefWidth="302.0">
+                     <content>
+                        <VBox fx:id="connectionSuggestionsLayoutVbox" minWidth="-Infinity" prefHeight="644.0" prefWidth="302.0" />
+                     </content>
+                     <padding>
+                        <Insets bottom="1.0" />
+                     </padding></ScrollPane>
                     </children>
                 </VBox>
             </right>

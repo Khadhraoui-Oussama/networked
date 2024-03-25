@@ -1,4 +1,4 @@
-package com.fsb.networked.controllers;
+package com.fsb.networked.controllers.UiItemsControllers;
 
 import com.fsb.networked.dto.NotificationConnectionSharedPostDTO;
 import javafx.fxml.FXML;
@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
-public class NotificationConnectionSharedPostController implements Initializable {
+public class NotificationConnectionSharedPostItemController implements Initializable {
     @FXML
     ImageView opImgView;
     @FXML

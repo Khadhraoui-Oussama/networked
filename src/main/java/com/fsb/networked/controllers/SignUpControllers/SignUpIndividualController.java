@@ -1,29 +1,18 @@
-package com.fsb.networked.controllers;
-
-import java.io.File;
-import java.io.IOException;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.time.LocalDate;
-import java.time.Year;
-import java.util.Objects;
-import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+package com.fsb.networked.controllers.SignUpControllers;
 
 import com.fsb.networked.App;
 import com.fsb.networked.utils.*;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.stage.FileChooser;
+
+import java.io.File;
+import java.io.IOException;
+import java.net.URL;
+import java.time.LocalDate;
+import java.util.ResourceBundle;
 
 public class SignUpIndividualController implements Initializable {
 
@@ -95,8 +84,8 @@ public class SignUpIndividualController implements Initializable {
 			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "dob", dateOfBirthPicker.getValue());
 
 			// Check if a default profile picture is selected
-			String defaultMaleAvatar = FilePaths.getImagePath("/images/male_avatar.png");
-			String defaultFemaleAvatar = FilePaths.getImagePath("/images/female_avatar.png");
+			String defaultMaleAvatar = FileLoader.getImagePath("/images/male_avatar.png");
+			String defaultFemaleAvatar = FileLoader.getImagePath("/images/female_avatar.png");
 			String currentImagePath = (profilePictureImg.getImage().getUrl());
 
 			if (currentImagePath.equals(defaultMaleAvatar) || currentImagePath.equals(defaultFemaleAvatar)) {
@@ -107,7 +96,7 @@ public class SignUpIndividualController implements Initializable {
 				} else {
 					imagePath = "/images/male_avatar.png";
 				}
-				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", FilePaths.getImagePath(imagePath));
+				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", FileLoader.getImagePath(imagePath));
 			} else {
 				// Custom profile picture is selected
 				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
@@ -115,7 +104,7 @@ public class SignUpIndividualController implements Initializable {
 			//TODO REMOVE AFTER TESTING
 
 			//SPEED UP DEV
-			String path1 = FilePaths.chooseDirectoryToSaveTo();
+			String path1 = FileLoader.chooseDirectoryToSaveTo();
 			JSONParser.populateRealDataJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
 			if (currentImagePath.equals(defaultMaleAvatar) || currentImagePath.equals(defaultFemaleAvatar)) {
 				// Default avatar is selected
@@ -125,7 +114,7 @@ public class SignUpIndividualController implements Initializable {
 				} else {
 					imagePath = "/images/male_avatar.png";
 				}
-				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", FilePaths.getImagePath(imagePath));
+				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", FileLoader.getImagePath(imagePath));
 			} else {
 				// Custom profile picture is selected
 				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
@@ -163,7 +152,7 @@ public class SignUpIndividualController implements Initializable {
 	}
 
 	public void uploadProfilePicture() {
-		File file = FilePaths.uploadProfilePicture();
+		File file = FileLoader.uploadPicture("Choose a profile picture to use");
 		if (file != null) {
 			System.out.println("path :" + file.toURI().getPath());
 			// set the image view source as the file path
@@ -229,8 +218,8 @@ public class SignUpIndividualController implements Initializable {
 	private void updateDefaultProfilePicture() {
 		// Check if the user has selected a custom image
 		String currentImagePath = profilePictureImg.getImage().getUrl();
-		String defaultMaleAvatar = FilePaths.getImagePath("/images/male_avatar.png");
-		String defaultFemaleAvatar = FilePaths.getImagePath("/images/female_avatar.png");
+		String defaultMaleAvatar = FileLoader.getImagePath("/images/male_avatar.png");
+		String defaultFemaleAvatar = FileLoader.getImagePath("/images/female_avatar.png");
 
 		if (currentImagePath.equals(defaultMaleAvatar) || currentImagePath.equals(defaultFemaleAvatar)) {
 			// If the user has not selected a custom image, update the profile picture based on the selected gender
@@ -241,7 +230,7 @@ public class SignUpIndividualController implements Initializable {
 			} else if ("Male".equals(selectedGender)) {
 				imagePath = "/images/male_avatar.png";
 			}
-			profilePictureImg.setImage(new Image(FilePaths.getImagePath(imagePath)));
+			profilePictureImg.setImage(new Image(FileLoader.getImagePath(imagePath)));
 		}
 	}
 

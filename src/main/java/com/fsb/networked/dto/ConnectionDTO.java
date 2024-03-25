@@ -7,6 +7,7 @@ public class ConnectionDTO {
     private String firstName;
     private String lastName;
     private LocalDate dateOfConnection;
+    private String connectionImage;
 
     public ConnectionDTO(String emailAddress, String firstName, String lastName, LocalDate dateOfConnection) {
         this.emailAddress = emailAddress;
@@ -16,6 +17,14 @@ public class ConnectionDTO {
     }
 
     public ConnectionDTO() {
+    }
+
+    public String getConnectionImage() {
+        return connectionImage;
+    }
+
+    public void setConnectionImage(String connectionImage) {
+        this.connectionImage = connectionImage;
     }
 
     public String getEmailAddress() {

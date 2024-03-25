@@ -1,4 +1,4 @@
-package com.fsb.networked.controllers;
+package com.fsb.networked.controllers.ChildWindowControllers;
 
 import com.fsb.networked.dto.EducationDTO;
 import com.fsb.networked.utils.*;

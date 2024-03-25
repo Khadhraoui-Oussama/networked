@@ -1,4 +1,4 @@
-package com.fsb.networked.controllers;
+package com.fsb.networked.controllers.UiItemsControllers;
 
 import com.fsb.networked.dto.JobOfferDTO;
 import javafx.fxml.FXML;

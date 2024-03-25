@@ -1,14 +1,10 @@
 package com.fsb.networked.utils;
 
-import javafx.scene.image.Image;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.json.JSONPointer;
 
 import java.io.*;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -103,7 +99,7 @@ public class JSONParser {
         signUpBasicObject.put("gender", "Male");
 
         String imagePath = "/images/male_avatar.png";
-        signUpBasicObject.put("picture", FilePaths.getImagePath(imagePath));
+        signUpBasicObject.put("picture", FileLoader.getImagePath(imagePath));
 
         jsonObject.put("signUpBasic", signUpBasicObject);
 
@@ -313,7 +309,7 @@ public class JSONParser {
             signUpBasicObject.put("address", "10 Jarzouna");
             signUpBasicObject.put("gender", "Male");
             signUpBasicObject.put("dob", "2003-10-04");
-            String picture = FilePaths.getImagePath("/images/male_avatar.png");
+            String picture = FileLoader.getImagePath("/images/male_avatar.png");
             signUpBasicObject.put("picture", "file:/C:/Users/khadh/IdeaProjects/networked/src/main/resources/images/male_avatar.png");
             jsonObject.put("signUpBasic", signUpBasicObject);
 

@@ -1,7 +1,7 @@
-package com.fsb.networked.controllers;
+package com.fsb.networked.controllers.SignUpControllers;
 
 import com.fsb.networked.App;
-import com.fsb.networked.utils.FilePaths;
+import com.fsb.networked.utils.FileLoader;
 import com.fsb.networked.utils.JSONParser;
 import com.fsb.networked.utils.PDFCreator;
 import javafx.fxml.FXML;
@@ -11,7 +11,6 @@ import javafx.scene.control.Label;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.stage.FileChooser;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -61,19 +60,7 @@ public class SignUpIndividualVideoController implements Initializable {
        // Clear mediaview
        media = null;
        mediaView.setMediaPlayer(null);
-       final FileChooser fc = new FileChooser();
-       // Set the title
-       fc.setTitle("Choose a video resume to use ");
-       // Set the initial directory (default one)
-       fc.setInitialDirectory(new File(System.getProperty("user.home")));
-       // Extension filters
-       // Clear all extension filters
-       fc.getExtensionFilters().clear();
-       fc.getExtensionFilters().addAll(
-               new FileChooser.ExtensionFilter("Video Files", "*.mp4", "*.mov", "*.avi", "*.webm"));
-       //.mkv format causes issues ( maybe not supported)
-       // Set the selected file or use null if no file has been selected
-       videoFile = fc.showOpenDialog(null);
+       videoFile = FileLoader.uploadVideo("Choose a video resume to use");
        if (videoFile != null) {
            try {
                System.out.println("Path to video : " + videoFile.toURI().getPath());
@@ -119,7 +106,7 @@ public class SignUpIndividualVideoController implements Initializable {
             System.out.println("All Info Gathered");
 
             //create the pdf resume
-            String path = FilePaths.chooseDirectoryToSaveTo();
+            String path = FileLoader.chooseDirectoryToSaveTo();
             System.out.println(path);
             System.out.println("C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\");
             PDFCreator.createPDF(path,"\\resume.pdf");
@@ -132,22 +119,29 @@ public class SignUpIndividualVideoController implements Initializable {
     @FXML
     private void playVideo()
     {
-        mediaPlayer.play();
+        if(mediaPlayer!=null)
+        {
+            mediaPlayer.play();
+        }
     }
 
     @FXML
     private void pauseVideo()
     {
-        mediaPlayer.pause();
+        if(mediaPlayer!=null)
+        {
+            mediaPlayer.pause();
+        }
     }
 
     @FXML
     private void resetVideo()
     {
+        if(mediaPlayer!=null)
+        {
         mediaPlayer.pause();
         mediaPlayer.seek(Duration.ZERO);
-
-        mediaPlayer.play();
+        }
     }
 
     @FXML

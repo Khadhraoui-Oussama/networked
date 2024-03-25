@@ -1,4 +1,4 @@
-package com.fsb.networked.controllers;
+package com.fsb.networked.controllers.SignUpControllers;
 
 import com.fsb.networked.App;
 import com.fsb.networked.utils.*;

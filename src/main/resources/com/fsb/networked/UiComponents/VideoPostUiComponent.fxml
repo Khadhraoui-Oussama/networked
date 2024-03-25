@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.Font?>
-<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="723.0" prefWidth="780.0" style="-fx-border-color: green; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.VideoPostItemController">
+<VBox alignment="BOTTOM_CENTER" minWidth="-Infinity" prefHeight="723.0" prefWidth="780.0" style="-fx-border-color: green; -fx-border-width: 4;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.UiItemsControllers.VideoPostItemController">
    <children>
       <HBox prefHeight="66.0" prefWidth="634.0" spacing="20.0">
          <children>

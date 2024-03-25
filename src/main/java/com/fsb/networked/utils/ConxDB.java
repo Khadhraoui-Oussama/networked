@@ -8,10 +8,10 @@ public class ConxDB {
 
 	private static Connection connexion;
 
-	private final String DB_URL = "jdbc:mysql://localhost:3306/networked_2";
-	private final String USER = "root";
-	private final String PASS= "";
-
+	private final String DB_URL = "jdbc:mysql://196.229.18.84:3306/networked_db";
+	private final String USER = "any_user";
+	private final String PASS= "password!1";
+	//root root1234
 	private ConxDB() throws SQLException
 	{
 		try

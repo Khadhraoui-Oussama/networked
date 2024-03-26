@@ -12,4 +12,8 @@ public class IndividualService {
         result = EntrepriseDAO.saveToDB(entrepriseDTO);
         return result;
     }*/
+    public int individualExists(String email,String password)
+    {
+        return individualDAO.individualExists(email,password);
+    }
 }

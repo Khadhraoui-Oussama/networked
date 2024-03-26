@@ -64,7 +64,7 @@ public class FileLoader {
             return selectedDirectory.getAbsolutePath();
         } else {
             System.out.println("Folder selection cancelled.");
-            return "Folder selection cancelled.";
+            return "-1";
         }
     }
 

@@ -10,7 +10,7 @@ public class ConxDB {
 
 	private final String DB_URL = "jdbc:mysql://localhost:3306/networked_db";
 	private final String USER = "root";
-	private final String PASS= "";
+	private final String PASS= "root1234";
 	//root root1234
 	private ConxDB() throws SQLException
 	{

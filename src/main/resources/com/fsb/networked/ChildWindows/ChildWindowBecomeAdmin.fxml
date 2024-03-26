@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="256.0" prefWidth="633.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.ChildWindowControllers.BecomeAdminChildWindowController">
+   <children>
+      <VBox prefHeight="251.0" prefWidth="599.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="63.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="58.0" prefWidth="632.0" text="Enter the code sent to you by the  developper team">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="63.0" prefWidth="600.0">
+               <children>
+                  <Label prefHeight="62.0" prefWidth="166.0" text="Code">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                     <padding>
+                        <Insets left="10.0" />
+                     </padding>
+                  </Label>
+                  <TextField fx:id="codeField" prefHeight="46.0" prefWidth="454.0">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <ButtonBar prefHeight="64.0" prefWidth="600.0">
+              <buttons>
+                  <Button fx:id="submitBtn" layoutX="509.0" layoutY="22.0" mnemonicParsing="false" onAction="#submitAdminCode" prefHeight="34.0" prefWidth="90.0" text="Submit">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </Button>
+              </buttons>
+               <padding>
+                  <Insets right="10.0" />
+               </padding>
+            </ButtonBar>
+            <Label fx:id="statusLabel" prefHeight="63.0" prefWidth="634.0" text="Status Label">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+   </children>
+</StackPane>

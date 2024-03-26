@@ -12,4 +12,8 @@ public class EntrepriseService {
         result = EntrepriseDAO.saveToDB(entrepriseDTO);
         return result;
     }
+
+    public int entrepriseExists(String email, String password) {
+        return entrepriseDAO.entrepriseExists(email,password);
+    }
 }

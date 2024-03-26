@@ -16,8 +16,8 @@ public class LoginController {
 	
 	@FXML
     private void gotoSignIn() throws IOException {
-        //App.setRoot("SignInPage");
-        App.setRoot("HomePageScenes/HomePageIndividual");
+        App.setRoot("SignInPage");
+        //App.setRoot("HomePageScenes/HomePageIndividual");
        // FilePaths.chooseDirectoryToSaveTo();
     }
 	@FXML

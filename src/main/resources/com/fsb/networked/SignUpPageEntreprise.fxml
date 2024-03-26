@@ -135,7 +135,7 @@
             <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
               <buttons>
                 <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" text="BACK" />
-                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#goNext" text="NEXT" />
+                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#finishSignUpEntreprise" text="NEXT" />
                   <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSignUp" text="Cancel" />
               </buttons>
             </ButtonBar>

@@ -54,6 +54,20 @@ public class Alerts
 	        alert.setContentText("Please enter a valid email address.\nAn email address should be:\n in the format:\n example@example.com");
 		 	return alert;
 	 }
+	 public static Alert AlertNotInDB()
+	 {
+		 	Alert alert = new Alert(AlertType.WARNING);
+	        alert.setTitle("Email Address Not Registered");
+	        alert.setContentText("Please enter a registered email address.\nOr go to sign up");
+		 	return alert;
+	 }
+	 public static Alert AlertWrongPassword()
+	 {
+		 	Alert alert = new Alert(AlertType.WARNING);
+	        alert.setTitle("Password Incorrect");
+	        alert.setContentText("Please Check your password.\nIf you have forgotten your password\nYou can reset it");
+		 	return alert;
+	 }
 	 public static Alert AlertPasswordField()
 	 {
 		 	Alert alert = new Alert(AlertType.WARNING);
@@ -131,6 +145,13 @@ public class Alerts
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Video Size Is Too Big");
 		alert.setContentText("Try Uploading a smaller video file\nMaximum Size id 15MB");
+		return alert;
+	}
+
+	public static Alert AlertCheckInput() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Please check your credentials");
+		alert.setContentText("Password or email incorrect\nIf you forgot your password then\nTry resetting it");
 		return alert;
 	}
 }

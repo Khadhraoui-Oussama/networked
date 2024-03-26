@@ -31,7 +31,7 @@ public class PDFCreator {
     static PDImageXObject backImg;
     //create a blank page
     static PDPage pdfPage = new PDPage(PDRectangle.A4);
-    public static void createPDF(String PATH,String NAME)
+    public static File createPDF(String PATH,String NAME)
     {
         //create the pdf document
         PDDocument pdfDocument = new PDDocument();
@@ -88,9 +88,12 @@ public class PDFCreator {
         }
         //save the pdf file
         try {
-            pdfDocument.save(new File(PATH+NAME));
+            File pdfFile = new File(PATH+NAME);
+            pdfDocument.save(pdfFile);
             //close the document
             pdfDocument.close();
+            //return the pdfFile
+            return pdfFile;
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -253,7 +256,6 @@ public class PDFCreator {
             contentStream.beginText();
             contentStream.newLineAtOffset(xOffset,yOffset - i*15);
             text = storageOfWrappedText[i];
-            System.out.println(text + "\n");
             contentStream.showText(text);
             contentStream.endText();
         }

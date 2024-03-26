@@ -58,7 +58,7 @@ public class SignUpEntrepriseController implements Initializable {
 	private Label statusLabel;
 
 	@FXML
-	private void goNext() throws IOException {
+	private void finishSignUpEntreprise() throws IOException {
 		boolean res =  validateInfo();
 		System.out.println(res);
 		if (res) {
@@ -73,7 +73,8 @@ public class SignUpEntrepriseController implements Initializable {
 			entrepriseDTO.setEntrepriseLogoPath(entrepriseLogoImageView.getImage().getUrl());
 			entrepriseDTO.setEntrepriseSize(sizeComboBox.getValue());
 			entrepriseDTO.setEntrepriseWebsite( websiteTextField.getText());
-
+			entrepriseDTO.setPassword(JSONParser.getValueFromJSONFile(ImportantFileReferences.ENTREPRISEJSON,"signUp","password"));
+			entrepriseDTO.setEmail(JSONParser.getValueFromJSONFile(ImportantFileReferences.ENTREPRISEJSON,"signUp","email"));
 			//save to DB
 			EntrepriseService entrepriseService = new EntrepriseService();
 			entrepriseService.saveEntrepriseToDB(entrepriseDTO);
@@ -96,6 +97,8 @@ public class SignUpEntrepriseController implements Initializable {
 		isValid &= Validator.validateField(locationTextField, Regexes.LOCATION_REGEX,Alerts.AlertAddressField());
 		System.out.println("Address :" + isValid);
 		isValid &= Validator.validateField(dateOfFoundationDatePicker, null,null); // Date is not validated using regex
+		isValid &= Validator.validateImageSize(entrepriseLogoImageView,Alerts.AlertImageSizeTooBig());
+		isValid &= Validator.validateImagePath(entrepriseLogoImageView,Alerts.AlertImagePathTooLong());
 		return isValid;
 	}
 
@@ -131,7 +134,6 @@ public class SignUpEntrepriseController implements Initializable {
 		String imageURL = FileLoader.getImagePath("/images/anonymous_logo.jpg");
 		entrepriseLogoImageView.setImage(new Image(imageURL));
 
-		dateOfFoundationDatePicker.setValue(JSONParser.getValueFromJSONFile(ImportantFileReferences.ENTREPRISEJSON,"signUpBasic",""));
 		//THIS IS ONLY TO SPEED UP THE DEVELEOPMENT REMOVE WHEN READY TO PUSH TO PROD
 		dateOfFoundationDatePicker.setValue(LocalDate.of(2003, 10, 4));
 		entrepriseNameField.setText("Boga Cidre");

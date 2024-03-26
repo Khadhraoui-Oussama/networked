@@ -19,24 +19,26 @@ public class EntrepriseDAO {
         ResultSet rs = null;
         try {
             String sqlSave = "INSERT INTO entreprise(" +
-                                        "name,password," +
+                                        "name,email,password," +
                                         "sector,size," +
                                         "location,founders," +
                                         "website,logoPicture)" +
-                                        " VALUES (?,?, ?, ?, ?, ?, ?, ?)";
+                                        " VALUES (?,?, ?, ?, ?,?, ?, ?, ?)";
             pstmt = connection.prepareStatement(sqlSave, Statement.RETURN_GENERATED_KEYS);
             //JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUp","emailAddress")
-            //email
+            //name
             pstmt.setString(1, entrepriseDTO.getEntrepriseName());
+            //email
+            pstmt.setString(2, entrepriseDTO.getEmail());
             //password
-            pstmt.setString(2, entrepriseDTO.getPassword());
+            pstmt.setString(3, entrepriseDTO.getPassword());
             //sector
-            pstmt.setString(3, entrepriseDTO.getEntrepriseSector());
+            pstmt.setString(4, entrepriseDTO.getEntrepriseSector());
             //size
-            pstmt.setString(4, entrepriseDTO.getEntrepriseSize());
-            pstmt.setString(5, entrepriseDTO.getEntrepriseLocation());
-            pstmt.setString(6, entrepriseDTO.getEntrepriseFounders());
-            pstmt.setString(7, entrepriseDTO.getEntrepriseWebsite());
+            pstmt.setString(5, entrepriseDTO.getEntrepriseSize());
+            pstmt.setString(6, entrepriseDTO.getEntrepriseLocation());
+            pstmt.setString(7, entrepriseDTO.getEntrepriseFounders());
+            pstmt.setString(8, entrepriseDTO.getEntrepriseWebsite());
 
             //logo picture
             //create an array of bytes for the pfp from the file that is created from the pathof image in the individual.json file
@@ -44,7 +46,7 @@ public class EntrepriseDAO {
             File pictureFile = new File(picturePath);
             byte[] pictureByteArray = Conversions.convertFileToByteArray(pictureFile);
             System.out.println("byte array size image : " + pictureByteArray.length);
-            pstmt.setBytes(8, pictureByteArray);
+            pstmt.setBytes(9, pictureByteArray);
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
 
@@ -59,7 +61,37 @@ public class EntrepriseDAO {
         }
         return entrepriseID;
     }
-
+    public static int entrepriseExists(String email, String password) {
+        int resultInt = 0;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            //check if the email and password match
+            String sqlCheckUser = "SELECT id FROM entreprise WHERE email = ? AND password = ?";
+            pstmt = connection.prepareStatement(sqlCheckUser);
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            rs = pstmt.executeQuery();
+            if (rs.next()) {
+                // Email and password match, return the entreprise ID
+                resultInt = rs.getInt("id");
+            } else {
+                // Email or password does not match, set appropriate return code
+                resultInt = -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultInt;
+    }
 /*
     public static int delete(String n, String p) {
         int rowsAffected = 0;

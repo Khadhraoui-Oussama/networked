@@ -21,8 +21,6 @@ public class VideoPostItemController implements Initializable {
     @FXML
     ImageView opImgView;
     @FXML
-    ImageView postImageView;
-    @FXML
     Label opNameLabel;
     @FXML
     Label dateOfPublicationLabel;
@@ -99,6 +97,10 @@ public class VideoPostItemController implements Initializable {
     //               mediaView.setMediaPlayer(mediaPlayer);
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (mediaPlayer != null) {
+            // Set mediaPlayer to mediaView
+            mediaView.setMediaPlayer(mediaPlayer);
+        }
     }
 
     public <T> void setData(VideoPostDTO videoPost)
@@ -118,5 +120,16 @@ public class VideoPostItemController implements Initializable {
         mediaPlayer.setVolume(.1);
         mediaView.setMediaPlayer(mediaPlayer);
 
+    }
+
+    public MediaPlayer getMediaPLayer() {
+        return this.mediaPlayer;
+    }
+    public void disposeMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.stop();
+            mediaPlayer.dispose();
+            mediaPlayer = null; // Resetting the mediaPlayer reference
+        }
     }
 }

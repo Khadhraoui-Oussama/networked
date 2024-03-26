@@ -54,9 +54,9 @@ public class SignUpController implements Initializable{
 	@FXML
     private void gotoSignUpEntreprise() throws IOException
 	{
-		if(validateBasicInfo())
+		if(Validator.validateTextFieldSQLUnique(emailAddressField,Alerts.AlertEmailInUse(),"email","individual") && validateBasicInfo())
 		{
-			JSONParser.writeToJSONFile(ImportantFileReferences.ENTREPRISEJSON, "signUp", "emailAddress", emailAddressField.getText());
+			JSONParser.writeToJSONFile(ImportantFileReferences.ENTREPRISEJSON, "signUp", "email", emailAddressField.getText());
 			JSONParser.writeToJSONFile(ImportantFileReferences.ENTREPRISEJSON, "signUp", "password", passwordField.getText());
 			App.setRoot("SignUpPageEntreprise");
 		}
@@ -76,7 +76,6 @@ public class SignUpController implements Initializable{
 		boolean isValid = true;
 		isValid &= Validator.validateField(emailAddressField, Regexes.EMAIL_REGEX,Alerts.AlertEmailField());
 		isValid &= Validator.validateField(passwordField, Regexes.PASSWORD_REGEX,Alerts.AlertPasswordField());
-		// TODO UNCOMMENT THIS TO CHECK FOR EMAIL UNIQNESS I LEFT IT TO SPEED UP DEV
 		return isValid;
 	}
 	@Override

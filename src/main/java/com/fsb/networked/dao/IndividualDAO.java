@@ -17,18 +17,18 @@ import java.sql.*;
 public class IndividualDAO {
 
     //connection
-    public static void saveToDB()
+    public static void saveToDB(byte[] pdfFile)
     {
         //TODO FIX THE SAVE FUNCTION JUST SAVES BASIC INFO EVEN IF EDUCATION INFO IS NOT CORRECT OR CAUSED ERRORS
         //TODO NONE OF THAT IS NECCESARY AS ALL DATA WILL BE CORRECT BECAUSE OF FRONT END INPUT CHECKS VALIDATEINFO FUNCTIONS COMING IN CLUTCH
-        int createdIndividualID = saveBasicInfoToDB();
+        int createdIndividualID = saveBasicInfoToDB(pdfFile);
         saveEducationsToDB(createdIndividualID);
         saveWorkExperiencesToDB(createdIndividualID);
         saveSkillsToDB(createdIndividualID);
         saveProjectsToDB(createdIndividualID);
     }
     private static Connection connection = ConxDB.getInstance();
-    public static int saveBasicInfoToDB()
+    public static int saveBasicInfoToDB(byte[] pdfFile)
     {
         int individualId = 0;
         PreparedStatement pstmt = null; // we use a prepared statement to avoid any SQL injection attacks.
@@ -39,8 +39,8 @@ public class IndividualDAO {
                                             "firstName,lastName," +
                                             "profilePicture,video_cv," +
                                             "country,birth_date" +
-                                            ",isAdmin,gender)" +
-                                            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ? ,?)";
+                                            ",isAdmin,gender,pdf_resume)" +
+                                            " VALUES (?,?, ?, ?, ?, ?, ?,?, ?, ? ,?)";
             pstmt = connection.prepareStatement(sqlSave, Statement.RETURN_GENERATED_KEYS);
             //JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUp","emailAddress")
             //email
@@ -71,11 +71,16 @@ public class IndividualDAO {
 
             //birth_date
             pstmt.setDate(8, Date.valueOf(Conversions.stringtoLocalDate(JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpBasic","dob"))));
+            //isAdmin
             pstmt.setBoolean(9,false);
+            //gender
             pstmt.setString(10,JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpBasic","gender"));
+            //pdfresume
+            pstmt.setBytes(11,pdfFile);
+            System.out.println("byte array size pdf : "  + pdfFile.length);
+
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
-
             //get id needed to populate the other tables
             if(rs.next())
             {
@@ -90,7 +95,6 @@ public class IndividualDAO {
         }
         return individualId;
     }
-
     public static void saveEducationsToDB(int accountId) {
         if (accountId == -1) return;
         PreparedStatement pstmt = null;
@@ -197,6 +201,39 @@ public class IndividualDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public static int individualExists(String email, String password) {
+        int resultInt = 0;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        try {
+            //check if the email and password match
+            String sqlCheckUser = "SELECT id FROM individual WHERE email = ? AND password = ?";
+            pstmt = connection.prepareStatement(sqlCheckUser);
+            pstmt.setString(1, email);
+            pstmt.setString(2, password);
+            rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                // Email and password match, return the user ID
+                resultInt = rs.getInt("id");
+            } else {
+                // Email or password does not match, set appropriate return code
+                resultInt = -1;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            // Close resources
+            try {
+                if (rs != null) rs.close();
+                if (pstmt != null) pstmt.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return resultInt;
     }
 
 /*

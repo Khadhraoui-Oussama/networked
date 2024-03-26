@@ -122,6 +122,7 @@ public class EntrepriseDTO {
                 ", entrepriseDateOfFoundation=" + entrepriseDateOfFoundation +
                 ", entrepriseLogoPath='" + entrepriseLogoPath + '\'' +
                 ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
                 '}';
     }
 }

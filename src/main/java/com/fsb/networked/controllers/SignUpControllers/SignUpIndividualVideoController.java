@@ -34,9 +34,6 @@ public class SignUpIndividualVideoController implements Initializable {
     private Button chooseVideoBtn;
 
     @FXML
-    private Button generatePDFBtn;
-
-    @FXML
     private Button finishBtn;
 
     @FXML
@@ -95,10 +92,13 @@ public class SignUpIndividualVideoController implements Initializable {
 
 
     public static boolean isValidVideo(File file,MediaView mediaView) {
-        boolean isValid  = true;
-        isValid &= file != null;
-        isValid &= Validator.validateVideoFileSize(file,mediaView ,Alerts.AlertVideoResumeSizeTooBig());
-        return  isValid;
+        if(file == null)
+        {
+            return false;
+        }
+        else{
+            return Validator.validateVideoFileSize(file,mediaView ,Alerts.AlertVideoResumeSizeTooBig());
+        }
    }
     @FXML
     private void goBack() throws IOException
@@ -108,23 +108,30 @@ public class SignUpIndividualVideoController implements Initializable {
             App.setRoot("SignUpScenes/SignUpPageIndividualProject");
         }
     }
-    IndividualDAO individualDAO = new IndividualDAO();
-    @FXML
+  @FXML
     private void finishSignUpIndividual() throws IOException
     {
         if(isValidVideo(videoFile,mediaView))
         {
-            //add the video path to the json file
-            JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpVideo", "videoPath", "file:" + videoFile.toURI().getPath());
-            System.out.println("All Info Gathered");
-            //create the pdf resume
             String path = FileLoader.chooseDirectoryToSaveTo();
-            System.out.println("PDF resume saved at : " + path);
-            //PDFCreator.createPDF(path,"\\resume.pdf");
-            individualDAO.saveToDB();
+            System.out.println("PDF PATH HERE" + path);
+            if(!path.isEmpty() && !path.equals("-1"))
+            {
+                //add the video path to the json file
+                JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpVideo", "videoPath", "file:" + videoFile.toURI().getPath());
+                System.out.println("All Info Gathered");
+                //create the pdf resume
+
+                System.out.println("PDF resume saved at : " + path);
+                File pdfFile = PDFCreator.createPDF(path,"\\resume.pdf");
+                IndividualDAO.saveToDB(Conversions.convertFileToByteArray(pdfFile));
+            }
+            else {
+                statusLabel.setText("Pls choose a directory to save your pdf resume to.");
+            }
         }
         else {
-            statusLabel.setText("Pls select a valid video resume first\nto be able to generate your PDF.");
+            statusLabel.setText("Pls select a valid video resume first\nto continue.");
         }
     }
 

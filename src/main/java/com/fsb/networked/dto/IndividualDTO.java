@@ -10,10 +10,11 @@ public class IndividualDTO {
     private LocalDate birthDate;
     private byte[] profile_picture;
     private byte[] video_resume;
+    private byte[] pdf_resume;
     private String country;
     private boolean isAdmin;
 
-    public IndividualDTO(int id, String firstName, String lastName, String email, LocalDate birthDate, byte[] profile_picture, byte[] video_resume, String country, boolean isAdmin) {
+    public IndividualDTO(int id, String firstName, String lastName, String email, LocalDate birthDate, byte[] profile_picture, byte[] video_resume, byte[] pdf_resume, String country, boolean isAdmin) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -21,8 +22,17 @@ public class IndividualDTO {
         this.birthDate = birthDate;
         this.profile_picture = profile_picture;
         this.video_resume = video_resume;
+        this.pdf_resume = pdf_resume;
         this.country = country;
         this.isAdmin = isAdmin;
+    }
+
+    public byte[] getPdf_resume() {
+        return pdf_resume;
+    }
+
+    public void setPdf_resume(byte[] pdf_resume) {
+        this.pdf_resume = pdf_resume;
     }
 
     public IndividualDTO() {

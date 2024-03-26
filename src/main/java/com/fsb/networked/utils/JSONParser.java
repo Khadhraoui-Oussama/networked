@@ -149,7 +149,7 @@ public class JSONParser {
         JSONObject signUpBasicObject = new JSONObject();
         signUpBasicObject.put("email","");
         signUpBasicObject.put("password","");
-        jsonObject.put("signUpBasic",signUpBasicObject);
+        jsonObject.put("signUp",signUpBasicObject);
         String filePath = ImportantFileReferences.ENTREPRISEJSON;
         try (FileWriter writer = new FileWriter(filePath, false)) {
             writer.write(jsonObject.toString());

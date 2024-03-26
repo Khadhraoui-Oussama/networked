@@ -14,6 +14,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class HomePageController  implements Initializable {
+public class HomePageIndividualController implements Initializable {
 
     //labels
     @FXML
@@ -98,12 +99,14 @@ public class HomePageController  implements Initializable {
     private VBox messageConnectionLayoutVbox;
     @FXML
     private VBox connectionSuggestionsLayoutVbox;
+    // Media Players
+    private List<MediaPlayer> mediaPlayers = new ArrayList<>();
     //in notifications and messages button if user has messages or notifications replace the Icon with a red one
     //just change the imageview resource in the tab imageview
 
     @FXML
-    private void reloadHomeTab() throws IOException {
-        System.out.println("Reloaded");
+    private void loadHomeTab() throws IOException {
+        loadPostsVBox();
     }
 
     @FXML
@@ -119,7 +122,7 @@ public class HomePageController  implements Initializable {
     }
 
     @FXML
-    private void loadTabProfileTab()
+    private void loadProfileTab()
     {
         loadProfileLayoutVbox();
     }
@@ -227,6 +230,7 @@ public class HomePageController  implements Initializable {
     private void loadJobOffersVbox()
     {
         List<JobOfferDTO> jobOffers = new ArrayList<>(getJobOffersFromDB());
+        jobPostsLayoutVbox.getChildren().clear();
             for (int i = 0; i < jobOffers.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("UiComponents/JobPostUiComponent.fxml"));
@@ -271,6 +275,7 @@ public class HomePageController  implements Initializable {
     }
     private void loadSuggestionsVBox() {
         List<ConnectionDTO> connectionSuggestions = new ArrayList<>(getConnectionSuggestionsFromDB());
+        connectionSuggestionsLayoutVbox.getChildren().clear();
         for (int i = 0; i < connectionSuggestions.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("UiComponents/ConnectionSuggestionUiComponent.fxml"));
@@ -286,7 +291,9 @@ public class HomePageController  implements Initializable {
     }
     private <T> void loadPostsVBox()
     {
+        //disposeMediaPlayers();
         List<T> posts = new ArrayList<>(getPostsFromDB());
+        postsLayoutVbox.getChildren().clear();
         for (int i = 0; i < posts.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             if(posts.get(i) instanceof ImagePostDTO)
@@ -309,7 +316,7 @@ public class HomePageController  implements Initializable {
                     VideoPostItemController controller = fxmlLoader.getController();
                     controller.setData((VideoPostDTO) posts.get(i));
                     postsLayoutVbox.getChildren().add(videoPostVbox);
-
+                    mediaPlayers.add(controller.getMediaPLayer());
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
@@ -328,6 +335,29 @@ public class HomePageController  implements Initializable {
             }
         }
     }
+   /* private void disposeMediaPlayers() {
+        // Iterate through all video post items and dispose their media players
+        for (Node node : postsLayoutVbox.getChildren()) {
+            if (node instanceof VBox) {
+                VBox postVbox = (VBox) node;
+                Object controller = postVbox.getProperties().get("controller");
+                if (controller instanceof VideoPostItemController) {
+                    VideoPostItemController videoController = (VideoPostItemController) controller;
+                    videoController.disposeMediaPlayer();
+                }
+            }
+        }
+    }*/
+   private void disposeMediaPlayers() {
+       // Dispose all media players and stop playing videos
+       for (MediaPlayer mediaPlayer : mediaPlayers) {
+           if (mediaPlayer != null) {
+               mediaPlayer.stop();
+           }
+       }
+       // Clear the list of media players
+       mediaPlayers.clear();
+   }
     private <T> List<T> getPostsFromDB()
     {
         List<T> ls = new ArrayList<T>();
@@ -497,6 +527,7 @@ public class HomePageController  implements Initializable {
     private void loadConnectionSharedPostNotificationLayoutVbox()
     {
         List<NotificationConnectionSharedPostDTO> notifications = new ArrayList<>(getNotificationConnectionSharedPostsFromDB());
+        notificationsLayoutVbox.getChildren().clear();
         for (int i = 0; i < notifications.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("UiComponents/NotificationUiComponent.fxml"));
@@ -534,6 +565,7 @@ public class HomePageController  implements Initializable {
         settings.add(new SettingDTO("Modify Skills ",this::modifySkills));
         settings.add(new SettingDTO("Modify Education",this::modifyEducation));
         settings.add(new SettingDTO("Modify Personal Projects",this::modifyProjects));
+        settings.add(new SettingDTO("Become Admin",this::becomeAdmin));
         System.out.println(settings.size());
         for (int i = 0; i < settings.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -724,9 +756,49 @@ public class HomePageController  implements Initializable {
             e.printStackTrace();
         }
     }
+    private void becomeAdmin(ActionEvent event)
+    {
+        try {
+            // Load the FXML file for the child window
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("ChildWindows/ChildWindowBecomeAdmin.fxml"));
+            Parent root = fxmlLoader.load();
+
+            // Create a new stage for the child window
+            Stage stage = new Stage();
+            stage.setResizable(false);
+            //APPLICATION_MODAL THIS MEANS THAT THE APPLICATION IS INACCESSIBLE WHILE THIS WINDOWS IS OPEN
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.setTitle("Become an admin");
+
+            // Set the scene with the FXML content
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            // Show the child window
+            stage.showAndWait();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+   /* private void disposeMediaPlayers() {
+        // Dispose all media players and stop playing videos
+        for (MediaPlayer mediaPlayer : mediaPlayers) {
+            if (mediaPlayer != null) {
+                mediaPlayer.stop();
+                mediaPlayer.dispose();
+            }
+        }
+        // Clear the list of media players
+        mediaPlayers.clear();
+    }*/
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        loadPostsVBox();
+        try {
+            loadHomeTab();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
         loadSuggestionsVBox();
         //change the button text based on the user pfp
         if(profilePictureImageView.getImage().getUrl().toString().substring(6)
@@ -739,5 +811,6 @@ public class HomePageController  implements Initializable {
         else {
             changeAddPfpBtn.setText("Change the profile picture");
         }
+
     }
 }

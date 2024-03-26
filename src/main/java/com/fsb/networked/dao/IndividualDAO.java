@@ -17,7 +17,7 @@ import java.sql.*;
 public class IndividualDAO {
 
     //connection
-    public static void saveToDB(byte[] pdfFile)
+    public static int saveToDB(byte[] pdfFile)
     {
         //TODO FIX THE SAVE FUNCTION JUST SAVES BASIC INFO EVEN IF EDUCATION INFO IS NOT CORRECT OR CAUSED ERRORS
         //TODO NONE OF THAT IS NECCESARY AS ALL DATA WILL BE CORRECT BECAUSE OF FRONT END INPUT CHECKS VALIDATEINFO FUNCTIONS COMING IN CLUTCH
@@ -26,6 +26,7 @@ public class IndividualDAO {
         saveWorkExperiencesToDB(createdIndividualID);
         saveSkillsToDB(createdIndividualID);
         saveProjectsToDB(createdIndividualID);
+        return  createdIndividualID;
     }
     private static Connection connection = ConxDB.getInstance();
     public static int saveBasicInfoToDB(byte[] pdfFile)

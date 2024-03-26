@@ -43,6 +43,8 @@ public class VideoPostItemController implements Initializable {
     @FXML
     Button resetBtn;
     @FXML
+    Button reloadBtn;
+    @FXML
     Button likeBtn;
     @FXML
     Button commentBtn;
@@ -88,13 +90,13 @@ public class VideoPostItemController implements Initializable {
             mediaPlayer.seek(Duration.ZERO);
         }
     }
-
-    ////clear media : media = null;
-    //// Initialize media and mediaPlayer
-    //               media = new Media(videoFile.toURI().toString());
-    //               mediaPlayer = new MediaPlayer(media);
-    //// Set the media player for the mediaView:
-    //               mediaView.setMediaPlayer(mediaPlayer);
+    //TODO SOMETIMES THE VIDEO WONT LOAD IN THE POST SO REALOADVIDEO HOPEFULLY FIXES THAT
+    public void reloadVideo() {
+        disposeMediaPlayer();
+        mediaPlayer = new MediaPlayer(media);
+        mediaPlayer.setVolume(.1);
+        mediaView.setMediaPlayer(mediaPlayer);
+    }
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         if (mediaPlayer != null) {
@@ -132,4 +134,6 @@ public class VideoPostItemController implements Initializable {
             mediaPlayer = null; // Resetting the mediaPlayer reference
         }
     }
+
+
 }

@@ -1,7 +1,7 @@
 package com.fsb.networked.controllers.SignUpControllers;
 
 import com.fsb.networked.App;
-import com.fsb.networked.dao.IndividualDAO;
+import com.fsb.networked.service.IndividualService;
 import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -113,6 +113,7 @@ public class SignUpIndividualVideoController implements Initializable {
     {
         if(isValidVideo(videoFile,mediaView))
         {
+            IndividualService individualService = new IndividualService();
             String path = FileLoader.chooseDirectoryToSaveTo();
             System.out.println("PDF PATH HERE" + path);
             if(!path.isEmpty() && !path.equals("-1"))
@@ -124,7 +125,7 @@ public class SignUpIndividualVideoController implements Initializable {
 
                 System.out.println("PDF resume saved at : " + path);
                 File pdfFile = PDFCreator.createPDF(path,"\\resume.pdf");
-                IndividualDAO.saveToDB(Conversions.convertFileToByteArray(pdfFile));
+                individualService.saveIndividualToDB(Conversions.convertFileToByteArray(pdfFile));
             }
             else {
                 statusLabel.setText("Pls choose a directory to save your pdf resume to.");
@@ -144,7 +145,6 @@ public class SignUpIndividualVideoController implements Initializable {
             mediaPlayer.play();
         }
     }
-
     @FXML
     private void pauseVideo()
     {

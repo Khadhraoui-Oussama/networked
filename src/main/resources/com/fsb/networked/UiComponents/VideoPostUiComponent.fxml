@@ -77,6 +77,15 @@
                         </ImageView>
                      </graphic>
                   </Button>
+                  <Button fx:id="reloadBtn" mnemonicParsing="false" onAction="#reloadVideo" prefHeight="26.0" prefWidth="42.0">
+                     <graphic>
+                        <ImageView fitHeight="17.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/reload_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                </children>
             </HBox>
             <HBox minHeight="-Infinity" prefHeight="40.0" prefWidth="634.0">

@@ -30,6 +30,7 @@ public class CreateVideoPostChildWindowController implements Initializable {
     Button pauseBtn;
     @FXML
     Button resetBtn;
+
     @FXML
     Label statusLabel;
     @FXML
@@ -102,7 +103,6 @@ public class CreateVideoPostChildWindowController implements Initializable {
             mediaPlayer.seek(Duration.ZERO);
         }
     }
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Check if mediaPlayer is initialized

@@ -335,7 +335,7 @@ public class HomePageIndividualController implements Initializable {
             }
         }
     }
-   /* private void disposeMediaPlayers() {
+   /*private void disposeMediaPlayers() {
         // Iterate through all video post items and dispose their media players
         for (Node node : postsLayoutVbox.getChildren()) {
             if (node instanceof VBox) {
@@ -353,6 +353,7 @@ public class HomePageIndividualController implements Initializable {
        for (MediaPlayer mediaPlayer : mediaPlayers) {
            if (mediaPlayer != null) {
                mediaPlayer.stop();
+               mediaPlayer.dispose();
            }
        }
        // Clear the list of media players
@@ -492,6 +493,7 @@ public class HomePageIndividualController implements Initializable {
 
     private void loadMessageConnectionLayoutVbox()
     {
+        disposeMediaPlayers();
         List<MessageConnectionDTO> messageConnections = new ArrayList<>(getMessageConnectionFromDB());
         for (int i = 0; i < messageConnections.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
@@ -508,6 +510,7 @@ public class HomePageIndividualController implements Initializable {
     }
     private List<MessageConnectionDTO> getMessageConnectionFromDB()
     {
+
         //TODO gets all the connections and the last message from the database
         //TODO GET JOB OFFERS FROM DATABASE AND FILL THEM HERE INSTEAD OF THIS FOR LOOP
         List<MessageConnectionDTO> ls = new ArrayList<>();
@@ -526,6 +529,7 @@ public class HomePageIndividualController implements Initializable {
 
     private void loadConnectionSharedPostNotificationLayoutVbox()
     {
+        disposeMediaPlayers();
         List<NotificationConnectionSharedPostDTO> notifications = new ArrayList<>(getNotificationConnectionSharedPostsFromDB());
         notificationsLayoutVbox.getChildren().clear();
         for (int i = 0; i < notifications.size(); i++) {
@@ -559,6 +563,7 @@ public class HomePageIndividualController implements Initializable {
     }
     private void loadProfileLayoutVbox()
     {
+        disposeMediaPlayers();
         List<SettingDTO> settings = new ArrayList<>();
         profileLayoutVbox.getChildren().clear();
         settings.add(new SettingDTO("Modify Work Experience", this::modifyWorkExperience));
@@ -582,6 +587,7 @@ public class HomePageIndividualController implements Initializable {
     }
     private void loadSettingsLayoutVbox()
     {
+        disposeMediaPlayers();
         List<SettingDTO> settings = new ArrayList<>();
         settingsLayoutVbox.getChildren().clear();
         settings.add(new SettingDTO("Change My Password", this::changePassword));
@@ -780,17 +786,6 @@ public class HomePageIndividualController implements Initializable {
         }
     }
 
-   /* private void disposeMediaPlayers() {
-        // Dispose all media players and stop playing videos
-        for (MediaPlayer mediaPlayer : mediaPlayers) {
-            if (mediaPlayer != null) {
-                mediaPlayer.stop();
-                mediaPlayer.dispose();
-            }
-        }
-        // Clear the list of media players
-        mediaPlayers.clear();
-    }*/
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -811,6 +806,11 @@ public class HomePageIndividualController implements Initializable {
         else {
             changeAddPfpBtn.setText("Change the profile picture");
         }
-
+       /* tabPane.getSelectionModel().selectedItemProperty().addListener((observable ,oldTab,newTab) -> {
+            if (oldTab.equals(tabHome)) {
+                disposeMediaPlayers();
+            }
+        });*/
     }
 }
+

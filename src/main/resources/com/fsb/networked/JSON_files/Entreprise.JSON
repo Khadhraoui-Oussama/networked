@@ -1,1 +1,15 @@
-{"webSite":"","logoImage":"","foundingYear":"","founder":"","localisation":"","description":"","companySize":"","nameEntreprise":"","sector":""}
+{
+  "signUpBasic": {
+    "email": "",
+    "password": ""
+  },
+  "webSite": "",
+  "logoImage": "",
+  "foundingYear": "",
+  "founder": "",
+  "localisation": "",
+  "description": "",
+  "companySize": "",
+  "nameEntreprise": "",
+  "sector": ""
+}

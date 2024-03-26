@@ -1,6 +1,6 @@
 package com.fsb.networked.controllers.ChildWindowControllers;
 
-import com.fsb.networked.dto.JobDTO;
+import com.fsb.networked.dto.WorkDTO;
 import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -38,7 +38,7 @@ public class WorkExperienceChildWindowController implements Initializable {
     private Button btnDeleteJob;
 
     @FXML
-    private ListView<JobDTO> jobListView;
+    private ListView<WorkDTO> jobListView;
     private final JSONArray jobsArray = new JSONArray();
     @FXML
     private void addJob()
@@ -47,7 +47,7 @@ public class WorkExperienceChildWindowController implements Initializable {
         //TODO DATABSE
         if(validateJob())
         {
-            JobDTO job = new JobDTO(jobPositionField.getText(), companyField.getText(),jobTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue());
+            WorkDTO job = new WorkDTO(jobPositionField.getText(), companyField.getText(),jobTypeField.getText(),descriptionTextArea.getText(),startDate.getValue(),endDate.getValue());
             //now clear all the fields
             jobPositionField.clear();
             companyField.clear();
@@ -65,7 +65,7 @@ public class WorkExperienceChildWindowController implements Initializable {
     {
         //DONE TODO : when delete skill btn is presses delete the job from the listview of jobs
         //TODO DATABSE
-        JobDTO selectedJob = jobListView.getSelectionModel().getSelectedItem();
+        WorkDTO selectedJob = jobListView.getSelectionModel().getSelectedItem();
         jobListView.getItems().remove(selectedJob);
         jobsArray.remove(jobListView.getItems().indexOf(jobListView.getSelectionModel().getSelectedItem()));
     }
@@ -93,12 +93,12 @@ public class WorkExperienceChildWindowController implements Initializable {
     {
         /*------------*/
         //held together by glue
-        jobListView.setCellFactory(new Callback<ListView<JobDTO>, ListCell<JobDTO>>() {
+        jobListView.setCellFactory(new Callback<ListView<WorkDTO>, ListCell<WorkDTO>>() {
             @Override
-            public ListCell<JobDTO> call(ListView<JobDTO> param) {
-                return new ListCell<JobDTO>() {
+            public ListCell<WorkDTO> call(ListView<WorkDTO> param) {
+                return new ListCell<WorkDTO>() {
                     @Override
-                    protected void updateItem(JobDTO job, boolean empty) {
+                    protected void updateItem(WorkDTO job, boolean empty) {
                         super.updateItem(job, empty);
                         if (job == null || empty) {
                             setText(null);
@@ -110,7 +110,7 @@ public class WorkExperienceChildWindowController implements Initializable {
             }
         });
         //TODO GET IT FROM DATABASE
-        JSONArray jobsArray = JSONParser.getJobsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+        JSONArray jobsArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpWork");
         // Iterate over each skill object in the JSON array and extract each field
         for (int i = 0; i < jobsArray.length(); i++) {
             JSONObject jobObject = jobsArray.getJSONObject(i);
@@ -122,7 +122,7 @@ public class WorkExperienceChildWindowController implements Initializable {
             String endDateValue = jobObject.getString("endDate");
 
             //create a skill object with those extracted values
-            JobDTO job = new JobDTO(positionValue,companyValue,descriptionValue,typeValue, Conversions.stringtoLocalDate(startDateValue),Conversions.stringtoLocalDate(endDateValue));
+            WorkDTO job = new WorkDTO(positionValue,companyValue,descriptionValue,typeValue, Conversions.stringtoLocalDate(startDateValue),Conversions.stringtoLocalDate(endDateValue));
             //add that skill object to the skillsListView list of items(skills)
             //check if all fields are empty then don't add it
             //without this check at the first signUp the user will find an empty ghost task

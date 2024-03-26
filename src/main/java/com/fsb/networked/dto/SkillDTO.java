@@ -18,7 +18,11 @@ public class SkillDTO
 		this.level = level;
 	}
 
-	public String getTitle()
+    public SkillDTO() {
+
+    }
+
+    public String getTitle()
 	{
 		return title;
 	}

@@ -1,10 +1,7 @@
 package com.fsb.networked.controllers.ChildWindowControllers;
 
 import com.fsb.networked.dto.ProjectDTO;
-import com.fsb.networked.utils.Alerts;
-import com.fsb.networked.utils.JSONParser;
-import com.fsb.networked.utils.Regexes;
-import com.fsb.networked.utils.Validator;
+import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -104,7 +101,7 @@ public class ProjectChildWindowController implements Initializable {
             }
         });
 		//TODO GET FROM DB
-		JSONArray projectsArray = JSONParser.getProjectsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+		JSONArray projectsArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpProjects");
 		// Iterate over each skill object in the JSON array and extract each field
 		for (int i = 0; i < projectsArray.length(); i++) {
 			JSONObject projectObject = projectsArray.getJSONObject(i);

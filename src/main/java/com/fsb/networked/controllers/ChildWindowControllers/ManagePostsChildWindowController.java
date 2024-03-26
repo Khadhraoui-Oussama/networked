@@ -57,7 +57,7 @@ public class ManagePostsChildWindowController implements Initializable {
             }
         });
         //TODO GET FROM DB
-        //JSONArray postArray = JSONParser.getEducationsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+        //JSONArray postArray = JSONParser.getEducationsJSONArray(ImportantFileReferences.INDIVIDUALJSON);
             // Iterate over each skill object in the JSON array and extract each field
 
             /*ConnectionDTO education = new EducationDTO(positionValue,companyValue,descriptionValue,typeValue, Conversions.stringtoLocalDate(startDateValue),Conversions.stringtoLocalDate(endDateValue));

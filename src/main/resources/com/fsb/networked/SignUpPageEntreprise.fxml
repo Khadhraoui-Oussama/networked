@@ -57,7 +57,7 @@
                                     <Font size="25.0" />
                                  </font>
                               </Label>
-                              <TextField fx:id="companyNameField" prefHeight="26.0" prefWidth="158.0" />
+                              <TextField fx:id="entrepriseNameField" prefHeight="26.0" prefWidth="158.0" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" layoutX="10.0" layoutY="138.0" prefHeight="59.0" prefWidth="686.0">
@@ -139,7 +139,7 @@
                   <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSignUp" text="Cancel" />
               </buttons>
             </ButtonBar>
-            <ImageView fx:id="companyLogoImageView" fitHeight="314.0" fitWidth="365.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <ImageView fx:id="entrepriseLogoImageView" fitHeight="314.0" fitWidth="365.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <VBox prefHeight="46.0" prefWidth="392.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BASELINE">
                <children>
                   <ButtonBar prefHeight="246.0" prefWidth="392.0">

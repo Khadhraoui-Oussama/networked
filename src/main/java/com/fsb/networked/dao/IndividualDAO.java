@@ -1,6 +1,15 @@
 package com.fsb.networked.dao;
 
-import com.fsb.networked.utils.*;
+import com.fsb.networked.dto.EducationDTO;
+import com.fsb.networked.dto.ProjectDTO;
+import com.fsb.networked.dto.SkillDTO;
+import com.fsb.networked.dto.WorkDTO;
+import com.fsb.networked.utils.Conversions;
+import com.fsb.networked.utils.ConxDB;
+import com.fsb.networked.utils.ImportantFileReferences;
+import com.fsb.networked.utils.JSONParser;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.IOException;
@@ -8,20 +17,31 @@ import java.sql.*;
 public class IndividualDAO {
 
     //connection
-    private static Connection conn = ConxDB.getInstance();
-    public static int save()
+    public static void saveToDB()
+    {
+        //TODO FIX THE SAVE FUNCTION JUST SAVES BASIC INFO EVEN IF EDUCATION INFO IS NOT CORRECT OR CAUSED ERRORS
+        //TODO NONE OF THAT IS NECCESARY AS ALL DATA WILL BE CORRECT BECAUSE OF FRONT END INPUT CHECKS VALIDATEINFO FUNCTIONS COMING IN CLUTCH
+        int createdIndividualID = saveBasicInfoToDB();
+        saveEducationsToDB(createdIndividualID);
+        saveWorkExperiencesToDB(createdIndividualID);
+        saveSkillsToDB(createdIndividualID);
+        saveProjectsToDB(createdIndividualID);
+    }
+    private static Connection connection = ConxDB.getInstance();
+    public static int saveBasicInfoToDB()
     {
         int individualId = 0;
         PreparedStatement pstmt = null; // we use a prepared statement to avoid any SQL injection attacks.
-        PreparedStatement pstmt2 = null; // we use a prepared statement to avoid any SQL injection attacks.
         ResultSet rs = null;
         try
         {
-            String sqlSave = "INSERT INTO user(email,password," +
+            String sqlSave = "INSERT INTO individual(email,password," +
                                             "firstName,lastName," +
-                                            "profile_picture,video_cv," +
-                                            "country,birth_date) VALUES (?, ?, ?, ?, ?, ?, ? ,?)";
-            pstmt = conn.prepareStatement(sqlSave, Statement.RETURN_GENERATED_KEYS);
+                                            "profilePicture,video_cv," +
+                                            "country,birth_date" +
+                                            ",isAdmin,gender)" +
+                                            " VALUES (?,?, ?, ?, ?, ?, ?, ?, ? ,?)";
+            pstmt = connection.prepareStatement(sqlSave, Statement.RETURN_GENERATED_KEYS);
             //JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUp","emailAddress")
             //email
             pstmt.setString(1, JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUp","emailAddress"));
@@ -34,32 +54,33 @@ public class IndividualDAO {
             //profile_picture
             //create an array of bytes for the pfp from the file that is created from the pathof image in the individual.json file
             String picturePath = (JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "picture")).toString().substring(6);
-            //URI picturePathUri = URI.create(picturePath);
             File pictureFile = new File(picturePath);
-            byte[] profilePicture = ImageConverter.convertFileToByteArray(pictureFile);
-            System.out.println("byte array size: "  + profilePicture.length);
-            pstmt.setBytes(5, profilePicture);
-            //TODO video_cv
-            pstmt.setBytes(6, null);
+            byte[] pictureByteArray = Conversions.convertFileToByteArray(pictureFile);
+            System.out.println("byte array size image : "  + pictureByteArray.length);
+            pstmt.setBytes(5, pictureByteArray);
+
+            //video resume
+            String videoPath = (JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpVideo", "videoPath")).toString().substring(6);
+            File videoResumeFile = new File(videoPath);
+            byte[] videoResumeByteArray = Conversions.convertFileToByteArray(videoResumeFile);
+            System.out.println("byte array size video : "  + videoResumeByteArray.length);
+            pstmt.setBytes(6, videoResumeByteArray);
+
             //country
             pstmt.setString(7, JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpBasic","country"));
+
             //birth_date
             pstmt.setDate(8, Date.valueOf(Conversions.stringtoLocalDate(JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpBasic","dob"))));
-
+            pstmt.setBoolean(9,false);
+            pstmt.setString(10,JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpBasic","gender"));
             pstmt.executeUpdate();
             rs = pstmt.getGeneratedKeys();
 
+            //get id needed to populate the other tables
             if(rs.next())
             {
                 individualId = rs.getInt(1);
             }
-            //SET THE USER account type 1 if individual and 2 if entreprise
-            String sqlUserAccountType = "INSERT INTO user_account_type(userID,account_type) VALUES (?, ?)";
-            pstmt2 = conn.prepareStatement(sqlUserAccountType, Statement.RETURN_GENERATED_KEYS);
-            pstmt2.setInt(1, individualId);
-            pstmt2.setInt(2,1);
-            pstmt2.executeUpdate();
-
         }
         catch (SQLException e)
         {
@@ -68,6 +89,114 @@ public class IndividualDAO {
             throw new RuntimeException(e);
         }
         return individualId;
+    }
+
+    public static void saveEducationsToDB(int accountId) {
+        if (accountId == -1) return;
+        PreparedStatement pstmt = null;
+        try{
+            String sql = "INSERT INTO education (user_id, diploma," +
+                                                " institute, description," +
+                                                " type, startDate," +
+                                                " endDate)" +
+                                                " VALUES (?, ?, ?, ?, ?, ?, ?)";
+            pstmt = connection.prepareStatement(sql);
+            JSONArray educationArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpEducation");
+            for (int i = 0; i < educationArray.length();i++ ) {
+                //get educationDTO from the educationArray JSON object item (cast from Object) at index i
+                EducationDTO educationDTO =  JSONParser.JSONObjectToEducationDTO((JSONObject) educationArray.get(i));
+                pstmt.setInt(1, accountId);
+                pstmt.setString(2, educationDTO.getDiploma());
+                pstmt.setString(3, educationDTO.getInstitute());
+                pstmt.setString(4, educationDTO.getDescription());
+                pstmt.setString(5, educationDTO.getType());
+                pstmt.setDate(6, java.sql.Date.valueOf(educationDTO.getStartDate()));
+                pstmt.setDate(7, java.sql.Date.valueOf(educationDTO.getEndDate()));
+
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void saveWorkExperiencesToDB(int accountId) {
+        if (accountId == -1) return;
+        PreparedStatement pstmt = null;
+        try{
+            String sql = "INSERT INTO work (" +
+                                    "user_id, position," +
+                                    " company, description," +
+                                    " type, startDate," +
+                                    " endDate)" +
+                                    " VALUES (?, ?, ?, ?, ?, ?, ?)";
+            pstmt = connection.prepareStatement(sql);
+            JSONArray educationArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpWork");
+            for (int i = 0; i < educationArray.length();i++ ) {
+                //get educationDTO from the educationArray JSON object item (cast from Object) at index i
+                WorkDTO workDTO =  JSONParser.JSONObjectToWorkDTO((JSONObject) educationArray.get(i));
+                pstmt.setInt(1, accountId);
+                pstmt.setString(2, workDTO.getPosition());
+                pstmt.setString(3, workDTO.getCompany());
+                pstmt.setString(4, workDTO.getDescription());
+                pstmt.setString(5, workDTO.getType());
+                pstmt.setDate(6, java.sql.Date.valueOf(workDTO.getStartDate()));
+                pstmt.setDate(7, java.sql.Date.valueOf(workDTO.getEndDate()));
+
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void saveSkillsToDB(int accountId) {
+        if (accountId == -1) return;
+        PreparedStatement pstmt = null;
+        try{
+            String sql = "INSERT INTO skill (" +
+                    "user_id, title," +
+                    " technology, description," +
+                    " level)" +
+                    " VALUES ( ?, ?, ?, ?, ?)";
+            pstmt = connection.prepareStatement(sql);
+            JSONArray skillsArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpSkills");
+            for (int i = 0; i < skillsArray.length();i++ ) {
+                SkillDTO skillDTO =  JSONParser.JSONObjectToSkillDTO((JSONObject) skillsArray.get(i));
+                pstmt.setInt(1, accountId);
+                pstmt.setString(2, skillDTO.getTitle());
+                pstmt.setString(3, skillDTO.getTechnology());
+                pstmt.setString(4, skillDTO.getDescription());
+                pstmt.setString(5, skillDTO.getLevel());
+
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public static void saveProjectsToDB(int accountId) {
+        if (accountId == -1) return;
+        PreparedStatement pstmt = null;
+        try{
+            String sql = "INSERT INTO project (" +
+                    "user_id, title," +
+                    " technology, description," +
+                    " link)" +
+                    " VALUES ( ?, ?, ?, ?, ?)";
+            pstmt = connection.prepareStatement(sql);
+            JSONArray projectsJSONArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpProjects");
+            for (int i = 0; i < projectsJSONArray.length();i++ ) {
+                ProjectDTO projectDTO =  JSONParser.JSONObjectToProjectDTO((JSONObject) projectsJSONArray.get(i));
+                pstmt.setInt(1, accountId);
+                pstmt.setString(2, projectDTO.getTitle());
+                pstmt.setString(3, projectDTO.getTechnology());
+                pstmt.setString(4, projectDTO.getDescription());
+                pstmt.setString(5, projectDTO.getLink());
+
+                pstmt.executeUpdate();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 /*

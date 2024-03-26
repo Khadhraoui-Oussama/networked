@@ -2,8 +2,7 @@ package com.fsb.networked.controllers.SignUpControllers;
 
 import com.fsb.networked.App;
 import com.fsb.networked.dao.IndividualDAO;
-import com.fsb.networked.utils.FileLoader;
-import com.fsb.networked.utils.JSONParser;
+import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -73,47 +72,59 @@ public class SignUpIndividualVideoController implements Initializable {
                mediaPlayer.setOnError(() -> {
                    statusLabel.setText("Video not supported or corrupted!");
                    System.out.println("Media player error: " + mediaPlayer.getError());
+                   if(mediaPlayer != null){
+                       mediaPlayer.dispose();
+                   }
                });
                mediaView.setMediaPlayer(mediaPlayer);
            } catch (Exception e) {
                // Handle any exceptions
                e.printStackTrace();
                statusLabel.setText("Error occurred while loading video");
+               if(mediaPlayer != null){
+                   mediaPlayer.dispose();
+               }
            }
        } else {
            statusLabel.setText("Invalid video resume used !!");
+           if(mediaPlayer != null){
+               mediaPlayer.dispose();
+           }
        }
    }
 
 
-    public static boolean isValidVideo(File file) {
-        return file != null;
-    }
+    public static boolean isValidVideo(File file,MediaView mediaView) {
+        boolean isValid  = true;
+        isValid &= file != null;
+        isValid &= Validator.validateVideoFileSize(file,mediaView ,Alerts.AlertVideoResumeSizeTooBig());
+        return  isValid;
+   }
     @FXML
     private void goBack() throws IOException
     {
-        mediaPlayer.dispose();
-        App.setRoot("SignUpScenes/SignUpPageIndividualProject");
+        if(mediaPlayer != null) {
+            mediaPlayer.dispose();
+            App.setRoot("SignUpScenes/SignUpPageIndividualProject");
+        }
     }
     IndividualDAO individualDAO = new IndividualDAO();
     @FXML
     private void finishSignUpIndividual() throws IOException
     {
-        if(isValidVideo(videoFile))
+        if(isValidVideo(videoFile,mediaView))
         {
             //add the video path to the json file
-            JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpVideo", "videoPath", videoFile.toURI().getPath());
+            JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpVideo", "videoPath", "file:" + videoFile.toURI().getPath());
             System.out.println("All Info Gathered");
-
             //create the pdf resume
             String path = FileLoader.chooseDirectoryToSaveTo();
-            System.out.println(path);
-            System.out.println("C:\\Users\\khadh\\IdeaProjects\\networked\\src\\main\\resources\\com\\fsb\\networked\\PDFFiles\\");
+            System.out.println("PDF resume saved at : " + path);
             //PDFCreator.createPDF(path,"\\resume.pdf");
-            individualDAO.save();
+            individualDAO.saveToDB();
         }
         else {
-            statusLabel.setText("Pls select a video resume first\nto be able to generate your PDF.");
+            statusLabel.setText("Pls select a valid video resume first\nto be able to generate your PDF.");
         }
     }
 
@@ -122,6 +133,7 @@ public class SignUpIndividualVideoController implements Initializable {
     {
         if(mediaPlayer!=null)
         {
+            mediaPlayer.setVolume(.1);
             mediaPlayer.play();
         }
     }
@@ -152,8 +164,11 @@ public class SignUpIndividualVideoController implements Initializable {
         // and returned to the original state
         JSONParser.resetIndividualJSONFile();
         JSONParser.resetEntrepriseJSONFile();
-        mediaView.setMediaPlayer(null);
-        mediaPlayer.dispose();
+        if(mediaPlayer != null)
+        {
+            mediaView.setMediaPlayer(null);
+            mediaPlayer.dispose();
+        }
         App.setRoot("LogInPage");
     }
 

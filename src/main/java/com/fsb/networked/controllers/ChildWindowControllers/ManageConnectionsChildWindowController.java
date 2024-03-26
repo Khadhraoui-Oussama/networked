@@ -1,10 +1,7 @@
 package com.fsb.networked.controllers.ChildWindowControllers;
 
 import com.fsb.networked.dto.ConnectionDTO;
-import com.fsb.networked.utils.Alerts;
-import com.fsb.networked.utils.JSONParser;
-import com.fsb.networked.utils.Regexes;
-import com.fsb.networked.utils.Validator;
+import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -75,7 +72,7 @@ public class ManageConnectionsChildWindowController implements Initializable {
             }
         });
         //TODO GET FROM DB
-        JSONArray educationArray = JSONParser.getEducationsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+        JSONArray educationArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpEducation");
             // Iterate over each skill object in the JSON array and extract each field
 
             /*ConnectionDTO education = new EducationDTO(positionValue,companyValue,descriptionValue,typeValue, Conversions.stringtoLocalDate(startDateValue),Conversions.stringtoLocalDate(endDateValue));

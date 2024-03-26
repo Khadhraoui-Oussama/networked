@@ -23,7 +23,11 @@ public class EducationDTO
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}
-	
+
+	public EducationDTO() {
+
+	}
+
 	public LocalDate getStartDate()
 	{
 		return startDate;

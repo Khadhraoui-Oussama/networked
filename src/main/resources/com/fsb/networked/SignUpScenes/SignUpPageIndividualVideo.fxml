@@ -2,8 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.media.MediaView?>
 <?import javafx.scene.text.*?>
@@ -77,37 +76,58 @@
                <children>
                   <ButtonBar prefHeight="40.0" prefWidth="200.0">
                     <buttons>
-                      <Button fx:id="playBtn" mnemonicParsing="false" onAction="#playVideo" prefHeight="41.0" prefWidth="109.0" text="PLAY">
+                      <Button fx:id="playBtn" minWidth="61.0" mnemonicParsing="false" onAction="#playVideo" prefHeight="54.0" prefWidth="75.0">
                            <font>
                               <Font size="19.0" />
                            </font>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/icons/play-button.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                     </buttons>
                   </ButtonBar>
                   <ButtonBar layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="200.0">
                      <buttons>
-                        <Button fx:id="pauseBtn" mnemonicParsing="false" onAction="#pauseVideo" prefHeight="41.0" prefWidth="109.0" text="PAUSE">
+                        <Button fx:id="pauseBtn" minWidth="50.0" mnemonicParsing="false" onAction="#pauseVideo" prefHeight="58.0" prefWidth="75.0">
                            <font>
                               <Font size="19.0" />
                            </font>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/icons/pause.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </buttons>
                   </ButtonBar>
                   <ButtonBar layoutX="10.0" layoutY="51.0" prefHeight="41.0" prefWidth="292.0">
                      <buttons>
-                        <Button fx:id="resetBtn" mnemonicParsing="false" onAction="#resetVideo" prefHeight="41.0" prefWidth="109.0" text="RESET">
+                        <Button fx:id="resetBtn" minWidth="0.0" mnemonicParsing="false" onAction="#resetVideo" prefHeight="58.0" prefWidth="75.0">
                            <font>
                               <Font size="19.0" />
                            </font>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <graphic>
+                              <ImageView fitHeight="45.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../../../images/icons/reset.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
                         </Button>
                      </buttons>
                      <VBox.margin>

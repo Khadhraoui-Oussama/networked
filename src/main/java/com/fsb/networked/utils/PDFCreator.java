@@ -39,7 +39,7 @@ public class PDFCreator {
         PDImageXObject pfpImg;
         PDImageXObject separatorImg;
         try {
-            pfpImg = PDImageXObject.createFromFile(JSONParser.getValueFromJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON","signUpBasic","picture").toString().substring(6),pdfDocument);
+            pfpImg = PDImageXObject.createFromFile(JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpBasic","picture").toString().substring(6),pdfDocument);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -76,10 +76,10 @@ public class PDFCreator {
             contentStream.drawImage(separatorImg,0,pdfPage.getMediaBox().getHeight() - 440 );
             //END HARDCODED
 
-            addSkillsContentToPDF(new JSONObject(JSONParser.getJSONFromFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")), pdfDocument, pdfPage);
-            addWorkContentToPDF(new JSONObject(JSONParser.getJSONFromFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")), pdfDocument, pdfPage);
-            addEducationContentToPDF(new JSONObject(JSONParser.getJSONFromFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")), pdfDocument, pdfPage);
-            addProjectContentToPDF(new JSONObject(JSONParser.getJSONFromFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON")), pdfDocument, pdfPage);
+            addSkillsContentToPDF(new JSONObject(JSONParser.getJSONFromFile(ImportantFileReferences.INDIVIDUALJSON)), pdfDocument, pdfPage);
+            addWorkContentToPDF(new JSONObject(JSONParser.getJSONFromFile(ImportantFileReferences.INDIVIDUALJSON)), pdfDocument, pdfPage);
+            addEducationContentToPDF(new JSONObject(JSONParser.getJSONFromFile(ImportantFileReferences.INDIVIDUALJSON)), pdfDocument, pdfPage);
+            addProjectContentToPDF(new JSONObject(JSONParser.getJSONFromFile(ImportantFileReferences.INDIVIDUALJSON)), pdfDocument, pdfPage);
 
             //close the contentStream
             contentStream.close();
@@ -96,11 +96,11 @@ public class PDFCreator {
         }
     }
     private static String extractSimpleValue(String parentField, String field) {
-        String value = JSONParser.getValueFromJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",parentField,field);
+        String value = JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,parentField,field);
         return value;
     }
     public static String extractArrayValueByIndex(String parentField, String field,int index) {
-        String filePath = "src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON";
+        String filePath = ImportantFileReferences.INDIVIDUALJSON;
         String fileContent;
         fileContent = JSONParser.getJSONFromFile(filePath);
         JSONObject item;

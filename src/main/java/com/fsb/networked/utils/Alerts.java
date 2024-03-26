@@ -120,4 +120,17 @@ public class Alerts
 		alert.setContentText("Try Uploading a smaller image file\nMaximum Size id 16MB");
 		return alert;
 	}
+
+    public static Alert AlertVideoResumeSizeTooBig() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Video Size Is Too Big");
+		alert.setContentText("Try Uploading a smaller video file\nMaximum Size id 30MB");
+		return alert;
+    }
+	public static Alert AlertVideoAttachmentSizeTooBig() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Video Size Is Too Big");
+		alert.setContentText("Try Uploading a smaller video file\nMaximum Size id 15MB");
+		return alert;
+	}
 }

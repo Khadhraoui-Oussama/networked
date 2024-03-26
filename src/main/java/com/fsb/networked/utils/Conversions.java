@@ -1,8 +1,8 @@
 package com.fsb.networked.utils;
 
+import java.io.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class Conversions {
     public static LocalDate stringtoLocalDate(String dateString)
@@ -25,4 +25,14 @@ public class Conversions {
         // Parse the string to a LocalDate object using the formatter
         return LocalDate.parse(dateString, formatter);
     }*/
+   public static byte[] convertFileToByteArray(File file) throws IOException {
+       try (FileInputStream fis = new FileInputStream(file)) {
+           byte[] fileData = new byte[(int) file.length()];
+           fis.read(fileData);
+           return fileData;
+       }
+   }
+    public static InputStream convertByteArrayToInputStream(byte[] byteArray) {
+        return new ByteArrayInputStream(byteArray);
+    }
 }

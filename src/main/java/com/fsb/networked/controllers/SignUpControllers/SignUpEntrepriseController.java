@@ -1,6 +1,8 @@
 package com.fsb.networked.controllers.SignUpControllers;
 
 import com.fsb.networked.App;
+import com.fsb.networked.dto.EntrepriseDTO;
+import com.fsb.networked.service.EntrepriseService;
 import com.fsb.networked.utils.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -17,7 +19,7 @@ import java.util.ResourceBundle;
 public class SignUpEntrepriseController implements Initializable {
 
 	@FXML
-	private TextField companyNameField;
+	private TextField entrepriseNameField;
 
 	@FXML
 	private ComboBox<String> sectorComboBox;
@@ -50,7 +52,7 @@ public class SignUpEntrepriseController implements Initializable {
 	private Button btnCancel;
 
 	@FXML
-	private ImageView companyLogoImageView;
+	private ImageView entrepriseLogoImageView;
 
 	@FXML
 	private Label statusLabel;
@@ -61,17 +63,20 @@ public class SignUpEntrepriseController implements Initializable {
 		System.out.println(res);
 		if (res) {
 			// TODO : FILL OUT THE DTO FOR ENTREPRISE
-			//debug stmts
-			System.out.println("company name : " + companyNameField.getText());
-			System.out.println("company sector : " + sectorComboBox.getValue());
-			System.out.println("date  : " + dateOfFoundationDatePicker.getValue());
-			System.out.println("size : " + sizeComboBox.getValue());
-			System.out.println("founders : " + foundersTextField.getText());
-			System.out.println("website : " + websiteTextField.getText());
-			System.out.println("location : " + locationTextField.getText());
-			App.setRoot("SignUpScenes/SignUpPageIndividualSkills");
-			System.out.println("Entreprise Information gathered");
-			//
+			EntrepriseDTO entrepriseDTO = new EntrepriseDTO();
+			//FILL THE DTO CLASS WITH DATA FROM THE CONTROLLER COMPONENTS
+			entrepriseDTO.setEntrepriseName( entrepriseNameField.getText());
+			entrepriseDTO.setEntrepriseFounders(foundersTextField.getText());
+			entrepriseDTO.setEntrepriseDateOfFoundation(dateOfFoundationDatePicker.getValue());
+			entrepriseDTO.setEntrepriseLocation(locationTextField.getText());
+			entrepriseDTO.setEntrepriseSector(sectorComboBox.getValue());
+			entrepriseDTO.setEntrepriseLogoPath(entrepriseLogoImageView.getImage().getUrl());
+			entrepriseDTO.setEntrepriseSize(sizeComboBox.getValue());
+			entrepriseDTO.setEntrepriseWebsite( websiteTextField.getText());
+
+			//save to DB
+			EntrepriseService entrepriseService = new EntrepriseService();
+			entrepriseService.saveEntrepriseToDB(entrepriseDTO);
 		}
 	}
 	@FXML
@@ -82,7 +87,7 @@ public class SignUpEntrepriseController implements Initializable {
 	private boolean validateInfo() {
 		boolean isValid = true;
 
-		isValid &= Validator.validateField(companyNameField, Regexes.TITLE_REGEX,Alerts.AlertTitleField());
+		isValid &= Validator.validateField(entrepriseNameField, Regexes.TITLE_REGEX,Alerts.AlertTitleField());
 		System.out.println("company name :" + isValid);
 		isValid &= Validator.validateField(foundersTextField, Regexes.FOUNDERS_REGEX,Alerts.AlertFoundersField());
 		System.out.println("Founders :" + isValid);
@@ -109,7 +114,7 @@ public class SignUpEntrepriseController implements Initializable {
 		if (file != null) {
 			System.out.println("path :" + file.toURI().getPath());
 			// set the image view source as the file path
-			companyLogoImageView.setImage(new Image(file.toURI().toString()));
+			entrepriseLogoImageView.setImage(new Image(file.toURI().toString()));
 			statusLabel.setText("Profile Image uploaded successfully");
 		} else {
 			statusLabel.setText("Invalid profile image used !!");
@@ -121,15 +126,15 @@ public class SignUpEntrepriseController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		sectorComboBox.getItems().addAll(ComboBoxes.SECTORS);
 		sizeComboBox.getItems().addAll(ComboBoxes.COMPANY_SIZES);
-
+		//TODO FIX THE ENTREPRISE INITILAIZE WITH JSON FILE AND DAO /SERVICE
 		//image
 		String imageURL = FileLoader.getImagePath("/images/anonymous_logo.jpg");
-		companyLogoImageView.setImage(new Image(imageURL));
+		entrepriseLogoImageView.setImage(new Image(imageURL));
 
-
+		dateOfFoundationDatePicker.setValue(JSONParser.getValueFromJSONFile(ImportantFileReferences.ENTREPRISEJSON,"signUpBasic",""));
 		//THIS IS ONLY TO SPEED UP THE DEVELEOPMENT REMOVE WHEN READY TO PUSH TO PROD
 		dateOfFoundationDatePicker.setValue(LocalDate.of(2003, 10, 4));
-		companyNameField.setText("Boga Cidre");
+		entrepriseNameField.setText("Boga Cidre");
 		foundersTextField.setText("Ali Ben Bouga ,Sirine Cidraoui");
 		locationTextField.setText("200 Jarzouna");
 		websiteTextField.setText("https://bogaCidre.com");

@@ -18,6 +18,10 @@ public class ProjectDTO
 		this.link = link;
 	}
 
+	public ProjectDTO() {
+
+	}
+
 	public String getTitle() {
 		return this.title;
 	}

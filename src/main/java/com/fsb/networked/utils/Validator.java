@@ -6,6 +6,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
+import javafx.scene.media.MediaView;
 
 import java.io.File;
 import java.util.regex.Matcher;
@@ -72,6 +73,15 @@ public class Validator {
         return true;
     }
 
+    public static boolean validateVideoFileSize(File videoFile,MediaView mediaView, Alert alert) {
+        if(videoFile == null || videoFile.length() > 31457280) // about 30MB
+        {
+            flashRedBorder(mediaView);
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
 }
 
 

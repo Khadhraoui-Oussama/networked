@@ -56,7 +56,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 	@FXML
     private void goNext() throws IOException
 	{
-		JSONParser.updateSkillsJSONArray(skillsArray);
+		JSONParser.updateJSONArray(skillsArray,"signUpSkills");
 		App.setRoot("SignUpScenes/SignUpPageIndividualProject");
 		System.out.println("Individual Skills Information gathered");
     }
@@ -138,7 +138,7 @@ public class SignUpIndividualSkillsController implements Initializable {
 
 		//this bit of code makes sure the skillsListView gets populated with whatever skills the user has added
 		// so that in case of going to next scene and going back, the inputed data doesn't get lost
-		JSONArray skillsArray = JSONParser.getSkillsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+		JSONArray skillsArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpSkills");
 		// Iterate over each skill object in the JSON array and extract each field
 		for (int i = 0; i < skillsArray.length(); i++) {
 			JSONObject skillObject = skillsArray.getJSONObject(i);

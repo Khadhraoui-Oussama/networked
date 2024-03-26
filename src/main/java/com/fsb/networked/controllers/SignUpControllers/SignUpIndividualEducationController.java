@@ -145,7 +145,7 @@ public class SignUpIndividualEducationController implements Initializable {
                 };
             }
         });
-		JSONArray educationArray = JSONParser.getEducationsJSONArray("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+		JSONArray educationArray = JSONParser.getJSONArrayFromJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpEducation");
 		// Iterate over each skill object in the JSON array and extract each field
 		for (int i = 0; i < educationArray.length(); i++) {
 			JSONObject educationObject = educationArray.getJSONObject(i);

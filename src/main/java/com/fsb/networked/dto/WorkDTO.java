@@ -4,7 +4,7 @@ import org.json.JSONObject;
 
 import java.time.LocalDate;
 
-public class JobDTO
+public class WorkDTO
 {
 	private String position;
 	private String company;
@@ -13,7 +13,7 @@ public class JobDTO
 	private LocalDate startDate;
 	private LocalDate endDate;
 	
-	public JobDTO(String position, String company, String type, String description, LocalDate startDate, LocalDate endDate)
+	public WorkDTO(String position, String company, String type, String description, LocalDate startDate, LocalDate endDate)
 	{
 		super();
 		this.position = position;
@@ -24,7 +24,7 @@ public class JobDTO
 		this.endDate = endDate;
 	}
 
-	public JobDTO() {
+	public WorkDTO() {
 
 	}
 

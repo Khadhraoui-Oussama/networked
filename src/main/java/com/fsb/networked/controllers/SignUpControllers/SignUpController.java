@@ -33,9 +33,9 @@ public class SignUpController implements Initializable{
 	
 	@FXML
     private void gotoSignUpIndividual() throws IOException {
-		if (validateBasicInfo()) {
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUp", "emailAddress", emailAddressField.getText());
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUp", "password", passwordField.getText());
+		if (Validator.validateTextFieldSQLUnique(emailAddressField,Alerts.AlertEmailInUse(),"email","individual") && validateBasicInfo()) {
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUp", "emailAddress", emailAddressField.getText());
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUp", "password", passwordField.getText());
 			//bad hacky solution to load an image path to the Individual JSON file in order to avoid Invalid url or resource not found error when  getValueFromJSONFIle is called on the picture field
 			String imagePath = "/images/male_avatar.png";
 			URL imageUrl = getClass().getResource(imagePath);
@@ -46,7 +46,7 @@ public class SignUpController implements Initializable{
 			} else {
 				System.err.println("Image resource not found: " + imagePath);
 			}
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON","signUpBasic","picture",image.getUrl());
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON,"signUpBasic","picture",image.getUrl());
 			//go to next scene
 			App.setRoot("SignUpScenes/SignUpPageIndividualBasic");
 		}
@@ -56,6 +56,8 @@ public class SignUpController implements Initializable{
 	{
 		if(validateBasicInfo())
 		{
+			JSONParser.writeToJSONFile(ImportantFileReferences.ENTREPRISEJSON, "signUp", "emailAddress", emailAddressField.getText());
+			JSONParser.writeToJSONFile(ImportantFileReferences.ENTREPRISEJSON, "signUp", "password", passwordField.getText());
 			App.setRoot("SignUpPageEntreprise");
 		}
     }
@@ -75,7 +77,6 @@ public class SignUpController implements Initializable{
 		isValid &= Validator.validateField(emailAddressField, Regexes.EMAIL_REGEX,Alerts.AlertEmailField());
 		isValid &= Validator.validateField(passwordField, Regexes.PASSWORD_REGEX,Alerts.AlertPasswordField());
 		// TODO UNCOMMENT THIS TO CHECK FOR EMAIL UNIQNESS I LEFT IT TO SPEED UP DEV
-		isValid &= Validator.validateTextFieldSQLUnique(emailAddressField,Alerts.AlertEmailInUse(),"email","user");
 		return isValid;
 	}
 	@Override

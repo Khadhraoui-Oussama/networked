@@ -76,12 +76,12 @@ public class SignUpIndividualController implements Initializable {
 		//DONE TODO : do the same for the email and password fields in the SignUpPage scene
 
 		if (validateBasicInfo()) {
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "firstName", firstNameField.getText());
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "lastName", lastNameField.getText());
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "country", countryComboBox.getValue());
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "address", physicalAdressField.getText());
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "gender", genderComboBox.getValue());
-			JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "dob", dateOfBirthPicker.getValue());
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "firstName", firstNameField.getText());
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "lastName", lastNameField.getText());
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "country", countryComboBox.getValue());
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "address", physicalAdressField.getText());
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "gender", genderComboBox.getValue());
+			JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "dob", dateOfBirthPicker.getValue());
 
 			// Check if a default profile picture is selected
 			String defaultMaleAvatar = FileLoader.getImagePath("/images/male_avatar.png");
@@ -96,15 +96,15 @@ public class SignUpIndividualController implements Initializable {
 				} else {
 					imagePath = "/images/male_avatar.png";
 				}
-				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", FileLoader.getImagePath(imagePath));
+				JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "picture", FileLoader.getImagePath(imagePath));
 			} else {
 				// Custom profile picture is selected
-				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
+				JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "picture", currentImagePath);
 			}
 			//TODO REMOVE AFTER TESTING
 			//SPEED UP DEV
 			//String path1 = FileLoader.chooseDirectoryToSaveTo();
-			//JSONParser.populateRealDataJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON");
+			JSONParser.populateRealDataJSONFile(ImportantFileReferences.INDIVIDUALJSON);
 			if (currentImagePath.equals(defaultMaleAvatar) || currentImagePath.equals(defaultFemaleAvatar)) {
 				// Default avatar is selected
 				String imagePath;
@@ -113,10 +113,10 @@ public class SignUpIndividualController implements Initializable {
 				} else {
 					imagePath = "/images/male_avatar.png";
 				}
-				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", FileLoader.getImagePath(imagePath));
+				JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "picture", FileLoader.getImagePath(imagePath));
 			} else {
 				// Custom profile picture is selected
-				JSONParser.writeToJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture", currentImagePath);
+				JSONParser.writeToJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "picture", currentImagePath);
 			}
 			//PDFCreator.createPDF(path1,"\\resume" + ".pdf");
 			//SPEED UP DEV
@@ -179,30 +179,30 @@ public class SignUpIndividualController implements Initializable {
 
 		//load the previously entered data ,so we don't lose it if we decide to go back to check for error in input
 		firstNameField.setText(JSONParser.getValueFromJSONFile(
-				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				ImportantFileReferences.INDIVIDUALJSON,
 				"signUpBasic",
 				"firstName"));
 		lastNameField.setText(JSONParser.getValueFromJSONFile(
-				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				ImportantFileReferences.INDIVIDUALJSON,
 				"signUpBasic",
 				"lastName"));
 		countryComboBox.getSelectionModel().select(JSONParser.getValueFromJSONFile(
-				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				ImportantFileReferences.INDIVIDUALJSON,
 				"signUpBasic",
 				"country"));
 		physicalAdressField.setText(JSONParser.getValueFromJSONFile(
-				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				ImportantFileReferences.INDIVIDUALJSON,
 				"signUpBasic",
 				"address"));
 		genderComboBox.getSelectionModel().select(JSONParser.getValueFromJSONFile(
-				"src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON",
+				ImportantFileReferences.INDIVIDUALJSON,
 				"signUpBasic",
 				"gender"));
 		//image
-		String imageURL = JSONParser.getValueFromJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "picture");
+		String imageURL = JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "picture");
 		profilePictureImg.setImage(new Image(imageURL));
 		//and DOB
-		String dobString = JSONParser.getValueFromJSONFile("src/main/resources/com/fsb/networked/JSON_files/Individiual.JSON", "signUpBasic", "dob");
+		String dobString = JSONParser.getValueFromJSONFile(ImportantFileReferences.INDIVIDUALJSON, "signUpBasic", "dob");
 		if (!dobString.isBlank()) {
 			//format the string dob so that it becomes a LocalDate object
 			LocalDate dob = Conversions.stringtoLocalDate(dobString);

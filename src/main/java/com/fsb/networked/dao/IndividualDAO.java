@@ -4,10 +4,7 @@ import com.fsb.networked.dto.EducationDTO;
 import com.fsb.networked.dto.ProjectDTO;
 import com.fsb.networked.dto.SkillDTO;
 import com.fsb.networked.dto.WorkDTO;
-import com.fsb.networked.utils.Conversions;
-import com.fsb.networked.utils.ConxDB;
-import com.fsb.networked.utils.ImportantFileReferences;
-import com.fsb.networked.utils.JSONParser;
+import com.fsb.networked.utils.*;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -87,6 +84,11 @@ public class IndividualDAO {
             {
                 individualId = rs.getInt(1);
             }
+            String sqlSaveSession = "INSERT INTO session(individualID, sessionID) VALUES (?, ?)";
+            pstmt = connection.prepareStatement(sqlSaveSession);
+            pstmt.setInt(1, individualId); // Assuming userID is a foreign key in the session table
+            pstmt.setInt(2, SessionManager.generateSessionID(individualId));
+            pstmt.executeUpdate();
         }
         catch (SQLException e)
         {
@@ -236,6 +238,42 @@ public class IndividualDAO {
         }
         return resultInt;
     }
+    public static Blob getIndividualImageFromDB(int individualID) throws SQLException, IOException {
+        String query = "SELECT profilePicture FROM individual WHERE id = ?";
+        Blob imageBlob = null;
+
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, individualID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    // Retrieve the image blob from the result set
+                    imageBlob = rs.getBlob("profilePicture");
+                }
+            }
+        }
+
+        return imageBlob;
+    }
+
+    public static String getIndividualNameFromDB(int individualID) throws SQLException, IOException {
+        String query = "SELECT individual.firstName, individual.lastName FROM individual WHERE id = ?";
+        String name = "";
+
+        try (PreparedStatement pstmt = connection.prepareStatement(query)) {
+            pstmt.setInt(1, individualID);
+            try (ResultSet rs = pstmt.executeQuery()) {
+                if (rs.next()) {
+                    // Retrieve the image blob from the result set
+                    name = rs.getString("firstName");
+                    name += " ";
+                    name += rs.getString("lastName");
+                }
+            }
+        }
+
+        return name;
+    }
+
 
 /*
     public static int delete(String n, String p) {

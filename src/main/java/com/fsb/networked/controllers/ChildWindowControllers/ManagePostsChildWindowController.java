@@ -50,7 +50,7 @@ public class ManagePostsChildWindowController implements Initializable {
                         if (post == null || empty) {
                             setText(null);
                         } else {
-                            setText("Content: " + post.getPostText() +"\nPosted at: " + post.getPublicationDate() + post.getPublicationTime() +  "\nPost has image: " + (post instanceof ImagePostDTO) + "\nPost has video: " + (post instanceof VideoPostDTO));
+                            setText("Content: " + post.getPostText() +"\nPosted at: " + post.getPublicationDateTime()  +  "\nPost has image: " + (post instanceof ImagePostDTO) + "\nPost has video: " + (post instanceof VideoPostDTO));
                         }
                     }
                 };

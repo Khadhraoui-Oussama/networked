@@ -53,33 +53,44 @@ public class Validator {
             return true;
         }
     }
-    public static boolean validateImagePath(ImageView profilePictureImg, Alert alert) {
-        String imagePath = profilePictureImg.getImage().getUrl();
-        if (imagePath != null && imagePath.contains("%20")) { // contains whitespace or no but a url encodes it like %20
-            flashRedBorder(profilePictureImg);
+    //ImageView doesn't have a property for border so we change border color for its parent node
+    public static boolean validateImagePath(ImageView profilePictureImg,Node parentNode, Alert alert) {
+        if (profilePictureImg.getImage() != null && profilePictureImg.getImage().getUrl().contains("%20")) { // contains whitespace or no but a url encodes it like %20
+            flashRedBorder(parentNode);
             alert.showAndWait();
             return false;
         }
         return true;
     }
-    public static boolean validateImageSize(ImageView profilePictureImg, Alert alert) {
+    public static boolean validateImageSize(ImageView profilePictureImg,Node parentNode, Alert alert) {
         String imagePath = profilePictureImg.getImage().getUrl();
         File img = new File(imagePath.substring(6));
         if (img.length() > 16777214 ) { // maximum is 16777215  bytes (16MB)
-            flashRedBorder(profilePictureImg);
+            flashRedBorder(parentNode);
             alert.showAndWait();
             return false;
         }
         return true;
     }
 
-    public static boolean validateVideoFileSize(File videoFile,MediaView mediaView, Alert alert) {
+    public static boolean validateVideoFileSize(File videoFile,MediaView mediaView,Node parentNode, Alert alert) {
         if(videoFile == null || videoFile.length() > 31457280) // about 30MB
         {
-            flashRedBorder(mediaView);
+            flashRedBorder(parentNode);
             alert.showAndWait();
             return false;
         }
+        return true;
+    }
+    public static boolean validateImageSelected(ImageView imgView ,Node parentNode, Alert alert)
+    {
+        if(imgView.getImage() == null)
+        {
+            flashRedBorder(parentNode);
+            alert.showAndWait();
+            return false;
+        }
+        System.out.println("validate image post : "+imgView.getImage().getUrl());
         return true;
     }
 }

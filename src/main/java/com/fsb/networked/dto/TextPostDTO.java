@@ -1,22 +1,20 @@
 package com.fsb.networked.dto;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.Blob;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-public class TextPostDTO {
+public class TextPostDTO implements Comparable<TextPostDTO>{
     private String originalPosterName;
-    private LocalDate publicationDate;
-    private LocalTime publicationTime;
+    private LocalDateTime publicationDateTime;
     private String postText;
     private int numberOfLikes;
     private int numberOfComments;
-    private String opImgSrc;
+    private Blob opImgSrc;
 
-    public TextPostDTO(String originalPosterName, LocalDate publicationDate, LocalTime publicationTime, String postText, int numberOfReactions, int numberOfComments, String opImgSrc) {
+    public TextPostDTO(String originalPosterName, LocalDateTime publicationDateTime, String postText, int numberOfReactions, int numberOfComments, Blob opImgSrc) {
         this.originalPosterName = originalPosterName;
-        this.publicationDate = publicationDate;
-        this.publicationTime = publicationTime;
+        this.publicationDateTime = publicationDateTime;
         this.postText = postText;
         this.numberOfLikes = numberOfReactions;
         this.numberOfComments = numberOfComments;
@@ -34,21 +32,12 @@ public class TextPostDTO {
         this.originalPosterName = originalPosterName;
     }
 
-    public LocalDate getPublicationDate() {
-        return publicationDate;
+    public LocalDateTime getPublicationDateTime() {
+        return publicationDateTime;
     }
 
-    public void setPublicationDate(LocalDate publicationDate) {
-        this.publicationDate = publicationDate;
-    }
-
-
-    public LocalTime getPublicationTime() {
-        return publicationTime;
-    }
-
-    public void setPublicationTime(LocalTime publicationTime) {
-        this.publicationTime = publicationTime;
+    public void setPublicationDateTime(LocalDateTime publicationDateTime) {
+        this.publicationDateTime = publicationDateTime;
     }
 
     public String getPostText() {
@@ -75,35 +64,43 @@ public class TextPostDTO {
         this.numberOfComments = numberOfComments;
     }
 
-    public String getOpImgSrc() {
+    public Blob getOpImgSrc() {
         return opImgSrc;
     }
 
-    public void setOpImgSrc(String opImgSrc) {
+    public void setOpImgSrc(Blob opImgSrc) {
         this.opImgSrc = opImgSrc;
     }
 
     @Override
     public String toString() {
-        return "Post{" +
+        return "PostDTO{" +
                 "originalPosterName='" + originalPosterName + '\'' +
-                ", publicationDate=" + publicationDate +
+                ", publicationDateTime=" + publicationDateTime +
                 ", postText='" + postText + '\'' +
                 ", numberOfReactions=" + numberOfLikes +
                 ", numberOfComments=" + numberOfComments +
                 ", opImgSrc='" + opImgSrc + '\'' +
                 '}';
     }
+
+    //equals based on publicationDateTime
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        TextPostDTO textPost = (TextPostDTO) o;
-        return numberOfLikes == textPost.numberOfLikes && numberOfComments == textPost.numberOfComments && Objects.equals(originalPosterName, textPost.originalPosterName) && Objects.equals(publicationDate, textPost.publicationDate) && Objects.equals(publicationTime, textPost.publicationTime) && Objects.equals(postText, textPost.postText) && Objects.equals(opImgSrc, textPost.opImgSrc);
+        TextPostDTO that = (TextPostDTO) o;
+        return Objects.equals(publicationDateTime, that.publicationDateTime);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(originalPosterName, publicationDate, publicationTime, postText, numberOfLikes, numberOfComments, opImgSrc);
+        return Objects.hash(originalPosterName, publicationDateTime, postText, numberOfLikes, numberOfComments, opImgSrc);
+    }
+
+    @Override
+    public int compareTo(TextPostDTO o) {
+        //compare based on the publication date and time to load the posts later in the home page based on the same metric
+        return this.getPublicationDateTime().compareTo(o.getPublicationDateTime());
     }
 }

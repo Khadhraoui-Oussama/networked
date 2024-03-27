@@ -5,12 +5,12 @@ import javafx.scene.control.Alert.AlertType;
 
 public class Alerts
 {
-	 public static void AlertEmptyField()
+	 public static Alert AlertEmptyField()
 	 {
 		 	Alert alert = new Alert(AlertType.WARNING);
 	        alert.setTitle("Some Input fields are empty");
 	        alert.setContentText("Please fill all input fields");
-	        alert.showAndWait();
+		 return alert;
 	 }
 	 public static Alert AlertNameField()
 	 {
@@ -44,7 +44,7 @@ public class Alerts
 	 {
 		 	Alert alert = new Alert(AlertType.WARNING);
 	        alert.setTitle("Invalid Description");
-	        alert.setContentText("Please provide a valid description, \nA valid description should not excedd 150 characters.");
+	        alert.setContentText("Please provide a valid description, \nA valid description should not exceed 150 characters.");
          return alert;
      }
 	 public static Alert AlertEmailField()
@@ -137,8 +137,8 @@ public class Alerts
 
     public static Alert AlertVideoResumeSizeTooBig() {
 		Alert alert = new Alert(AlertType.WARNING);
-		alert.setTitle("Video Size Is Too Big");
-		alert.setContentText("Try Uploading a smaller video file\nMaximum Size id 30MB");
+		alert.setTitle("Either you forgot to include a video or Video Size Is Too Big");
+		alert.setContentText("Dont forget to upload video file with a \nMaximum Size of 30MB");
 		return alert;
     }
 	public static Alert AlertVideoAttachmentSizeTooBig() {
@@ -152,6 +152,13 @@ public class Alerts
 		Alert alert = new Alert(AlertType.WARNING);
 		alert.setTitle("Please check your credentials");
 		alert.setContentText("Password or email incorrect\nIf you forgot your password then\nTry resetting it");
+		return alert;
+	}
+
+    public static Alert AlertPostContentField() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Invalid Post Text Content");
+		alert.setContentText("Please check your input,\nA valid input should not exceed 249 characters.");
 		return alert;
 	}
 }

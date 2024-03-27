@@ -137,8 +137,8 @@ public class SignUpIndividualController implements Initializable {
 		isValid &= Validator.validateField(lastNameField, Regexes.NAME_REGEX,Alerts.AlertNameField());
 		isValid &= Validator.validateField(dateOfBirthPicker,null,null);
 		isValid &= Validator.validateField(physicalAdressField, Regexes.LOCATION_REGEX,Alerts.AlertAddressField());
-		isValid &= Validator.validateImagePath(profilePictureImg,Alerts.AlertImagePathTooLong());
-		isValid &= Validator.validateImageSize(profilePictureImg,Alerts.AlertImageSizeTooBig());
+		isValid &= Validator.validateImagePath(profilePictureImg,profilePictureImg.getParent(),Alerts.AlertImagePathTooLong());
+		isValid &= Validator.validateImageSize(profilePictureImg,profilePictureImg.getParent(),Alerts.AlertImageSizeTooBig());
 		return isValid;
 	}
 

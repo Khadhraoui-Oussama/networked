@@ -97,7 +97,7 @@ public class SignUpIndividualVideoController implements Initializable {
             return false;
         }
         else{
-            return Validator.validateVideoFileSize(file,mediaView ,Alerts.AlertVideoResumeSizeTooBig());
+            return Validator.validateVideoFileSize(file,mediaView ,mediaView.getParent(),Alerts.AlertVideoResumeSizeTooBig());
         }
    }
     @FXML
@@ -125,7 +125,8 @@ public class SignUpIndividualVideoController implements Initializable {
 
                 System.out.println("PDF resume saved at : " + path);
                 File pdfFile = PDFCreator.createPDF(path,"\\resume.pdf");
-                individualService.saveIndividualToDB(Conversions.convertFileToByteArray(pdfFile));
+                int individualID = individualService.saveIndividualToDB(Conversions.convertFileToByteArray(pdfFile));
+                SessionManager.setID(individualID);
             }
             else {
                 statusLabel.setText("Pls choose a directory to save your pdf resume to.");

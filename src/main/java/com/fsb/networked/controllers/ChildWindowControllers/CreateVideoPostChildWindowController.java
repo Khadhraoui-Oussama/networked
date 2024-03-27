@@ -1,6 +1,9 @@
 package com.fsb.networked.controllers.ChildWindowControllers;
 
-import com.fsb.networked.utils.FileLoader;
+import com.fsb.networked.dto.VideoPostDTO;
+import com.fsb.networked.service.IndividualService;
+import com.fsb.networked.service.PostService;
+import com.fsb.networked.utils.*;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -15,7 +18,11 @@ import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class CreateVideoPostChildWindowController implements Initializable {
@@ -30,7 +37,6 @@ public class CreateVideoPostChildWindowController implements Initializable {
     Button pauseBtn;
     @FXML
     Button resetBtn;
-
     @FXML
     Label statusLabel;
     @FXML
@@ -42,11 +48,53 @@ public class CreateVideoPostChildWindowController implements Initializable {
     @FXML
     Media media;
     @FXML
-    public void post()
-    {
+    public void postVideoPost() throws SQLException, IOException {
+        if(isValidVideo(videoFile,mediaView)){
+            PostService postService = new PostService();
+            Connection connection = ConxDB.getInstance();
+            IndividualService individualService = new IndividualService();
+            VideoPostDTO videoPostDTO = new VideoPostDTO();
+            videoPostDTO.setPostText(postContentTextArea.getText());
+            videoPostDTO.setNumberOfComments(0);
+            videoPostDTO.setNumberOfLikes(0);
+            videoPostDTO.setOpImgSrc(individualService.getIndividualImageBlobFromDB(SessionManager.ID));
+            videoPostDTO.setPublicationDateTime(LocalDateTime.now());
+            videoPostDTO.setOriginalPosterName(individualService.getIndividualNameFromDB(SessionManager.ID));
 
+            //TODO DEBUG STRING SOURCES
+            //TODO INMPLEMENT VALIDATOR AND VALIDATEINFO FOR THE VIDEO UPLOADING THE POST CONTENT
+            videoPostDTO.setAttachmentFile(Conversions.convertFileToBlob(videoFile,connection));
+            int result = postService.addVideoPost(videoPostDTO);
+            if(result > 0)
+            {
+                statusLabel.setText("Post added successfully !");
+            }
+            else{
+                statusLabel.setText("There was an error posting!");
+            }
+        }
+        else statusLabel.setText("Pls correctly fill all the fields to post !");
     }
     private File videoFile;
+    private boolean isValidVideo(File file,MediaView mediaView) {
+        boolean isValid = true;
+        if(file == null || postContentTextArea.getText().isEmpty() || postContentTextArea.getText().isBlank())
+        {
+            if(file == null)
+            {
+                Validator.flashRedBorder(mediaView.getParent());
+            }
+            if(postContentTextArea.getText().isEmpty() || postContentTextArea.getText().isBlank())
+            {
+                Validator.flashRedBorder(postContentTextArea);
+            }
+            Alerts.AlertEmptyField().showAndWait();
+            return false;
+        }
+        isValid &= Validator.validateVideoFileSize(file,mediaView ,mediaView.getParent(),Alerts.AlertVideoResumeSizeTooBig());
+        isValid &= Validator.validateField(postContentTextArea,Regexes.POST_CONTENT_REGEX,Alerts.AlertPostContentField());
+        return  isValid;
+    }
     @FXML
     public void uploadVideo()
     {

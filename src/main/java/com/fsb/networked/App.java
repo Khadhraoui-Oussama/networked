@@ -1,6 +1,7 @@
 package com.fsb.networked;
 
 import com.fsb.networked.utils.JSONParser;
+import com.fsb.networked.utils.SessionManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * JavaFX App
@@ -25,10 +27,16 @@ public class App extends Application {
         stage.show();
         stage.setOnCloseRequest(event -> {
             windowForceClosed = true;
-            resetJSONIfForceblyClosed(); // Perform any necessary cleanup tasks
-        });
-    }
-    private void resetJSONIfForceblyClosed() {
+            resetJSONIfForciblyClosed();
+            try {
+                //clean session row
+                SessionManager.cleanSessionRow(SessionManager.ID, SessionManager.getSessionIDIndividual());
+                SessionManager.cleanSessionRow(SessionManager.ID, SessionManager.getSessionIDEntreprise());
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        });}
+    private void resetJSONIfForciblyClosed() {
         if (windowForceClosed) {
             JSONParser.resetIndividualJSONFile();
             JSONParser.resetEntrepriseJSONFile();

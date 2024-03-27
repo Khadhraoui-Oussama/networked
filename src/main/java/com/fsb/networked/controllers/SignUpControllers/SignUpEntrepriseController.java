@@ -77,7 +77,8 @@ public class SignUpEntrepriseController implements Initializable {
 			entrepriseDTO.setEmail(JSONParser.getValueFromJSONFile(ImportantFileReferences.ENTREPRISEJSON,"signUp","email"));
 			//save to DB
 			EntrepriseService entrepriseService = new EntrepriseService();
-			entrepriseService.saveEntrepriseToDB(entrepriseDTO);
+			int entrepriseID = entrepriseService.saveEntrepriseToDB(entrepriseDTO);
+			SessionManager.setID(entrepriseID);
 		}
 	}
 	@FXML
@@ -97,8 +98,8 @@ public class SignUpEntrepriseController implements Initializable {
 		isValid &= Validator.validateField(locationTextField, Regexes.LOCATION_REGEX,Alerts.AlertAddressField());
 		System.out.println("Address :" + isValid);
 		isValid &= Validator.validateField(dateOfFoundationDatePicker, null,null); // Date is not validated using regex
-		isValid &= Validator.validateImageSize(entrepriseLogoImageView,Alerts.AlertImageSizeTooBig());
-		isValid &= Validator.validateImagePath(entrepriseLogoImageView,Alerts.AlertImagePathTooLong());
+		isValid &= Validator.validateImageSize(entrepriseLogoImageView,entrepriseLogoImageView.getParent(),Alerts.AlertImageSizeTooBig());
+		isValid &= Validator.validateImagePath(entrepriseLogoImageView,entrepriseLogoImageView.getParent(),Alerts.AlertImagePathTooLong());
 		return isValid;
 	}
 

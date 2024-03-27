@@ -2,8 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.SignUpControllers.SignUpIndividualController">
@@ -44,6 +43,9 @@
                      <font>
                         <Font name="Calibri Light" size="40.0" />
                      </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" />
+                     </VBox.margin>
                   </Text>
                   <VBox prefHeight="346.0" prefWidth="522.0">
                      <children>
@@ -119,25 +121,69 @@
                   <Insets left="30.0" />
                </GridPane.margin>
             </VBox>
-            <ButtonBar prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <ButtonBar buttonMinWidth="30.0" prefHeight="40.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
               <buttons>
-                <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" text="BACK" />
-                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#goNext" text="NEXT" />
-                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSignUp" text="Cancel" />
+                <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" prefHeight="23.0">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/previous.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#goNext">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/next.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSignUp">
+                     <graphic>
+                        <ImageView fitHeight="25.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/cancel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic></Button>
               </buttons>
             </ButtonBar>
-            <ImageView fx:id="profilePictureImg" fitHeight="285.0" fitWidth="365.0" pickOnBounds="true" preserveRatio="true" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <HBox alignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="2">
+               <children>
+                  <ImageView fx:id="profilePictureImg" fitHeight="285.0" fitWidth="365.0" pickOnBounds="true" preserveRatio="true" />
+               </children>
+               <GridPane.margin>
+                  <Insets right="10.0" />
+               </GridPane.margin>
+            </HBox>
             <VBox prefHeight="46.0" prefWidth="392.0" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="BASELINE">
                <children>
-                  <ButtonBar prefHeight="246.0" prefWidth="392.0">
+                  <ButtonBar buttonMinWidth="30.0" prefHeight="246.0" prefWidth="392.0">
                      <buttons>
-                        <Button fx:id="btnUploadProfilePicture" mnemonicParsing="false" onAction="#uploadProfilePicture" prefHeight="52.0" prefWidth="186.0" text="Upload  your picture">
+                        <Button fx:id="btnUploadProfilePicture" minWidth="47.0" mnemonicParsing="false" onAction="#uploadProfilePicture" prefHeight="44.0" prefWidth="209.0">
                            <font>
                               <Font size="15.0" />
                            </font>
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
+                           <graphic>
+                              <HBox>
+                                 <children>
+                                    <Label prefHeight="35.0" prefWidth="158.0" text="Upload a profile picture">
+                                       <font>
+                                          <Font name="System Bold" size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <ImageView fitHeight="34.0" fitWidth="46.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../../images/icons/media_post.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </graphic>
                         </Button>
                      </buttons>
                      <VBox.margin>

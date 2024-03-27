@@ -56,7 +56,7 @@ public class TextPostItemController implements Initializable {
         Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/female_avatar.png")));
         opImgView.setImage(img);
         opNameLabel.setText(textPost.getOriginalPosterName());
-        dateOfPublicationLabel.setText(textPost.getPublicationDate().toString());
+        dateOfPublicationLabel.setText(textPost.getPublicationDateTime().toString());
         postContentLabel.setText(textPost.getPostText());
         numberOfCommentsLabel.setText(textPost.getNumberOfComments() + " : Comments");
         numberOfLikesLabel.setText(textPost.getNumberOfLikes() + " : Likes");

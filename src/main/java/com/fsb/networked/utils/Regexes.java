@@ -19,6 +19,7 @@ public class Regexes {
     public static String TECHNOLOGY_REGEX = "^[a-zA-Z0-9][a-zA-Z0-9 _,-]{1,38}[a-zA-Z0-9]$";
     public static String LOCATION_REGEX = "^[\\w\\s,.'-]{1,50}$";
     public static String DESCRIPTION_REGEX = "^.{1,150}$";
+    public static String POST_CONTENT_REGEX = "^.{1,249}$";
     public static String PASSWORD_REGEX = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&+=])(?=\\S+$).{8,30}$";
 
 

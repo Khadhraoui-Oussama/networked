@@ -2,8 +2,7 @@
 
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.SignUpControllers.SignUpIndividualWorkController">
@@ -137,23 +136,46 @@
                   <Insets left="30.0" />
                </GridPane.margin>
             </VBox>
-            <ButtonBar prefHeight="80.0" prefWidth="478.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-              <buttons>
-                <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" prefHeight="37.0" prefWidth="572.0" text="BACK">
+            <HBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <children>
+                <Button fx:id="btnBack" mnemonicParsing="false" onAction="#goBack" prefHeight="43.0" prefWidth="42.0">
                      <font>
                         <Font size="19.0" />
-                     </font></Button>
-                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#goNext" prefHeight="38.0" prefWidth="249.0" text="NEXT">
-                     <font>
-                        <Font size="17.0" />
-                     </font></Button>
-                  <Button fx:id="btnCancel" layoutX="264.0" layoutY="20.0" mnemonicParsing="false" onAction="#cancelSignUp" prefHeight="38.0" prefWidth="249.0" text="Cancel">
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/previous.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="btnNext" mnemonicParsing="false" onAction="#goNext" prefHeight="42.0" prefWidth="40.0">
                      <font>
                         <Font size="17.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/next.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-              </buttons>
-            </ButtonBar>
+                  <Button fx:id="btnCancel" mnemonicParsing="false" onAction="#cancelSignUp" prefHeight="42.0" prefWidth="34.0">
+                     <font>
+                        <Font size="17.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/cancel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+            </HBox>
             <VBox prefHeight="454.0" prefWidth="530.0" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2" GridPane.rowSpan="2">
                <children>
                   <Label text="Work experience that you have added :">

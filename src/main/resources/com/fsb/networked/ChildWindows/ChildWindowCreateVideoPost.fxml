@@ -49,7 +49,7 @@
                                     <Font name="System Bold" size="14.0" />
                                  </font>
                               </Label>
-                              <Button fx:id="postBtn" alignment="CENTER" contentDisplay="CENTER" minWidth="20.0" mnemonicParsing="false" onAction="#post" prefHeight="40.0" prefWidth="40.0">
+                              <Button fx:id="postBtn" alignment="CENTER" contentDisplay="CENTER" minWidth="20.0" mnemonicParsing="false" onAction="#postVideoPost" prefHeight="40.0" prefWidth="40.0">
                                  <font>
                                     <Font size="18.0" />
                                  </font>
@@ -70,7 +70,11 @@
                   </VBox>
                   <VBox alignment="TOP_RIGHT" prefHeight="307.0" prefWidth="415.0">
                      <children>
-                        <MediaView fx:id="mediaView" fitHeight="220.0" fitWidth="424.0" />
+                        <HBox alignment="CENTER">
+                           <children>
+                              <MediaView fx:id="mediaView" fitHeight="220.0" fitWidth="424.0" HBox.hgrow="ALWAYS" />
+                           </children>
+                        </HBox>
                         <HBox prefHeight="39.0" prefWidth="414.0">
                            <VBox.margin>
                               <Insets right="10.0" top="15.0" />

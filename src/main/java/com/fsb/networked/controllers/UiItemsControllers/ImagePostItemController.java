@@ -1,6 +1,7 @@
 package com.fsb.networked.controllers.UiItemsControllers;
 
 import com.fsb.networked.dto.ImagePostDTO;
+import com.fsb.networked.utils.Conversions;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -9,7 +10,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -53,19 +56,21 @@ public class ImagePostItemController implements Initializable {
 
     }
 
-    public <T> void setData(ImagePostDTO imagePost)
-    {
+    public <T> void setData(ImagePostDTO imagePost) throws SQLException, IOException {
         //get  image from database
-        Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/male_avatar.png")));
-        opImgView.setImage(img);
+        //TODO THIS COULD BE A PROBLEM
+        //TODO MAYBE GET THE URL AND DISPLAY IT LIKE THAT IF ANY ERROR OCCURS
+        File file1 = Conversions.convertBlobToFile(imagePost.getOpImgSrc());
+        Image opImage = new Image(file1.toURI().toString());
+        opImgView.setImage(opImage);
         postImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/female_avatar.png"))));
         opNameLabel.setText(imagePost.getOriginalPosterName());
-        dateOfPublicationLabel.setText(imagePost.getPublicationDate().toString());
+        dateOfPublicationLabel.setText(imagePost.getPublicationDateTime().toString());
         postContentLabel.setText(imagePost.getPostText());
         numberOfCommentsLabel.setText(imagePost.getNumberOfComments() + " : Comments");
         numberOfLikesLabel.setText(imagePost.getNumberOfLikes() + " : Likes");
-        File file = new File(imagePost.getAttachmentFileSrc());
-        Image postImage = new Image(file.toURI().toString());
+        File file2 = Conversions.convertBlobToFile(imagePost.getAttachmentFile());
+        Image postImage = new Image(file2.toURI().toString());
         postImageView.setImage(postImage);
     }
 }

@@ -49,7 +49,7 @@
                               </Label>
                                           <Button fx:id="normalPostBtn" minWidth="53.0" mnemonicParsing="false" onAction="#createNormalPost" prefHeight="49.0" prefWidth="80.0">
                                               <graphic>
-                                                  <ImageView fitHeight="39.0" fitWidth="34.0" pickOnBounds="true">
+                                                  <ImageView fitHeight="38.0" fitWidth="44.0" pickOnBounds="true">
                                                       <image>
                                                           <Image url="@../../../../images/icons/text_icon_2.png" />
                                                       </image>
@@ -66,7 +66,7 @@
                                                   <Insets left="10.0" />
                                               </HBox.margin>
                                               <graphic>
-                                                  <ImageView fitHeight="41.0" fitWidth="42.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
+                                                  <ImageView fitHeight="39.0" fitWidth="39.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true">
                                                       <image>
                                                           <Image url="@../../../../images/icons/add_image_icon.png" />
                                                       </image>
@@ -281,7 +281,7 @@
             <right>
                 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="710.0" prefWidth="302.0" BorderPane.alignment="CENTER">
                     <children>
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="302.0" text="You Might Know these people :">
+                  <Label alignment="CENTER" prefHeight="45.0" prefWidth="332.0" text=" People you might know " wrapText="true">
                      <font>
                         <Font size="20.0" />
                      </font>

@@ -1,46 +1,37 @@
 package com.fsb.networked.dto;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.sql.Blob;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class VideoPostDTO extends TextPostDTO {
 
-    private String attachmentFileSrc;
-    public VideoPostDTO(String originalPosterName, LocalDate publicationDate, LocalTime publicationTime, String postText, int numberOfReactions, int numberOfComments, String opImgSrc, String attachementImgSrc) {
-        super(originalPosterName, publicationDate,publicationTime, postText, numberOfReactions, numberOfComments, opImgSrc);
-        this.attachmentFileSrc = attachementImgSrc;
+    private Blob attachmentFile;
+    public VideoPostDTO(String originalPosterName, LocalDateTime publicationDateTime, String postText, int numberOfReactions, int numberOfComments, Blob opImgSrc, Blob attachementImgSrc) {
+        super(originalPosterName, publicationDateTime, postText, numberOfReactions, numberOfComments, opImgSrc);
+        this.attachmentFile = attachementImgSrc;
     }
 
     public VideoPostDTO() {
     }
 
-    public String getAttachmentFileSrc() {
-        return attachmentFileSrc;
+    public Blob getAttachmentFile() {
+        return attachmentFile;
     }
 
-    public void setAttachmentFileSrc(String attachmentFileSrc) {
-        this.attachmentFileSrc = attachmentFileSrc;
+    public void setAttachmentFile(Blob attachmentFile) {
+        this.attachmentFile = attachmentFile;
     }
 
     @Override
     public String toString() {
-        return "Video Post : " + super.toString() + " , {" +
-                "attachmentFileSrc='" + attachmentFileSrc +
+        return "Video " + super.toString() + " , {" +
+                "attachmentFileSrc='" + attachmentFile +
                 '}';
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        if (!super.equals(o)) return false;
-        VideoPostDTO mediaPost = (VideoPostDTO) o;
-        return Objects.equals(attachmentFileSrc, mediaPost.attachmentFileSrc);
-    }
-
-    @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), attachmentFileSrc);
+        return Objects.hash(super.hashCode(), attachmentFile);
     }
 }

@@ -5,6 +5,7 @@ import com.fsb.networked.service.EntrepriseService;
 import com.fsb.networked.service.IndividualService;
 import com.fsb.networked.utils.Alerts;
 import com.fsb.networked.utils.Regexes;
+import com.fsb.networked.utils.SessionManager;
 import com.fsb.networked.utils.Validator;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,6 +13,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 public class SignInController {
 
@@ -47,7 +49,7 @@ public class SignInController {
 	}
 
 	@FXML
-	private void doSignIn() throws IOException {
+	private void doSignIn() throws IOException, SQLException {
 		IndividualService individualService = new IndividualService();
 		EntrepriseService entrepriseService = new EntrepriseService();
 
@@ -57,20 +59,25 @@ public class SignInController {
 			int individualResult = individualService.individualExists(emailAddressField.getText(), passwordField.getText());
 			if (individualResult != -1) {
 				// Individual exists, redirect to individual home page
+				SessionManager.setID(individualResult);
+				SessionManager.setSessionIDIndividual();
 				App.setRoot("HomePageScenes/HomePageIndividual");
+				System.out.println("Session ID indiv after setting :" + SessionManager.getSessionIDEntreprise());
 				System.out.println("Signed in as individual");
 				return;
-			} else if (individualResult == -1) {
+			} else {
 				// Individual does not exist, check if enterprise exists
 				int enterpriseResult = entrepriseService.entrepriseExists(emailAddressField.getText(), passwordField.getText());
 				if (enterpriseResult != -1) {
 					// Enterprise exists, redirect to enterprise home page
+					SessionManager.setID(enterpriseResult);
+					SessionManager.setSessionIDEntreprise();
 					App.setRoot("HomePageScenes/HomePageEntreprise");
+					System.out.println("Session ID entreprise after setting :" + SessionManager.getSessionIDEntreprise());
 					System.out.println("Signed in as entreprise");
 					return;
 				}
 			}
-			else Alerts.AlertCheckInput().showAndWait();
 		}
 		// No user found or invalid input, show alert
 

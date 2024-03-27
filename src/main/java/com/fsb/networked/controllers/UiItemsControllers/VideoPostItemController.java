@@ -1,6 +1,7 @@
 package com.fsb.networked.controllers.UiItemsControllers;
 
 import com.fsb.networked.dto.VideoPostDTO;
+import com.fsb.networked.utils.Conversions;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -13,8 +14,9 @@ import javafx.scene.media.MediaView;
 import javafx.util.Duration;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
-import java.util.Objects;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class VideoPostItemController implements Initializable {
@@ -105,18 +107,19 @@ public class VideoPostItemController implements Initializable {
         }
     }
 
-    public <T> void setData(VideoPostDTO videoPost)
-    {
+    public <T> void setData(VideoPostDTO videoPost) throws SQLException, IOException {
         //get  image from database
-        Image img = new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/male_avatar.png")));
-        opImgView.setImage(img);
+        File file1 = Conversions.convertBlobToFile(videoPost.getOpImgSrc());
+        Image opImage = new Image(file1.toURI().toString());
+        opImgView.setImage(opImage);
         opNameLabel.setText(videoPost.getOriginalPosterName());
-        dateOfPublicationLabel.setText(videoPost.getPublicationDate().toString());
+        dateOfPublicationLabel.setText(videoPost.getPublicationDateTime().toString());
         postContentLabel.setText(videoPost.getPostText());
         numberOfCommentsLabel.setText(videoPost.getNumberOfComments() + " : Comments");
         numberOfLikesLabel.setText(videoPost.getNumberOfLikes() + " : Likes");
         //TODO HERE MAKE VIDEP PLAYER LIKE VIDEO SIGN UP
-        File videoFile = new File(videoPost.getAttachmentFileSrc());
+        //TODO COULD BE TROUBLE MAYBE GET WITH URL FROM DATABASE
+        File videoFile = Conversions.convertBlobToFile(videoPost.getAttachmentFile());
         media = new Media(videoFile.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(.1);
@@ -134,6 +137,4 @@ public class VideoPostItemController implements Initializable {
             mediaPlayer = null; // Resetting the mediaPlayer reference
         }
     }
-
-
 }

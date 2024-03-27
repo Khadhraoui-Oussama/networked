@@ -3,6 +3,7 @@ package com.fsb.networked.dao;
 import com.fsb.networked.dto.EntrepriseDTO;
 import com.fsb.networked.utils.Conversions;
 import com.fsb.networked.utils.ConxDB;
+import com.fsb.networked.utils.SessionManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -54,6 +55,11 @@ public class EntrepriseDAO {
             if (rs.next()) {
                 entrepriseID = rs.getInt(1);
             }
+            String sqlSaveSession = "INSERT INTO session(entrepriseID, sessionID) VALUES (?, ?)";
+            pstmt = connection.prepareStatement(sqlSaveSession);
+            pstmt.setInt(1, entrepriseID); // Assuming userID is a foreign key in the session table
+            pstmt.setInt(2, SessionManager.generateSessionID(entrepriseID));
+            pstmt.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
         } catch (IOException e) {

@@ -1,6 +1,9 @@
 package com.fsb.networked.utils;
 
 import java.io.*;
+import java.sql.Blob;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -34,5 +37,30 @@ public class Conversions {
    }
     public static InputStream convertByteArrayToInputStream(byte[] byteArray) {
         return new ByteArrayInputStream(byteArray);
+    }
+
+    public static File convertBlobToFile(Blob blob) throws SQLException, IOException {
+        File file = File.createTempFile("temp", null);
+        try (FileOutputStream outputStream = new FileOutputStream(file)) {
+            // Get the input stream from the BLOB
+            InputStream inputStream = blob.getBinaryStream();
+            byte[] buffer = new byte[4096];
+            int bytesRead;
+            // Write the data from the input stream to the file output stream
+            while ((bytesRead = inputStream.read(buffer)) != -1) {
+                outputStream.write(buffer, 0, bytesRead);
+            }
+        }
+        return file;
+    }
+    public static Blob convertFileToBlob(File file, Connection connection) throws SQLException, IOException {
+        try (FileInputStream inputStream = new FileInputStream(file)) {
+            byte[] fileBytes = new byte[(int) file.length()];
+            inputStream.read(fileBytes);
+
+           Blob a = connection.createBlob();
+           a.setBytes(1,fileBytes);
+           return  a;
+        }
     }
 }

@@ -8,7 +8,7 @@
 <?import javafx.scene.text.*?>
 <AnchorPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fsb.networked.controllers.SignUpControllers.SignUpIndividualVideoController">
    <children>
-      <GridPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <GridPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="770.0" prefWidth="1242.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <columnConstraints>
             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="208.40000610351564" />
             <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="411.59999389648436" />
@@ -39,97 +39,121 @@
                   <Insets left="20.0" />
                </GridPane.margin>
             </Text>
-            <ButtonBar prefHeight="107.0" prefWidth="648.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
-              <buttons>
-                  <Button fx:id="backBtn" mnemonicParsing="false" onAction="#goBack" prefHeight="37.0" prefWidth="572.0" text="BACK">
+            <HBox alignment="CENTER" spacing="10.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="4" GridPane.valignment="CENTER">
+               <GridPane.margin>
+                  <Insets />
+               </GridPane.margin>
+               <children>
+                  <Button fx:id="backBtn" alignment="CENTER" maxWidth="40.0" mnemonicParsing="false" onAction="#goBack" prefHeight="37.0" prefWidth="572.0">
                      <font>
                         <Font size="19.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/previous.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="btnCancel" layoutX="31.0" layoutY="44.0" mnemonicParsing="false" onAction="#cancelSignUp" prefHeight="37.0" prefWidth="572.0" text="Cancel">
+                  <Button fx:id="btnCancel" alignment="CENTER" maxWidth="40.0" mnemonicParsing="false" onAction="#cancelSignUp" prefHeight="40.0" prefWidth="572.0">
                      <font>
                         <Font size="19.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/cancel.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="chooseVideoBtn" mnemonicParsing="false" onAction="#uploadVideoResume" prefHeight="41.0" prefWidth="572.0" text="Choose video">
+                  <Button fx:id="chooseVideoBtn" alignment="CENTER" maxWidth="40.0" mnemonicParsing="false" onAction="#uploadVideoResume" prefHeight="41.0" prefWidth="572.0">
                      <font>
                         <Font size="19.0" />
                      </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/add_video_icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
                   </Button>
-                  <Button fx:id="finishBtn" mnemonicParsing="false" onAction="#finishSignUpIndividual" prefHeight="38.0" prefWidth="249.0" text="Finish">
+                  <Button fx:id="finishBtn" alignment="CENTER" maxWidth="40.0" mnemonicParsing="false" onAction="#finishSignUpIndividual" prefHeight="38.0" prefWidth="249.0">
                      <font>
                         <Font size="19.0" />
-                     </font></Button>
-              </buttons>
-            </ButtonBar>
-            <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a video Resume" textAlignment="CENTER" wrappingWidth="781.3789825439453" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2">
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/complete.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
+            <Text fill="#9fafca" strokeType="OUTSIDE" strokeWidth="0.0" text="Add a video Resume" textAlignment="CENTER" wrappingWidth="781.3789825439453" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font name="Calibri Light" size="40.0" />
                </font>
             </Text>
-            <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="600.0" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER" />
-            <VBox alignment="TOP_CENTER" prefHeight="337.0" prefWidth="196.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+            <HBox GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.halignment="CENTER" GridPane.rowIndex="3" GridPane.valignment="CENTER">
                <children>
-                  <ButtonBar prefHeight="40.0" prefWidth="200.0">
-                    <buttons>
-                      <Button fx:id="playBtn" minWidth="61.0" mnemonicParsing="false" onAction="#playVideo" prefHeight="54.0" prefWidth="75.0">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <graphic>
-                              <ImageView fitHeight="45.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../images/icons/play-button.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                    </buttons>
-                  </ButtonBar>
-                  <ButtonBar layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="200.0">
-                     <buttons>
-                        <Button fx:id="pauseBtn" minWidth="50.0" mnemonicParsing="false" onAction="#pauseVideo" prefHeight="58.0" prefWidth="75.0">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <graphic>
-                              <ImageView fitHeight="45.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../images/icons/pause.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </buttons>
-                  </ButtonBar>
-                  <ButtonBar layoutX="10.0" layoutY="51.0" prefHeight="41.0" prefWidth="292.0">
-                     <buttons>
-                        <Button fx:id="resetBtn" minWidth="0.0" mnemonicParsing="false" onAction="#resetVideo" prefHeight="58.0" prefWidth="75.0">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                           <opaqueInsets>
-                              <Insets />
-                           </opaqueInsets>
-                           <graphic>
-                              <ImageView fitHeight="45.0" fitWidth="56.0" pickOnBounds="true" preserveRatio="true">
-                                 <image>
-                                    <Image url="@../../../../images/icons/reset.png" />
-                                 </image>
-                              </ImageView>
-                           </graphic>
-                        </Button>
-                     </buttons>
-                     <VBox.margin>
+                  <MediaView fx:id="mediaView" fitHeight="400.0" fitWidth="600.0" />
+               </children>
+            </HBox>
+            <VBox alignment="CENTER" prefHeight="337.0" prefWidth="196.0" spacing="10.0" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <children>
+                <Button fx:id="playBtn" minWidth="40.0" mnemonicParsing="false" onAction="#playVideo" prefHeight="44.0" prefWidth="46.0">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <opaqueInsets>
                         <Insets />
-                     </VBox.margin>
-                  </ButtonBar>
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="48.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/play-button.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="pauseBtn" minWidth="45.0" mnemonicParsing="false" onAction="#pauseVideo" prefHeight="40.0" prefWidth="45.0">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="34.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/pause.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
+                  <Button fx:id="resetBtn" minWidth="0.0" mnemonicParsing="false" onAction="#resetVideo" prefHeight="42.0" prefWidth="46.0">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <graphic>
+                        <ImageView fitHeight="30.0" fitWidth="29.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../../images/icons/reset.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Button>
                   <Label fx:id="statusLabel" alignment="TOP_LEFT" contentDisplay="TOP" prefHeight="270.0" prefWidth="196.0" wrapText="true">
                      <font>
                         <Font size="28.0" />

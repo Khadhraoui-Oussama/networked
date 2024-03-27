@@ -23,6 +23,7 @@ public class PostDAO {
             while (rs.next()) {
                 TextPostDTO textPost = new TextPostDTO(
                         rs.getString("firstName" ) + " " + rs.getString("lastName" ),
+                        rs.getInt("PosterID"),
                         rs.getTimestamp("PublicationDateTime").toLocalDateTime(),
                         rs.getString("Content"),
                         rs.getInt("Likes"),
@@ -47,6 +48,7 @@ public class PostDAO {
             while (rs.next()) {
                 ImagePostDTO textPost = new ImagePostDTO(
                         rs.getString("firstName" ) + " " + rs.getString("lastName" ),
+                        rs.getInt("PosterID"),
                         rs.getTimestamp("PublicationDateTime").toLocalDateTime(),
                         rs.getString("Content"),
                         rs.getInt("Likes"),
@@ -72,6 +74,7 @@ public class PostDAO {
             while (rs.next()) {
                 VideoPostDTO videoPost = new VideoPostDTO(
                         rs.getString("firstName" ) + " " + rs.getString("lastName" ),
+                        rs.getInt("PosterID"),
                         rs.getTimestamp("PublicationDateTime").toLocalDateTime(),
                         rs.getString("Content"),
                         rs.getInt("Likes"),
@@ -104,7 +107,6 @@ public class PostDAO {
         }
         return rowsAffected;
     }
-
     public int addImagePost(ImagePostDTO imagePostDTO) throws SQLException {
         String query = "INSERT INTO networked_db.individual_image_post " +
                 "(PosterID, Content," +
@@ -146,5 +148,57 @@ public class PostDAO {
         }
         return rowsAffected;
     }
+    public int addVideoPostReaction(VideoPostDTO videoPostDTO) throws SQLException {
+        int postId = -1;
+        // Get the post ID first
+        String querySelect = "SELECT PostID FROM individual_video_post WHERE PosterID = ? AND PublicationDateTime = ? AND Content = ?";
+        try (PreparedStatement pstmtSelect = connection.prepareStatement(querySelect)) {
+            pstmtSelect.setInt(1, videoPostDTO.getPosterID());
+            pstmtSelect.setTimestamp(2, Timestamp.valueOf(videoPostDTO.getPublicationDateTime()));
+            pstmtSelect.setString(3, videoPostDTO.getPostText());
+            try (ResultSet rs = pstmtSelect.executeQuery()) {
+                if (rs.next()) {
+                    postId = rs.getInt("PostID");
+                }
+            }
+        }
+
+        if (postId != -1) {
+            // Update the reaction number
+            String queryUpdate = "UPDATE individual_video_post SET Likes = Likes + 1 WHERE PostID = ?";
+            try (PreparedStatement pstmtUpdate = connection.prepareStatement(queryUpdate)) {
+                pstmtUpdate.setInt(1, postId);
+                return pstmtUpdate.executeUpdate();
+            }
+        }
+        return 0; // Return 0 if the post ID was not found or if no rows were affected by the update
+    }
+    public int changeVideoPostReaction(VideoPostDTO videoPostDTO, int changeByValue) throws SQLException {
+        int postId = -1;
+        // Get the post ID first
+        String querySelect = "SELECT PostID FROM individual_video_post WHERE PosterID = ? AND PublicationDateTime = ? AND Content = ?";
+        try (PreparedStatement pstmtSelect = connection.prepareStatement(querySelect)) {
+            pstmtSelect.setInt(1, videoPostDTO.getPosterID());
+            pstmtSelect.setTimestamp(2, Timestamp.valueOf(videoPostDTO.getPublicationDateTime()));
+            pstmtSelect.setString(3, videoPostDTO.getPostText());
+            try (ResultSet rs = pstmtSelect.executeQuery()) {
+                if (rs.next()) {
+                    postId = rs.getInt("PostID");
+                }
+            }
+        }
+
+        if (postId != -1) {
+            // Update the reaction number
+            String queryUpdate = "UPDATE individual_video_post SET Likes = Likes + ? WHERE PostID = ?";
+            try (PreparedStatement pstmtUpdate = connection.prepareStatement(queryUpdate)) {
+                pstmtUpdate.setInt(1, changeByValue);  // Use changeByValue parameter here
+                pstmtUpdate.setInt(2, postId);
+                return pstmtUpdate.executeUpdate();
+            }
+        }
+        return 0;
+    }
 }
+
 

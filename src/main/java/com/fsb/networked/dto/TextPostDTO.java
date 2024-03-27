@@ -6,14 +6,16 @@ import java.util.Objects;
 
 public class TextPostDTO implements Comparable<TextPostDTO>{
     private String originalPosterName;
+    private int posterID;
     private LocalDateTime publicationDateTime;
     private String postText;
     private int numberOfLikes;
     private int numberOfComments;
     private Blob opImgSrc;
 
-    public TextPostDTO(String originalPosterName, LocalDateTime publicationDateTime, String postText, int numberOfReactions, int numberOfComments, Blob opImgSrc) {
+    public TextPostDTO(String originalPosterName,int posterID, LocalDateTime publicationDateTime, String postText, int numberOfReactions, int numberOfComments, Blob opImgSrc) {
         this.originalPosterName = originalPosterName;
+        this.posterID = posterID;
         this.publicationDateTime = publicationDateTime;
         this.postText = postText;
         this.numberOfLikes = numberOfReactions;
@@ -22,6 +24,14 @@ public class TextPostDTO implements Comparable<TextPostDTO>{
     }
 
     public TextPostDTO() {
+    }
+
+    public int getPosterID() {
+        return posterID;
+    }
+
+    public void setPosterID(int posterID) {
+        this.posterID = posterID;
     }
 
     public String getOriginalPosterName() {
@@ -74,30 +84,31 @@ public class TextPostDTO implements Comparable<TextPostDTO>{
 
     @Override
     public String toString() {
-        return "PostDTO{" +
+        return "TextPostDTO{" +
                 "originalPosterName='" + originalPosterName + '\'' +
+                ", posterID=" + posterID +
                 ", publicationDateTime=" + publicationDateTime +
                 ", postText='" + postText + '\'' +
-                ", numberOfReactions=" + numberOfLikes +
+                ", numberOfLikes=" + numberOfLikes +
                 ", numberOfComments=" + numberOfComments +
-                ", opImgSrc='" + opImgSrc + '\'' +
+                ", opImgSrc=" + opImgSrc +
                 '}';
     }
 
-    //equals based on publicationDateTime
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         TextPostDTO that = (TextPostDTO) o;
-        return Objects.equals(publicationDateTime, that.publicationDateTime);
+        return posterID == that.posterID && numberOfLikes == that.numberOfLikes && numberOfComments == that.numberOfComments && Objects.equals(originalPosterName, that.originalPosterName) && Objects.equals(publicationDateTime, that.publicationDateTime) && Objects.equals(postText, that.postText) && Objects.equals(opImgSrc, that.opImgSrc);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(originalPosterName, publicationDateTime, postText, numberOfLikes, numberOfComments, opImgSrc);
+        return Objects.hash(originalPosterName, posterID, publicationDateTime, postText, numberOfLikes, numberOfComments, opImgSrc);
     }
 
+    //compare to based on publicationDateTime
     @Override
     public int compareTo(TextPostDTO o) {
         //compare based on the publication date and time to load the posts later in the home page based on the same metric

@@ -1,6 +1,7 @@
 package com.fsb.networked.controllers.UiItemsControllers;
 
 import com.fsb.networked.dto.VideoPostDTO;
+import com.fsb.networked.service.PostService;
 import com.fsb.networked.utils.Conversions;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -8,9 +9,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -52,11 +56,27 @@ public class VideoPostItemController implements Initializable {
     Button commentBtn;
     @FXML
     Button shareBtn;
-
-    public void likePost()
-    {
-
+    boolean userLikedPost = false ;
+    private VideoPostDTO videoPostDTO;
+    PostService postService = new PostService();
+    public void likeUnlikePost() throws SQLException {
+        if (!userLikedPost) {
+            postService.changeVideoPostReaction(videoPostDTO, 1);
+            String result = (videoPostDTO.getNumberOfLikes() + 1) != 1 ? " likes" : " like";
+            result = (videoPostDTO.getNumberOfLikes()) + result;
+            numberOfLikesLabel.setText(result);
+            userLikedPost = true;
+            likeBtn.setBackground(new Background(new BackgroundFill(Color.rgb(30, 144, 255, 1.0), null, null)));
+        } else {
+            postService.changeVideoPostReaction(videoPostDTO, -1);
+            String result = (videoPostDTO.getNumberOfLikes() - 1) != 1 ? " likes" : " like";
+            result = (videoPostDTO.getNumberOfLikes()) + result;
+            numberOfLikesLabel.setText(result);
+            likeBtn.setBackground(new Background(new BackgroundFill(Color.rgb(186, 186, 186, 1.0), null, null)));
+            userLikedPost = false;
+        }
     }
+
     public void commentOnPost()
     {
 
@@ -105,26 +125,34 @@ public class VideoPostItemController implements Initializable {
             // Set mediaPlayer to mediaView
             mediaView.setMediaPlayer(mediaPlayer);
         }
+        if(userLikedPost)
+        {
+            likeBtn.setBackground(new Background(new BackgroundFill(Color.rgb(30, 144, 255, 1.0), null, null)));
+        }
+        else{
+            //grey color
+            likeBtn.setBackground(new Background(new BackgroundFill(Color.rgb(186, 186, 186, 1.0), null, null)));
+        }
     }
 
-    public <T> void setData(VideoPostDTO videoPost) throws SQLException, IOException {
+    public void setData(VideoPostDTO videoPostDTO) throws SQLException, IOException {
         //get  image from database
-        File file1 = Conversions.convertBlobToFile(videoPost.getOpImgSrc());
+        File file1 = Conversions.convertBlobToFile(videoPostDTO.getOpImgSrc());
         Image opImage = new Image(file1.toURI().toString());
         opImgView.setImage(opImage);
-        opNameLabel.setText(videoPost.getOriginalPosterName());
-        dateOfPublicationLabel.setText(videoPost.getPublicationDateTime().toString());
-        postContentLabel.setText(videoPost.getPostText());
-        numberOfCommentsLabel.setText(videoPost.getNumberOfComments() + " : Comments");
-        numberOfLikesLabel.setText(videoPost.getNumberOfLikes() + " : Likes");
+        opNameLabel.setText(videoPostDTO.getOriginalPosterName());
+        dateOfPublicationLabel.setText(videoPostDTO.getPublicationDateTime().toString());
+        postContentLabel.setText(videoPostDTO.getPostText());
+        numberOfCommentsLabel.setText(videoPostDTO.getNumberOfComments() + " : Comments");
+        numberOfLikesLabel.setText(videoPostDTO.getNumberOfLikes() + " : Likes");
         //TODO HERE MAKE VIDEP PLAYER LIKE VIDEO SIGN UP
         //TODO COULD BE TROUBLE MAYBE GET WITH URL FROM DATABASE
-        File videoFile = Conversions.convertBlobToFile(videoPost.getAttachmentFile());
+        File videoFile = Conversions.convertBlobToFile(videoPostDTO.getAttachmentFile());
         media = new Media(videoFile.toURI().toString());
         mediaPlayer = new MediaPlayer(media);
         mediaPlayer.setVolume(.1);
         mediaView.setMediaPlayer(mediaPlayer);
-
+        this.videoPostDTO = videoPostDTO;
     }
 
     public MediaPlayer getMediaPLayer() {

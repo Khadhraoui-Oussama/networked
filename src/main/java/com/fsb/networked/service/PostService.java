@@ -38,6 +38,10 @@ public class PostService {
     public int addVideoPost(VideoPostDTO videoPostDTO) throws SQLException {
         return postDAO.addVideoPost(videoPostDTO);
     }
+    public int changeVideoPostReaction(VideoPostDTO videoPostDTO,int changeByValue) throws SQLException {
+        return postDAO.changeVideoPostReaction(videoPostDTO,changeByValue);
+    }
+
 
 }
  /*ImagePostDTO post2 = new ImagePostDTO();

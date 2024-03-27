@@ -446,7 +446,7 @@ public class HomePageIndividualController implements Initializable {
         settings.add(new SettingDTO("Modify Skills ",this::modifySkills));
         settings.add(new SettingDTO("Modify Education",this::modifyEducation));
         settings.add(new SettingDTO("Modify Personal Projects",this::modifyProjects));
-        settings.add(new SettingDTO("Become Admin",this::becomeAdmin));
+        settings.add(new SettingDTO("Open Admin Portal",this::openAdminPortal));
        for (int i = 0; i < settings.size(); i++) {
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("UiComponents/SettingsUiComponent.fxml"));
@@ -484,15 +484,13 @@ public class HomePageIndividualController implements Initializable {
     }
 
     private void signOut(ActionEvent actionEvent) {
-        ;
         Alert confirmSignOut = new Alert(Alert.AlertType.CONFIRMATION);
         confirmSignOut.setTitle("Sign Out");
         confirmSignOut.setHeaderText("Are you sure you want to sign out?");
         confirmSignOut.setOnCloseRequest(new EventHandler<DialogEvent>() {
             @Override
             public void handle(DialogEvent event) {
-                // If user confirms sign out, fire close request for parent stage
-                if (confirmSignOut.getResult() == ButtonType.OK) {
+                if(confirmSignOut.getResult() == ButtonType.OK) {
                     try {
                         SessionManager.cleanSessionRow(SessionManager.ID, SessionManager.getSessionIDIndividual());
                     } catch (SQLException e) {
@@ -511,7 +509,6 @@ public class HomePageIndividualController implements Initializable {
                 }
             }
         });
-
         confirmSignOut.showAndWait();
     }
 
@@ -670,7 +667,7 @@ public class HomePageIndividualController implements Initializable {
             e.printStackTrace();
         }
     }
-    private void becomeAdmin(ActionEvent event)
+    private void openAdminPortal(ActionEvent event)
     {
         try {
             // Load the FXML file for the child window

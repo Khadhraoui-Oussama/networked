@@ -7,8 +7,8 @@ import java.util.Objects;
 public class VideoPostDTO extends TextPostDTO {
 
     private Blob attachmentFile;
-    public VideoPostDTO(String originalPosterName, LocalDateTime publicationDateTime, String postText, int numberOfReactions, int numberOfComments, Blob opImgSrc, Blob attachementImgSrc) {
-        super(originalPosterName, publicationDateTime, postText, numberOfReactions, numberOfComments, opImgSrc);
+    public VideoPostDTO(String originalPosterName,int posterID, LocalDateTime publicationDateTime, String postText, int numberOfReactions, int numberOfComments, Blob opImgSrc, Blob attachementImgSrc) {
+        super(originalPosterName,posterID, publicationDateTime, postText, numberOfReactions, numberOfComments, opImgSrc);
         this.attachmentFile = attachementImgSrc;
     }
 

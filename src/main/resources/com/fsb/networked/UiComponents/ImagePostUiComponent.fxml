@@ -70,7 +70,7 @@
       </VBox>
       <ButtonBar minHeight="-Infinity" prefHeight="58.0" prefWidth="634.0">
          <buttons>
-            <Button fx:id="likeBtn" minWidth="42.0" mnemonicParsing="false" onAction="#likePost" prefHeight="38.0">
+            <Button fx:id="likeBtn" minWidth="42.0" mnemonicParsing="false" onAction="#likeUnlikePost" prefHeight="38.0">
                <graphic>
                   <ImageView fitHeight="29.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
                      <image>

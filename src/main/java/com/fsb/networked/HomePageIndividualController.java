@@ -318,9 +318,7 @@ public class HomePageIndividualController implements Initializable {
                     ImagePostItemController controller = fxmlLoader.getController();
                     controller.setData((ImagePostDTO) posts.get(i));
                     postsLayoutVbox.getChildren().add(imagePostVbox);
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (SQLException e) {
+                } catch (IOException | SQLException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -333,9 +331,7 @@ public class HomePageIndividualController implements Initializable {
                     controller.setData((VideoPostDTO) posts.get(i));
                     postsLayoutVbox.getChildren().add(videoPostVbox);
                     mediaPlayers.add(controller.getMediaPLayer());
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (SQLException e) {
+                } catch (IOException | SQLException e) {
                     throw new RuntimeException(e);
                 }
             }
@@ -346,6 +342,8 @@ public class HomePageIndividualController implements Initializable {
                     VBox textPostVbox = fxmlLoader.load();
                     TextPostItemController controller = fxmlLoader.getController();
                     controller.setData((TextPostDTO) posts.get(i));
+                    controller.thisTextPostDTO = (TextPostDTO) posts.get(i);
+                    System.out.println("here AAAA: " + posts.get(i));
                     postsLayoutVbox.getChildren().add(textPostVbox);
                 } catch (IOException e) {
                     throw new RuntimeException(e);
@@ -694,11 +692,6 @@ public class HomePageIndividualController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        try {
-            loadHomeTab();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
         loadSuggestionsVBox();
         //change the button text based on the user pfp
         if(profilePictureImageView.getImage().getUrl().toString().substring(6)
@@ -711,11 +704,6 @@ public class HomePageIndividualController implements Initializable {
         else {
             changeAddPfpBtn.setText("Change the profile picture");
         }
-       /* tabPane.getSelectionModel().selectedItemProperty().addListener((observable ,oldTab,newTab) -> {
-            if (oldTab.equals(tabHome)) {
-                disposeMediaPlayers();
-            }
-        });*/
     }
 }
 

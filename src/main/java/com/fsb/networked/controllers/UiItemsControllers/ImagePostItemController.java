@@ -37,8 +37,11 @@ public class ImagePostItemController implements Initializable {
     Button commentBtn;
     @FXML
     Button shareBtn;
+    ImagePostDTO imagePostDTO = new ImagePostDTO();
+    public ImagePostItemController() {
+    }
 
-    public void likePost()
+    public void likeUnlikePost()
     {
 
     }
@@ -51,26 +54,26 @@ public class ImagePostItemController implements Initializable {
 
     }
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-
-    }
-
-    public <T> void setData(ImagePostDTO imagePost) throws SQLException, IOException {
+    public <T> void setData(ImagePostDTO imagePostDTO) throws SQLException, IOException {
         //get  image from database
         //TODO THIS COULD BE A PROBLEM
         //TODO MAYBE GET THE URL AND DISPLAY IT LIKE THAT IF ANY ERROR OCCURS
-        File file1 = Conversions.convertBlobToFile(imagePost.getOpImgSrc());
+        File file1 = Conversions.convertBlobToFile(imagePostDTO.getOpImgSrc());
         Image opImage = new Image(file1.toURI().toString());
         opImgView.setImage(opImage);
         postImageView.setImage(new Image(Objects.requireNonNull(getClass().getResourceAsStream("/images/female_avatar.png"))));
-        opNameLabel.setText(imagePost.getOriginalPosterName());
-        dateOfPublicationLabel.setText(imagePost.getPublicationDateTime().toString());
-        postContentLabel.setText(imagePost.getPostText());
-        numberOfCommentsLabel.setText(imagePost.getNumberOfComments() + " : Comments");
-        numberOfLikesLabel.setText(imagePost.getNumberOfLikes() + " : Likes");
-        File file2 = Conversions.convertBlobToFile(imagePost.getAttachmentFile());
+        opNameLabel.setText(imagePostDTO.getOriginalPosterName());
+        dateOfPublicationLabel.setText(imagePostDTO.getPublicationDateTime().toString());
+        postContentLabel.setText(imagePostDTO.getPostText());
+        numberOfCommentsLabel.setText(imagePostDTO.getNumberOfComments() + " : Comments");
+        numberOfLikesLabel.setText(imagePostDTO.getNumberOfLikes() + " : Likes");
+        File file2 = Conversions.convertBlobToFile(imagePostDTO.getAttachmentFile());
         Image postImage = new Image(file2.toURI().toString());
         postImageView.setImage(postImage);
+        this.imagePostDTO = imagePostDTO;
+    }
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
     }
 }

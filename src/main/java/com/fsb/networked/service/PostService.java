@@ -12,18 +12,19 @@ import java.util.List;
 public class PostService {
 
     PostDAO postDAO = new PostDAO();
+
     public <T> List<T> getPostsFromDB()
     {
             List<T> ls = new ArrayList<T>();
             //TODO FIGURE OUT HOW TO ORGANISE POSTS BY PUBLICATION DATE
-            List<T> listTextPosts = (List<T>) PostDAO.getTextPosts();
             List<T> listImagePosts = (List<T>) PostDAO.getImagePosts();
             List<T> listVideoPosts = (List<T>) PostDAO.getVideoPosts();
+            List<T> listTextPosts = (List<T>) PostDAO.getTextPosts();
 
-            //add to return list
+        //add to return list
             ls.addAll(listImagePosts);
-            ls.addAll(listTextPosts);
             ls.addAll(listVideoPosts);
+            ls.addAll(listTextPosts);
             ls.sort(null);
             //limit to 25
             int limit = Math.min(25, ls.size());
@@ -38,11 +39,32 @@ public class PostService {
     public int addVideoPost(VideoPostDTO videoPostDTO) throws SQLException {
         return postDAO.addVideoPost(videoPostDTO);
     }
-    public int changeVideoPostReaction(VideoPostDTO videoPostDTO,int changeByValue) throws SQLException {
-        return postDAO.changeVideoPostReaction(videoPostDTO,changeByValue);
+
+    public int addLikeToTextPost(TextPostDTO textPostDTO) throws SQLException {
+        return postDAO.addLikeToTextPost(textPostDTO);
     }
 
+    public int removeLikeFromTextPost(TextPostDTO textPostDTO) throws SQLException {
+        return postDAO.removeLikeFromTextPost(textPostDTO);
+    }
 
+    public int addLikeIndividualEntry(int individualID, int textPostID) throws SQLException {
+        return postDAO.addLikeIndividualEntry(individualID,textPostID);
+
+    }
+
+    public int removeLikeIndividualEntry(int individualID, int textPostID) throws SQLException {
+        return postDAO.removeLikeIndividualEntry(individualID,textPostID);
+    }
+    public int getTextPostId(TextPostDTO textPostDTO) throws SQLException {
+        return postDAO.getTextPostId(textPostDTO);
+    }
+    public int getTextPostLikesCount(int postId) throws SQLException {
+        return postDAO.getTextPostLikesCount(postId);
+    }
+    public boolean isUserLikedPost(int individualId, int postId) throws SQLException {
+        return postDAO.isUserLikedPost(individualId,postId);
+    }
 }
  /*ImagePostDTO post2 = new ImagePostDTO();
         post2.setPostText ("IMAGE Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type speci");

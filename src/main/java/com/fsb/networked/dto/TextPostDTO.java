@@ -43,7 +43,7 @@ public class TextPostDTO implements Comparable<TextPostDTO>{
     }
 
     public LocalDateTime getPublicationDateTime() {
-        return publicationDateTime;
+        return this.publicationDateTime;
     }
 
     public void setPublicationDateTime(LocalDateTime publicationDateTime) {

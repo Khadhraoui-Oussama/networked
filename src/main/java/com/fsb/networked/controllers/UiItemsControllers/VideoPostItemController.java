@@ -1,7 +1,6 @@
 package com.fsb.networked.controllers.UiItemsControllers;
 
 import com.fsb.networked.dto.VideoPostDTO;
-import com.fsb.networked.service.PostService;
 import com.fsb.networked.utils.Conversions;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -9,12 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
-import javafx.scene.paint.Color;
 import javafx.util.Duration;
 
 import java.io.File;
@@ -56,25 +52,9 @@ public class VideoPostItemController implements Initializable {
     Button commentBtn;
     @FXML
     Button shareBtn;
-    boolean userLikedPost = false ;
     private VideoPostDTO videoPostDTO;
-    PostService postService = new PostService();
-    public void likeUnlikePost() throws SQLException {
-        if (!userLikedPost) {
-            postService.changeVideoPostReaction(videoPostDTO, 1);
-            String result = (videoPostDTO.getNumberOfLikes() + 1) != 1 ? " likes" : " like";
-            result = (videoPostDTO.getNumberOfLikes()) + result;
-            numberOfLikesLabel.setText(result);
-            userLikedPost = true;
-            likeBtn.setBackground(new Background(new BackgroundFill(Color.rgb(30, 144, 255, 1.0), null, null)));
-        } else {
-            postService.changeVideoPostReaction(videoPostDTO, -1);
-            String result = (videoPostDTO.getNumberOfLikes() - 1) != 1 ? " likes" : " like";
-            result = (videoPostDTO.getNumberOfLikes()) + result;
-            numberOfLikesLabel.setText(result);
-            likeBtn.setBackground(new Background(new BackgroundFill(Color.rgb(186, 186, 186, 1.0), null, null)));
-            userLikedPost = false;
-        }
+    public void likeUnlikePost(){
+
     }
 
     public void commentOnPost()
@@ -124,14 +104,6 @@ public class VideoPostItemController implements Initializable {
         if (mediaPlayer != null) {
             // Set mediaPlayer to mediaView
             mediaView.setMediaPlayer(mediaPlayer);
-        }
-        if(userLikedPost)
-        {
-            likeBtn.setBackground(new Background(new BackgroundFill(Color.rgb(30, 144, 255, 1.0), null, null)));
-        }
-        else{
-            //grey color
-            likeBtn.setBackground(new Background(new BackgroundFill(Color.rgb(186, 186, 186, 1.0), null, null)));
         }
     }
 

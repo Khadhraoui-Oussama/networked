@@ -43,7 +43,6 @@ public class CreateImagePostChildWindowController {
             imagePostDTO.setOpImgSrc(individualService.getIndividualImageBlobFromDB(SessionManager.ID));
             imagePostDTO.setPublicationDateTime(LocalDateTime.now());
             imagePostDTO.setOriginalPosterName(individualService.getIndividualNameFromDB(SessionManager.ID));
-
             File imageFile = new File(imgView.getImage().getUrl().substring(6));
             System.out.println("check image path : " + imgView.getImage().getUrl().substring(6));
             imagePostDTO.setAttachmentFile(Conversions.convertFileToBlob(imageFile,connection));

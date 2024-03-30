@@ -160,5 +160,16 @@ public class Alerts
 		alert.setTitle("Invalid Post Text Content");
 		alert.setContentText("Please check your input,\nA valid input should not exceed 249 characters.");
 		return alert;
+	} public static Alert AlertJobPostContentField() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Invalid Post Description Content");
+		alert.setContentText("Please check your input,\nA valid input should not exceed 249 characters.");
+		return alert;
+	}
+	public static Alert AlertJobTitleField() {
+		Alert alert = new Alert(AlertType.WARNING);
+		alert.setTitle("Invalid Post Title Content");
+		alert.setContentText("Please check your input,\nA valid input should not exceed 249 characters.");
+		return alert;
 	}
 }

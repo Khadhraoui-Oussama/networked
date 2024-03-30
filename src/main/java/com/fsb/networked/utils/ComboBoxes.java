@@ -212,6 +212,26 @@ public class ComboBoxes
 			"Intermediate",
 			"Advanced"
 	};
+	public static String[] JOB_TYPE  = {"Remote","OnSite","Remote/OnSite"};
+	public static String[] SALARY_RANGE = {
+			"Less than $20,000",
+			"$20,000 - $30,000",
+			"$30,000 - $40,000",
+			"$40,000 - $50,000",
+			"$50,000 - $60,000",
+			"$60,000 - $70,000",
+			"$70,000 - $80,000",
+			"$80,000 - $90,000",
+			"$90,000 - $100,000",
+			"More than $100,000"
+	};
+	public static String[] EXPERIENCE_NEEDED = {
+			"Entry Level",
+			"1-2 Years",
+			"3-5 Years",
+			"5-10 Years",
+			"10+ Years"
+	};
 	public static String[] SECTORS =
 			{
 					"Technology",
